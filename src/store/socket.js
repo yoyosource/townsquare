@@ -1,7 +1,7 @@
 class LiveSession {
   constructor(store) {
-    this._wss = "wss://live.clocktower.online:8080/";
-    // this._wss = "ws://localhost:8081/"; // uncomment if using local server with NODE_ENV=development
+    // this._wss = "wss://live.clocktower.online:8080/";
+    this._wss = "ws://localhost:8081/"; // uncomment if using local server with NODE_ENV=development
     this._socket = null;
     this._isSpectator = true;
     this._gamestate = [];
@@ -278,6 +278,7 @@ class LiveSession {
         gamestate: this._gamestate,
         isNight: grimoire.isNight,
         isVoteHistoryAllowed: session.isVoteHistoryAllowed,
+        isVoteWatchingAllowed: session.isVoteWatchingAllowed,
         nomination: session.nomination,
         votingSpeed: session.votingSpeed,
         lockedVote: session.lockedVote,
@@ -301,6 +302,7 @@ class LiveSession {
       isLightweight,
       isNight,
       isVoteHistoryAllowed,
+      isVoteWatchingAllowed,
       nomination,
       votingSpeed,
       votes,
@@ -354,6 +356,7 @@ class LiveSession {
     if (!isLightweight) {
       this._store.commit("toggleNight", !!isNight);
       this._store.commit("session/setVoteHistoryAllowed", isVoteHistoryAllowed);
+      this._store.commit("session/setVoteWatchingAllowed", isVoteWatchingAllowed);
       this._store.commit("session/nomination", {
         nomination,
         votes,
@@ -715,6 +718,17 @@ class LiveSession {
   }
 
   /**
+   * Send the isVoteWatchingAllowed state. ST only
+   */
+  setVoteWatchingAllowed() {
+    if (this._isSpectator) return;
+    this._send(
+        "isVoteWatchingAllowed",
+        this._store.state.session.isVoteWatchingAllowed
+    );
+  }
+
+  /**
    * Send the voting speed. ST only
    * @param votingSpeed voting speed in seconds, minimum 1
    */
@@ -748,6 +762,7 @@ class LiveSession {
    * @param sync Flag whether to sync this vote with others or not
    */
   vote([index]) {
+    debugger;
     const player = this._store.state.players.players[index];
     if (
       this._store.state.session.playerId === player.id ||
@@ -880,6 +895,9 @@ export default store => {
         break;
       case "session/setVoteHistoryAllowed":
         session.setVoteHistoryAllowed();
+        break;
+      case "session/setVoteWatchingAllowed":
+        session.setVoteWatchingAllowed();
         break;
       case "toggleNight":
         session.setIsNight();

@@ -27,6 +27,7 @@ const state = () => ({
   voteHistory: [],
   markedPlayer: -1,
   isVoteHistoryAllowed: true,
+  isVoteWatchingAllowed: true,
   isRolesDistributed: false
 });
 
@@ -50,6 +51,7 @@ const mutations = {
   setMarkedPlayer: set("markedPlayer"),
   setNomination: set("nomination"),
   setVoteHistoryAllowed: set("isVoteHistoryAllowed"),
+  setVoteWatchingAllowed: set("isVoteWatchingAllowed"),
   claimSeat: set("claimedSeat"),
   distributeRoles: set("isRolesDistributed"),
   setSessionId(state, sessionId) {

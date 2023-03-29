@@ -25,6 +25,15 @@
           />
           Accessible to players
         </div>
+        <div class="option" @click="setVoteWatching">
+          <font-awesome-icon
+              :icon="[
+              'fas',
+              session.isVoteWatchingAllowed ? 'check-square' : 'square'
+            ]"
+          />
+          Vote Watching
+        </div>
         <div class="option" @click="clearVoteHistory">
           <font-awesome-icon icon="trash-alt" />
           Clear for everyone
@@ -106,6 +115,29 @@ export default {
         "session/setVoteHistoryAllowed",
         !this.session.isVoteHistoryAllowed
       );
+
+      if (this.session.isVoteHistoryAllowed) {
+        // Enable vote watching if vote history is re-enabled.
+        this.$store.commit(
+            "session/setVoteWatchingAllowed",
+            true
+        );
+      }
+    },
+    setVoteWatching() {
+      this.$store.commit(
+          "session/setVoteWatchingAllowed",
+          !this.session.isVoteWatchingAllowed
+      );
+
+      if (!this.session.isVoteWatchingAllowed) {
+        // Disable vote history if votes are hidden.
+        this.$store.commit(
+            "session/setVoteHistoryAllowed",
+            false
+        );
+      }
+
     },
     ...mapMutations(["toggleModal"])
   }
