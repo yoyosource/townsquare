@@ -20,7 +20,7 @@
       <em v-else>(majority is {{ Math.ceil(players.length / 2) }})</em>
 
       <template v-if="!session.isSpectator">
-        <div v-if="!session.isVoteInProgress && session.lockedVote < 1">
+        <div v-if="session.isVoteWatchingAllowed && !session.isVoteInProgress && session.lockedVote < 1">
           Time per player:
           <font-awesome-icon
             @mousedown.prevent="setVotingSpeed(-500)"
@@ -71,7 +71,7 @@
         </div>
       </template>
       <template v-else-if="canVote">
-        <div v-if="!session.isVoteInProgress">
+        <div v-if="session.isVoteWatchingAllowed && !session.isVoteInProgress">
           {{ session.votingSpeed / 1000 }} seconds between votes
         </div>
         <div class="button-group">
@@ -198,13 +198,17 @@ export default {
       this.$store.commit("session/lockVote", 1);
       this.$store.commit("session/setVoteInProgress", true);
       clearInterval(this.voteTimer);
-      this.voteTimer = setInterval(() => {
-        this.$store.commit("session/lockVote");
-        if (this.session.lockedVote > this.players.length) {
-          clearInterval(this.voteTimer);
-          this.$store.commit("session/setVoteInProgress", false);
-        }
-      }, this.session.votingSpeed);
+      if (this.session.isVoteWatchingAllowed) {
+        this.voteTimer = setInterval(() => {
+          this.$store.commit("session/lockVote");
+          if (this.session.lockedVote > this.players.length) {
+            clearInterval(this.voteTimer);
+            this.$store.commit("session/setVoteInProgress", false);
+          }
+        }, this.session.votingSpeed);
+      } else {
+        this.$store.commit("session/lockVote", this.players.length + 1);
+      }
     },
     pause() {
       if (this.voteTimer) {

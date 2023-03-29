@@ -6,10 +6,14 @@
       :class="[
         {
           dead: player.isDead,
-          marked: session.markedPlayer === index,
+          marked: (!session.isSpectator || session.isVoteWatchingAllowed)
+          && session.markedPlayer === index,
           'no-vote': player.isVoteless,
           you: session.sessionId && player.id && player.id === session.playerId,
-          'vote-yes': session.votes[index],
+          'vote-yes': (!session.isSpectator
+          || session.isVoteWatchingAllowed
+          || player.id === session.playerId)
+          && session.votes[index],
           'vote-lock': voteLocked
         },
         player.role.team

@@ -1,7 +1,7 @@
 class LiveSession {
   constructor(store) {
-    // this._wss = "wss://live.clocktower.online:8080/";
-    this._wss = "ws://localhost:8081/"; // uncomment if using local server with NODE_ENV=development
+    this._wss = "wss://live.clocktower.online:8080/";
+    // this._wss = "ws://localhost:8081/"; // uncomment if using local server with NODE_ENV=development
     this._socket = null;
     this._isSpectator = true;
     this._gamestate = [];
@@ -180,6 +180,10 @@ class LiveSession {
         if (!this._isSpectator) return;
         this._store.commit("session/setVoteHistoryAllowed", params);
         this._store.commit("session/clearVoteHistory");
+        break;
+      case "isVoteWatchingAllowed":
+        if (!this._isSpectator) return;
+        this._store.commit("session/setVoteWatchingAllowed", params);
         break;
       case "votingSpeed":
         if (!this._isSpectator) return;
@@ -784,6 +788,7 @@ class LiveSession {
    * @param fromST
    */
   _handleVote([index, vote, fromST]) {
+    debugger;
     const { session, players } = this._store.state;
     const playerCount = players.players.length;
     const indexAdjusted =
