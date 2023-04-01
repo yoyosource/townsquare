@@ -15,8 +15,8 @@ const PING_INTERVAL = 30000; // 30 seconds
 const options = {};
 
 if (process.env.NODE_ENV !== "development") {
-  options.cert = fs.readFileSync("cert.pem");
-  options.key = fs.readFileSync("key.pem");
+  options.cert = fs.readFileSync("/etc/letsencrypt/live/clocktower.live/fullchain.pem");
+  options.key = fs.readFileSync("/etc/letsencrypt/live/clocktower.live/privkey.pem");
 }
 
 const server = https.createServer(options);
@@ -104,7 +104,7 @@ for (let metric in metrics) {
 
 // a new client connects
 wss.on("connection", function connection(ws, req) {
-  // url pattern: clocktower.online/<channel>/<playerId|host>
+  // url pattern: clocktower.live/<channel>/<playerId|host>
   const url = req.url.toLocaleLowerCase().split("/");
   ws.playerId = url.pop();
   ws.channel = url.pop();
