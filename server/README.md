@@ -17,7 +17,7 @@ cd server/
 NODE_ENV=development node index.js
 ```
 
-This will open the backend server on `localhost:8081` and you
+This will open the backend server on `localhost:8001` and you
 need to adjust your `/src/store/socket.js` file to connect to
 the localhost backend.
 
