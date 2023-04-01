@@ -34,7 +34,7 @@ cd server/
 node index.js
 ```
 
-This will make the backend server available at your domain on port 8080.
+This will make the backend server available at your domain on port 8001.
 If you want to have it automatically recover on crash or server restart,
 you could use [pm2](https://pm2.keymetrics.io/) with the provided `ecosystem.config.js`
 
