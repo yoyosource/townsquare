@@ -10,10 +10,12 @@
       <em>{{ nominee.name }}</em
       >!
       <br />
-      <em class="blue">
-        {{ voters.length }} vote{{ voters.length !== 1 ? "s" : "" }}
-      </em>
-      in favor
+      <template v-if="!session.isSpectator || session.isVoteWatchingAllowed">
+        <em class="blue">
+          {{ voters.length }} vote{{ voters.length !== 1 ? "s" : "" }}
+        </em>
+        in favor
+      </template>
       <em v-if="nominee.role.team !== 'traveler'">
         (majority is {{ Math.ceil(alive / 2) }})
       </em>
