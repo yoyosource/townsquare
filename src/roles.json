@@ -1064,6 +1064,19 @@
     "ability": "Each night*, choose a player: they die. Minions you kill keep their ability & poison 1 Townsfolk neighbour. [\u22121 Outsider]"
   },
   {
+    "id": "vizier",
+    "name": "Vizier",
+    "edition": "",
+    "team": "minion",
+    "firstNight": 0,
+    "firstNightReminder": "",
+    "otherNight": 0,
+    "otherNightReminder": "",
+    "reminders": [],
+    "setup": false,
+    "ability": "All players know who you are. You can not die during the day. If good voted, you may choose to execute immediately."
+  },
+  {
     "id": "nodashii",
     "name": "No Dashii",
     "edition": "snv",
