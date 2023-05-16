@@ -122,3 +122,7 @@ This project and its website are provided free of charge and not affiliated with
 This project will always be available free of charge, since I love building cool things and playing Blood on the Clocktower. If you still want to support me with a donation, you can do that here:
 
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/bra1n)
+
+## Credits
+* Bra1n for building the original tool
+* Imzecorella for providing the Vizier image icon
