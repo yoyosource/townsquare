@@ -368,6 +368,32 @@
     "ability": "You start knowing a good player & their character. If the Demon kills them, you die too."
   },
   {
+    "id": "steward",
+    "name": "Steward",
+    "edition": "",
+    "team": "townsfolk",
+    "firstNight": 40,
+    "firstNightReminder": "Point to the marked player.",
+    "otherNight": 0,
+    "otherNightReminder": "",
+    "reminders": ["Known"],
+    "setup": false,
+    "ability": "You start knowing 1 good player."
+  },
+  {
+    "id": "knight",
+    "name": "Knight",
+    "edition": "",
+    "team": "townsfolk",
+    "firstNight": 40,
+    "firstNightReminder": "Point to the 2 marked players.",
+    "otherNight": 0,
+    "otherNightReminder": "",
+    "reminders": ["Known"],
+    "setup": false,
+    "ability": "You start knowing 2 players that are not the Demon."
+  },
+  {
     "id": "sailor",
     "name": "Sailor",
     "edition": "bmr",
