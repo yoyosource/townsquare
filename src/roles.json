@@ -1477,6 +1477,19 @@
     "ability": "You have the ability of the recently killed executee. If they are evil, you are poisoned until a good player dies by execution."
   },
   {
+    "id": "highpriestess",
+    "name": "High Priestess",
+    "edition": "",
+    "team": "townsfolk",
+    "firstNight": 50,
+    "firstNightReminder": "Point to a player.",
+    "otherNight": 69,
+    "otherNightReminder": "Point to a player.",
+    "reminders": [],
+    "setup": false,
+    "ability": "Each night, learn which player the Storyteller believes you should talk to most."
+  },
+  {
     "id": "snitch",
     "name": "Snitch",
     "edition": "",
@@ -1501,6 +1514,16 @@
     "reminders": ["Dead"],
     "setup": false,
     "ability": "Each night*, if either good living neighbour is drunk or poisoned, you die."
+  },
+  {
+    "id": "plaguedoctor",
+    "reminders": ["Storyteller Ability"],
+    "setup": false,
+    "name": "Plague Doctor",
+    "team": "outsider",
+    "otherNight": 7,
+    "otherNightReminder": "Use the Minion ability if the Storyteller Ability token is present.  Verify the correct night order for the ability.",
+    "ability": "If you die, the Storyteller gains a not-in-play Minion ability."
   },
   {
     "id": "puzzlemaster",
@@ -1688,6 +1711,22 @@
     "reminders": ["About to die"],
     "setup": false,
     "ability": "All players keep their eyes closed when voting & the vote tally is secret. Votes for you only count if you vote."
+  },
+  {
+    "id": "harpy",
+    "name": "Harpy",
+    "edition": "",
+    "team": "minion",
+    "firstNight": 24,
+    "firstNightReminder": "Wake the Harpy; they point at one player, then another. Wake the 1st player the Harpy pointed to, show them the 'This character has selected you' card, show them the Harpy token, then point at the 2nd player the Harpy pointed to.",
+    "otherNight": 14,
+    "otherNightReminder": "Wake the Harpy; they point at one player, then another. Wake the 1st player the Harpy pointed to, show them the 'This character has selected you' card, show them the Harpy token, then point at the 2nd player the Harpy pointed to.",
+    "reminders": [
+        "Mad",
+        "2nd"
+    ],
+    "setup": false,
+    "ability": "Each night, choose 2 players: tomorrow, the 1st player is mad that the 2nd is evil, or both might die."
   },
   {
     "id": "lilmonsta",
