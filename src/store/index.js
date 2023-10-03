@@ -168,7 +168,14 @@ export default new Vuex.Store({
     toggleMenu: toggle("isMenuOpen"),
     toggleNightOrder: toggle("isNightOrder"),
     toggleStatic: toggle("isStatic"),
-    toggleNight: toggle("isNight"),
+    toggleNight({ grimoire, players }) {
+      // Reset the hasResponded var for the next night.
+      players.players.map((player) => {
+        player.hasResponded = false;
+      })
+
+      grimoire.isNight = !grimoire.isNight;
+    },
     toggleGrimoire: toggle("isPublic"),
     toggleImageOptIn: toggle("isImageOptIn"),
     toggleModal({ modals }, name) {

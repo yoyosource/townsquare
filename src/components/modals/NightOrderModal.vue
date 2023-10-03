@@ -1,6 +1,9 @@
 <template>
   <Modal
     class="night-reference"
+    :class="{
+      storyteller: !session.isSpectator,
+    }"
     @close="toggleModal('nightOrder')"
     v-if="modals.nightOrder && roles.size"
   >
@@ -31,10 +34,22 @@
                 v-for="(player, index) in role.players"
                 :class="{ dead: player.isDead }"
                 :key="index"
-                >{{
+                >
+                <template v-if="!session.isSpectator">
+                  <div class="option" @click="setResponded(player)">
+                    {{ player.name }}
+                    <font-awesome-icon
+                        :icon="[
+                        'fas',
+                        player.hasResponded ? 'check-square' : 'square'
+                      ]"
+                    />
+                  </div>
+                </template>
+                <template v-if="session.isSpectator">{{
                   player.name + (role.players.length > index + 1 ? "," : "")
-                }}</small
-              >
+                }}</template>
+                </small>
             </span>
           </span>
           <span
@@ -83,10 +98,22 @@
                 v-for="(player, index) in role.players"
                 :class="{ dead: player.isDead }"
                 :key="index"
-                >{{
+                >
+                <template v-if="!session.isSpectator">
+                  <div class="option" @click="setResponded(player)">
+                    <font-awesome-icon
+                        :icon="[
+                        'fas',
+                        player.hasResponded ? 'check-square' : 'square'
+                      ]"
+                    />
+                    {{ player.name }}
+                  </div>
+                </template>
+                <template v-if="session.isSpectator">{{
                   player.name + (role.players.length > index + 1 ? "," : "")
-                }}</small
-              >
+                }}</template>
+                </small>
             </span>
           </span>
           <span class="reminder" v-if="role.otherNightReminder">
@@ -165,10 +192,17 @@ export default {
       rolesOtherNight.sort((a, b) => a.otherNight - b.otherNight);
       return rolesOtherNight;
     },
-    ...mapState(["roles", "modals", "edition", "grimoire"]),
+    ...mapState(["roles", "modals", "edition", "grimoire", "session"]),
     ...mapState("players", ["players", "fabled"])
   },
   methods: {
+    setResponded(player) {
+      this.$store.commit("players/update", {
+        player: player,
+        property: "hasResponded",
+        value: !player.hasResponded,
+      });
+    },
     ...mapMutations(["toggleModal"])
   }
 };
@@ -212,6 +246,10 @@ h4 {
   &:after {
     margin-left: 15px;
   }
+}
+
+.storyteller small {
+  display: block;
 }
 
 .fabled {

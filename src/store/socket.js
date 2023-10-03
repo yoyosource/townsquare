@@ -452,7 +452,7 @@ class LiveSession {
    * @param value
    */
   sendPlayer({ player, property, value }) {
-    if (this._isSpectator || property === "reminders") return;
+    if (this._isSpectator || property === "reminders" || property === "hasResponded") return;
     const index = this._store.state.players.players.indexOf(player);
     if (property === "role") {
       if (value.team && value.team === "traveler") {
@@ -766,7 +766,6 @@ class LiveSession {
    * @param sync Flag whether to sync this vote with others or not
    */
   vote([index]) {
-    debugger;
     const player = this._store.state.players.players[index];
     if (
       this._store.state.session.playerId === player.id ||
@@ -788,7 +787,6 @@ class LiveSession {
    * @param fromST
    */
   _handleVote([index, vote, fromST]) {
-    debugger;
     const { session, players } = this._store.state;
     const playerCount = players.players.length;
     const indexAdjusted =
