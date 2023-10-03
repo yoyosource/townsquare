@@ -332,7 +332,7 @@ ul {
       position: fixed;
       padding: 5px 10px;
       left: 50%;
-      bottom: 10%;
+      bottom: 0;
       width: 500px;
       z-index: 25;
       background: rgba(0, 0, 0, 0.75);
