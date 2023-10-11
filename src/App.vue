@@ -24,7 +24,7 @@
     <transition name="blur">
       <Intro v-if="!players.length"></Intro>
       <TownInfo v-if="players.length && !session.nomination"></TownInfo>
-      <Vote v-if="session.nomination"></Vote>
+      <Vote v-if="session.nomination" ref="vote"></Vote>
     </transition>
     <TownSquare></TownSquare>
     <Menu ref="menu"></Menu>
@@ -123,6 +123,17 @@ export default {
           break;
         case "escape":
           this.$store.commit("toggleModal");
+          break;
+        case "arrowup":
+          if (this.session.nomination) {
+            this.$refs.vote.vote(true);
+          }
+          break;
+        case "arrowdown":
+          if (this.session.nomination) {
+            this.$refs.vote.vote(false);
+          }
+          break;
       }
     }
   }
