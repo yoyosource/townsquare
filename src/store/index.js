@@ -135,11 +135,7 @@ export default new Vuex.Store({
     customRolesStripped: ({ roles }) => {
       const customRoles = [];
       const customKeys = Object.keys(customRole);
-      const strippedProps = [
-        "firstNightReminder",
-        "otherNightReminder",
-        "isCustom"
-      ];
+      const strippedProps = [];
       roles.forEach(role => {
         if (!role.isCustom) {
           customRoles.push({ id: role.id });
