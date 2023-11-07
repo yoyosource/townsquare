@@ -36,12 +36,12 @@
                 :key="index"
                 >
                 <template v-if="!session.isSpectator">
-                  <div class="option" @click="setResponded(player)">
+                  <div class="option" @click="setResponded(player, role.id)">
                     {{ player.name }}
                     <font-awesome-icon
                         :icon="[
                         'fas',
-                        player.hasResponded ? 'check-square' : 'square'
+                        !!player.hasResponded[role.id] ? 'check-square' : 'square'
                       ]"
                     />
                   </div>
@@ -100,11 +100,11 @@
                 :key="index"
                 >
                 <template v-if="!session.isSpectator">
-                  <div class="option" @click="setResponded(player)">
+                  <div class="option" @click="setResponded(player, role.id)">
                     <font-awesome-icon
                         :icon="[
                         'fas',
-                        player.hasResponded ? 'check-square' : 'square'
+                        !!player.hasResponded[role.id] ? 'check-square' : 'square'
                       ]"
                     />
                     {{ player.name }}
@@ -196,11 +196,13 @@ export default {
     ...mapState("players", ["players", "fabled"])
   },
   methods: {
-    setResponded(player) {
+    setResponded(player, roleId) {
+      var hasResponded = {...player.hasResponded}
+      hasResponded[roleId] = !hasResponded[roleId]
       this.$store.commit("players/update", {
         player: player,
         property: "hasResponded",
-        value: !player.hasResponded,
+        value: hasResponded,
       });
     },
     ...mapMutations(["toggleModal"])

@@ -112,6 +112,7 @@ export default new Vuex.Store({
       edition: false,
       fabled: false,
       gameState: false,
+      messages: false,
       nightOrder: false,
       reference: false,
       reminder: false,
@@ -167,7 +168,7 @@ export default new Vuex.Store({
     toggleNight({ grimoire, players }) {
       // Reset the hasResponded var for the next night.
       players.players.map((player) => {
-        player.hasResponded = false;
+        player.hasResponded = {};
       })
 
       grimoire.isNight = !grimoire.isNight;

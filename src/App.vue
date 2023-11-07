@@ -28,6 +28,7 @@
     </transition>
     <TownSquare></TownSquare>
     <Menu ref="menu"></Menu>
+    <!-- <CommsModal /> -->
     <EditionModal />
     <FabledModal />
     <RolesModal />
@@ -111,6 +112,9 @@ export default {
         case "c":
           if (this.session.isSpectator) return;
           this.$store.commit("toggleModal", "roles");
+          break;
+        case "m":
+          // this.$store.commit("toggleModal", "comms");
           break;
         case "v":
           if (this.session.voteHistory.length || !this.session.isSpectator) {

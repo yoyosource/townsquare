@@ -28,7 +28,8 @@ const state = () => ({
   markedPlayer: -1,
   isVoteHistoryAllowed: true,
   isVoteWatchingAllowed: true,
-  isRolesDistributed: false
+  isRolesDistributed: false,
+  messages: []
 });
 
 const getters = {};
