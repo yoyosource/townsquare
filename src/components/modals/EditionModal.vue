@@ -135,6 +135,7 @@ export default {
             const roles = JSON.parse(reader.result);
             this.parseRoles(roles);
           } catch (e) {
+            console.log(e);
             alert("Error reading custom script: " + e.message);
           }
           this.$refs.upload.value = "";
@@ -155,6 +156,7 @@ export default {
           const script = await res.json();
           this.parseRoles(script);
         } catch (e) {
+          console.log(e);
           alert("Error loading custom script: " + e.message);
         }
       }
@@ -165,11 +167,13 @@ export default {
         const roles = JSON.parse(text);
         this.parseRoles(roles);
       } catch (e) {
+        console.log(e);
         alert("Error reading custom script: " + e.message);
       }
     },
     parseRoles(roles) {
       if (!roles || !roles.length) return;
+      roles = roles.map(role => typeof role === "string" ? { id: role } : role);
       const metaIndex = roles.findIndex(({ id }) => id === "_meta");
       let meta = {};
       if (metaIndex > -1) {
@@ -181,11 +185,11 @@ export default {
         Object.assign({}, meta, { id: "custom" })
       );
       // check for fabled and set those too, if present
-      if (roles.some(({ id }) => this.$store.state.fabled.has(id))) {
+      if (roles.some((role) => this.$store.state.fabled.has(role.id || role))) {
         const fabled = [];
-        roles.forEach(({ id }) => {
-          if (this.$store.state.fabled.has(id)) {
-            fabled.push(this.$store.state.fabled.get(id));
+        roles.forEach((role ) => {
+          if (this.$store.state.fabled.has(role.id || role)) {
+            fabled.push(this.$store.state.fabled.get(role.id || role));
           }
         });
         this.$store.commit("players/setFabled", { fabled });
