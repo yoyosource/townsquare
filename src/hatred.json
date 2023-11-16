@@ -168,6 +168,10 @@
       {
         "id": "Heretic",
         "reason": "Only 1 jinxed character can be in play."
+      },
+      {
+        "id": "Plague Doctor",
+        "reason": "If the Plague Doctor dies, a living Minion gains the Spy ability in addition to their own ability, and learns this."
       }
     ]
   },
@@ -211,6 +215,10 @@
       {
         "id": "Heretic",
         "reason": "The Baron might only add 1 Outsider, not 2."
+      },
+      {
+        "id": "Plague Doctor",
+        "reason": " If the Storyteller gains the Baron ability, up to two players become out-of-play Outsiders."
       }
     ]
   },
@@ -240,6 +248,10 @@
       {
         "id": "Huntsman",
         "reason": "If the Marionette thinks that they are the Huntsman, the Damsel was added."
+      },
+      {
+        "id": "Plague Doctor",
+        "reason": "If the Demon has a neighbour who is alive and a Townsfolk or Outsider when the Plague Doctor dies, that player becomes an evil Marionette. If there is already an extra evil player, this does not happen."
       }
     ]
   },
@@ -382,7 +394,7 @@
       },
       {
         "id": "Flowergirl",
-        "reason":  "If players' eyes were closed during the nominations, the Flowergirl learns how many times the Demon voted."
+        "reason": "If players' eyes were closed during the nominations, the Flowergirl learns how many times the Demon voted."
       },
       {
         "id": "Lil' Monsta",
@@ -407,7 +419,7 @@
       },
       {
         "id": "Courtier",
-        "reason":  "If the Vizier loses their ability, they learn this and if the Vizier is executed while they have their ability, their team wins."
+        "reason": "If the Vizier loses their ability, they learn this and if the Vizier is executed while they have their ability, their team wins."
       },
       {
         "id": "Investigator",
@@ -419,11 +431,56 @@
       },
       {
         "id": "Preacher",
-        "reason":  "If the Vizier loses their ability, they learn this and if the Vizier is executed while they have their ability, their team wins."
+        "reason": "If the Vizier loses their ability, they learn this and if the Vizier is executed while they have their ability, their team wins."
       },
       {
         "id": "Fearmonger",
-        "reason":  "The Vizier wakes with the Fearmonger, learns who they choose and cannot choose to execute that player."
+        "reason": "The Vizier wakes with the Fearmonger, learns who they choose and cannot choose to execute that player."
+      }
+    ]
+  },
+  {
+    "id": "Boomdandy",
+    "hatred": [
+      {
+        "id": "Plague Doctor",
+        "reason": "If the Plague Doctor is executed and the Storyteller would gain the Boomdandy ability, the Boomdandy ability triggers immediately."
+      }
+    ]
+  },
+  {
+    "id": "Evil Twin",
+    "hatred": [
+      {
+        "id": "Plague Doctor",
+        "reason": "The Storyt+eller cannot gain the Evil Twin ability if the Plague Doctor dies."
+      }
+    ]
+  },
+  {
+    "id": "Fearmonger",
+    "hatred": [
+      {
+        "id": "Plague Doctor",
+        "reason": "If the Plague Doctor dies, a living Minion gains the Fearmonger ability in addition to their own ability, and learns this."
+      }
+    ]
+  },
+  {
+    "id": "Goblin",
+    "hatred": [
+      {
+        "id": "Plague Doctor",
+        "reason": "If the Plague Doctor dies, a living Minion gains the Goblin ability in addition to their own ability, and learns this."
+      }
+    ]
+  },
+  {
+    "id": "Scarlet Woman",
+    "hatred": [
+      {
+        "id": "Plague Doctor",
+        "reason": "If the Plague Doctor dies, a living Minion gains the Scarlet Woman ability in addition to their own ability, and learns this."
       }
     ]
   }
