@@ -165,13 +165,20 @@ export default new Vuex.Store({
     toggleMenu: toggle("isMenuOpen"),
     toggleNightOrder: toggle("isNightOrder"),
     toggleStatic: toggle("isStatic"),
-    toggleNight({ grimoire, players }) {
+    toggleNight({ grimoire, players }, val) {
       // Reset the hasResponded var for the next night.
       players.players.map((player) => {
         player.hasResponded = {};
       })
 
-      grimoire.isNight = !grimoire.isNight;
+      // This function can be called with an explicit value pushed from the
+      // socket. In that case, the value the host has declared takes effect,
+      // assuming it is at least a valid boolean.
+      if (val === true || val === false) {
+        grimoire.isNight = val;
+      } else {
+        grimoire.isNight = !grimoire.isNight;
+      }
     },
     toggleGrimoire: toggle("isPublic"),
     toggleImageOptIn: toggle("isImageOptIn"),
