@@ -504,5 +504,30 @@
         "reason": "If the Plague Doctor dies, a living Minion gains the Scarlet Woman ability in addition to their own ability, and learns this."
       }
     ]
+  },
+  {
+    "id": "Kazali",
+    "hatred": [
+      {
+        "id": "Bounty Hunter",
+        "reason": "An evil Townsfolk is only created if the Bounty Hunter is still in play after the Kazali acts."
+      },
+      {
+        "id": "Choirboy",
+        "reason": "The Kazali cannot choose the King to become a Minion if the Choirboy is in play."
+      },
+      {
+        "id": "Huntsman",
+        "reason": "If the Kazali chooses the Damsel to become a Minion and a Huntsman is in play, a good player becomes the Damsel."
+      },
+      {
+        "id": "Goon",
+        "reason": "If the Kazali chooses the Goon to become a Minion, remaining Minion choices are decided by the Storyteller."
+      },
+      {
+        "id": "Marionette",
+        "reason": "If the Kazali chooses to create a Marionette, they must choose one of their neighbours."
+      }
+    ]
   }
 ]
