@@ -86,6 +86,10 @@
       {
         "id": "Mayor",
         "reason": "If Leviathan is in play & no execution occurs on day 5, good wins."
+      },
+      {
+        "id": "Pit-Hag",
+        "reason": "After day 5, the Pit-Hag cannot choose Leviathan."
       }
     ]
   },
