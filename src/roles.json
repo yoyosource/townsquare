@@ -1517,6 +1517,19 @@
     "ability": "Each night, learn which player the Storyteller believes you should talk to most."
   },
   {
+    "id": "villageidiot",
+    "name": "Village Idiot",
+    "edition": "",
+    "team": "townsfolk",
+    "firstNight": 45,
+    "firstNightReminder": "The Village Idiot points to a player; give a thumbs up if that player is good or a thumbs down if that player is evil.",
+    "otherNight": 62,
+    "otherNightReminder": "The Village Idiot points to a player; give a thumbs up if that player is good or a thumbs down if that player is evil.",
+    "reminders": ["Drunk"],
+    "setup": true,
+    "ability": "Each night, choose a player: you learn their alignment. [+0 to +2 Village Idiots. 1 of the extras is drunk]"
+  },
+  {
     "id": "snitch",
     "name": "Snitch",
     "edition": "",
