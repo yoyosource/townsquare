@@ -363,7 +363,10 @@
     "firstNightReminder": "Show the marked character token. Point to the marked player.",
     "otherNight": 51,
     "otherNightReminder": "If the Grandmother\u2019s grandchild was killed by the Demon tonight: The Grandmother dies.",
-    "reminders": ["Grandchild"],
+    "reminders": [
+      "Grandchild",
+      "Dead"
+    ],
     "setup": false,
     "ability": "You start knowing a good player & their character. If the Demon kills them, you die too."
   },
