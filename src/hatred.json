@@ -537,5 +537,14 @@
         "reason": "If the Kazali chooses to create a Marionette, they must choose one of their neighbours."
       }
     ]
+  },
+  {
+    "id": "Yaggababble",
+    "hatred": [
+      {
+        "id": "Exorcist",
+        "reason": "If the Exorcist chooses the Yaggababble, the Yaggababble ability does not kill tonight."
+      }
+    ]
   }
 ]
