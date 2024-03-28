@@ -1560,12 +1560,15 @@
   },
   {
     "id": "plaguedoctor",
-    "reminders": ["Storyteller Ability"],
-    "setup": false,
     "name": "Plague Doctor",
+    "edition": "",
     "team": "outsider",
+    "firstNight": 0,
+    "firstNightReminder": "",
     "otherNight": 7,
     "otherNightReminder": "Use the Minion ability if the Storyteller Ability token is present.  Verify the correct night order for the ability.",
+    "reminders": ["Storyteller Ability"],
+    "setup": false,  
     "ability": "If you die, the Storyteller gains a not-in-play Minion ability."
   },
   {
