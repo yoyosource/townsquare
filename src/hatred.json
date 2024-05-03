@@ -76,6 +76,10 @@
         "reason": "If Leviathan is in play & the Ravenkeeper dies by execution, they wake that night to use their ability."
       },
       {
+        "id": "Banshee",
+        "reason": "If Leviathan is in play, and the Banshee dies by execution, all players learn that the Banshee has died, and the Banshee gains their ability."
+      }
+      {
         "id": "Sage",
         "reason": "If Leviathan is in play & the Sage dies by execution, they wake that night to use their ability."
       },
@@ -371,6 +375,10 @@
         "reason": "Riot registers as a Minion to the Town Crier."
       },
       {
+        "id": "Banshee",
+        "reason": "If Riot nominates and kills the Banshee, all players learn that the Banshee has died, and the Banshee may nominate two players immediately."
+      }
+      {
         "id": "Damsel",
         "reason": "Riot registers as a Minion to the Damsel."
       },
@@ -568,6 +576,15 @@
       {
         "id": "Summoner",
         "reason": "The Kazali can not choose to create a Summoner."
+      }
+    ]
+  },
+  {
+    "id": "Vortox",
+    "hatred": [
+      {
+        "id": "Banshee",
+        "reason": "If the Vortox is in play and the Demon kills the Banshee, the players still learn that the Banshee has died."
       }
     ]
   },

@@ -1533,6 +1533,18 @@
     "ability": "Each night, choose a player: you learn their alignment. [+0 to +2 Village Idiots. 1 of the extras is drunk]"
   },
   {
+    "id": "banshee",
+    "name": "Banshee",
+    "edition": "",
+    "team": "townsfolk",
+    "firstNight": 0,
+    "firstNightReminder": "",
+    "otherNight": 42,
+    "otherNightReminder": "Announce that the Banshee has died.",
+    "reminders": ["Has Ability"],
+    "ability": "If the Demon kills you, all players learn this. From now on, you may nominate twice per day and vote twice per nomination."
+  },
+  {
     "id": "snitch",
     "name": "Snitch",
     "edition": "",
@@ -1543,7 +1555,7 @@
     "otherNightReminder": "",
     "reminders": [],
     "setup": false,
-    "ability": "Minions start knowing 3 not-in-play characters."
+    "ability": "Minions start knowing 3 `not-in-play characters."
   },
   {
     "id": "acrobat",
