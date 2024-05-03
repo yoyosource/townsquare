@@ -78,7 +78,7 @@
       {
         "id": "Banshee",
         "reason": "If Leviathan is in play, and the Banshee dies by execution, all players learn that the Banshee has died, and the Banshee gains their ability."
-      }
+      },
       {
         "id": "Sage",
         "reason": "If Leviathan is in play & the Sage dies by execution, they wake that night to use their ability."
@@ -377,7 +377,7 @@
       {
         "id": "Banshee",
         "reason": "If Riot nominates and kills the Banshee, all players learn that the Banshee has died, and the Banshee may nominate two players immediately."
-      }
+      },
       {
         "id": "Damsel",
         "reason": "Riot registers as a Minion to the Damsel."
