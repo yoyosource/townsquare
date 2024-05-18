@@ -4,6 +4,7 @@ const NEWPLAYER = {
   role: {},
   reminders: [],
   isVoteless: false,
+  hasTwoVotes: false,
   hasResponded: {},
   isDead: false,
   pronouns: ""

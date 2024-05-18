@@ -12,7 +12,7 @@
       <br />
       <template v-if="!session.isSpectator || session.isVoteWatchingAllowed">
         <em class="blue">
-          {{ voters.length }} vote{{ voters.length !== 1 ? "s" : "" }}
+          {{ voteCount }} vote{{ voters.length !== 1 ? "s" : "" }}
         </em>
         in favor
       </template>
@@ -79,17 +79,25 @@
         <div class="button-group">
           <div
             class="button townsfolk"
-            @click="vote(false)"
+            @click="vote(0)"
             :class="{ disabled: !currentVote }"
           >
             Hand DOWN
           </div>
           <div
             class="button demon"
-            @click="vote(true)"
-            :class="{ disabled: currentVote }"
+            @click="vote(1)"
+            :class="{ disabled: currentVote === 1 }"
           >
             Hand UP
+          </div>
+          <div
+            class="button demon"
+            @click="vote(2)"
+            :class="{ disabled: currentVote === 2 }"
+            v-if="player.hasTwoVotes"
+          >
+            x2
           </div>
         </div>
       </template>
@@ -153,7 +161,7 @@ export default {
     },
     currentVote: function() {
       const index = this.players.findIndex(p => p.id === this.session.playerId);
-      return index >= 0 ? !!this.session.votes[index] : undefined;
+      return index >= 0 ? this.session.votes[index] : 0;
     },
     canVote: function() {
       if (!this.player) return false;
@@ -181,7 +189,23 @@ export default {
         ? reorder.slice(0, this.session.lockedVote - 1)
         : reorder
       ).filter(n => !!n);
-    }
+    },
+    voteCount: function() {
+    const nomination = this.session.nomination[1];
+    const votes = Array(this.players.length)
+        .fill(0)
+        .map((x, index) =>
+          this.session.votes[index] === undefined ? 0 : this.session.votes[index]
+        );
+    const reorder = [
+      ...votes.slice(nomination + 1),
+      ...votes.slice(0, nomination + 1)
+    ];
+    return (this.session.lockedVote
+        ? reorder.slice(0, this.session.lockedVote - 1)
+        : reorder
+      ).reduce((a, b) => a + b, 0);
+  },
   },
   data() {
     return {

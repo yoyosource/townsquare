@@ -9,11 +9,16 @@
           marked: (!session.isSpectator || session.isVoteWatchingAllowed)
           && session.markedPlayer === index,
           'no-vote': player.isVoteless,
+          'two-votes': player.hasTwoVotes,
           you: session.sessionId && player.id && player.id === session.playerId,
           'vote-yes': (!session.isSpectator
           || session.isVoteWatchingAllowed
           || player.id === session.playerId)
           && session.votes[index],
+          'vote-twice': (!session.isSpectator
+          || session.isVoteWatchingAllowed
+          || player.id === session.playerId)
+          && session.votes[index] === 2,
           'vote-lock': voteLocked
         },
         player.role.team
@@ -50,15 +55,20 @@
       <div class="overlay">
         <font-awesome-icon
           icon="hand-paper"
-          class="vote"
+          class="vote first-vote"
           title="Hand UP"
-          @click="vote()"
+          @click="vote(player)"
+        />
+        <font-awesome-icon
+          icon="hand-paper"
+          class="vote second-vote"
+          title="Second Hand UP"
         />
         <font-awesome-icon
           icon="times"
           class="vote"
           title="Hand DOWN"
-          @click="vote()"
+          @click="vote(player)"
         />
         <font-awesome-icon
           icon="times-circle"
@@ -101,6 +111,15 @@
         v-if="player.isDead && !player.isVoteless"
         @click="updatePlayer('isVoteless', true)"
         title="Ghost vote"
+      />
+
+      <!-- Two votes icon -->
+      <font-awesome-icon
+        icon="sign-language"
+        class="two-votes"
+        v-if="player.hasTwoVotes"
+        @click="updatePlayer('hasTwoVotes', false)"
+        title="Has two votes"
       />
 
       <!-- On block icon -->
@@ -152,6 +171,13 @@
             >
               <font-awesome-icon icon="chair" />
               Empty seat
+            </li>
+            <li
+              @click="updatePlayer('hasTwoVotes', !player.hasTwoVotes, true)"
+              v-if="session.isTwoVotesEnabled"
+            >
+              <font-awesome-icon icon="sign-language" class="two-votes-menu" />
+              Has Two Votes
             </li>
             <template v-if="!session.nomination">
               <li @click="nominatePlayer()">
@@ -341,12 +367,23 @@ export default {
     /**
      * Allow the ST to override a locked vote.
      */
-    vote() {
+    vote(player) {
       if (this.session.isSpectator) return;
       if (!this.voteLocked) return;
+
+      var count = this.session.votes[this.index];
+      console.log("vote", count, player, this.session.votes)
+      if (player.hasTwoVotes && count === 1) {
+        count = 2
+      } else if (count === 1) {
+        count = 0;
+      } else if (count === 0) {
+        count = 1;
+      }
+
       this.$store.commit("session/voteSync", [
         this.index,
-        !this.session.votes[this.index]
+        this.session.votes[this.index] = count
       ]);
     }
   }
@@ -569,6 +606,20 @@ export default {
   transform: scale(1);
 }
 
+#townsquare.vote .player:not(.vote-twice) .overlay svg.second-vote.fa-hand-paper {
+  opacity: 0 !important;
+}
+
+
+#townsquare.vote .player.two-votes .overlay svg.first-vote.fa-hand-paper {
+  right: 50%;
+}
+
+#townsquare.vote .player.two-votes .overlay svg.second-vote.fa-hand-paper {
+  left: 50%;
+}
+
+
 // you voted yes | a locked vote yes | a locked vote no
 #townsquare.vote .player.you.vote-yes .overlay svg.vote.fa-hand-paper,
 #townsquare.vote .player.vote-lock.vote-yes .overlay svg.vote.fa-hand-paper,
@@ -613,6 +664,23 @@ li.move:not(.from) .player .overlay svg.move {
   position: absolute;
   margin-top: -15%;
   right: 2px;
+}
+
+/****** Two votes icon ********/
+.player .two-votes {
+  color: #fff;
+  filter: drop-shadow(0 0 3px black);
+  transition: opacity 250ms;
+  z-index: 2;
+  position: absolute;
+  margin-top: -100%;
+  right: -5px;
+  transform: rotate(60deg);
+
+  #townsquare.public & {
+    opacity: 0;
+    pointer-events: none;
+  }
 }
 
 /****** Session seat glow *****/
@@ -822,6 +890,10 @@ li.move:not(.from) .player .overlay svg.move {
 
   svg {
     margin-right: 2px;
+  }
+
+  .two-votes-menu {
+    transform: rotate(60deg);
   }
 }
 

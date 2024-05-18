@@ -34,6 +34,15 @@
           />
           Vote Watching
         </div>
+        <div class="option" @click="setTwoVotes">
+          <font-awesome-icon
+              :icon="[
+              'fas',
+              session.isTwoVotesEnabled ? 'check-square' : 'square'
+            ]"
+          />
+          Voting Twice
+        </div>
         <div class="option" @click="clearVoteHistory">
           <font-awesome-icon icon="trash-alt" />
           Clear for everyone
@@ -138,6 +147,12 @@ export default {
         );
       }
 
+    },
+    setTwoVotes() {
+      this.$store.commit(
+          "session/setTwoVotesEnabled",
+          !this.session.isTwoVotesEnabled
+      );
     },
     ...mapMutations(["toggleModal"])
   }

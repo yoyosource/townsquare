@@ -3,12 +3,12 @@
  * If the vote is from a seat that is already locked, ignore it.
  * @param state session state
  * @param index seat of the player in the circle
- * @param vote true or false
+ * @param vote number of votes
  */
 const handleVote = (state, [index, vote]) => {
   if (!state.nomination) return;
   state.votes = [...state.votes];
-  state.votes[index] = vote === undefined ? !state.votes[index] : vote;
+  state.votes[index] = vote === undefined ? Math.abs(state.votes[index] - 1) : vote;
 };
 
 const state = () => ({
@@ -28,6 +28,7 @@ const state = () => ({
   markedPlayer: -1,
   isVoteHistoryAllowed: true,
   isVoteWatchingAllowed: true,
+  isTwoVotesEnabled: false,
   isRolesDistributed: false,
   messages: []
 });
@@ -53,6 +54,7 @@ const mutations = {
   setNomination: set("nomination"),
   setVoteHistoryAllowed: set("isVoteHistoryAllowed"),
   setVoteWatchingAllowed: set("isVoteWatchingAllowed"),
+  setTwoVotesEnabled: set("isTwoVotesEnabled"),
   claimSeat: set("claimedSeat"),
   distributeRoles: set("isRolesDistributed"),
   setSessionId(state, sessionId) {
