@@ -10,7 +10,7 @@
   },
   {
     "id": "Cannibal",
-    "jinx": [
+    "hatred": [
       {
           "id": "Butler",
           "reason": "If the Cannibal gains the Butler ability, the Cannibal learns this."
@@ -23,7 +23,7 @@
   },
   {
     "id": "Ogre",
-    "jinx": [
+    "hatred": [
       {
           "id": "Recluse",
           "reason": "If the Recluse registers as evil to the Ogre, the Ogre learns that they are evil."
