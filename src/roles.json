@@ -1300,10 +1300,10 @@
     "firstNight": 10,
     "firstNightReminder": "Wake the Demon, show them the 'This character selected you' card, show the King token and point to the King player.",
     "otherNight": 63,
-    "otherNightReminder": "If there are more dead than living, show the King a character token of a living player.",
+    "otherNightReminder": "If there are more dead equal or outnumber than living, show the King a character token of a living player.",
     "reminders": [],
     "setup": false,
-    "ability": "Each night, if the dead outnumber the living, you learn 1 alive character. The Demon knows who you are."
+    "ability": "Each night, if the dead equal or outnumber the living, you learn 1 alive character. The Demon knows who you are."
   },
   {
     "id": "balloonist",
@@ -1582,6 +1582,19 @@
     "reminders": ["Storyteller Ability"],
     "setup": false,  
     "ability": "If you die, the Storyteller gains a not-in-play Minion ability."
+  },
+  {
+    "id": "ogre",
+    "name": "Ogre",
+    "edition": "",
+    "team": "outsider",
+    "firstNight": 49,
+    "firstNightReminder": "The Ogre points to a player (not themselves) and becomes their alignment.",
+    "otherNight": 0,
+    "otherNightReminder": "",
+    "reminders": [],
+    "setup": false,
+    "ability": "On your 1st night, choose a player (not yourself): you become their alignment (you don't know which) even if drunk or poisoned."
   },
   {
     "id": "puzzlemaster",

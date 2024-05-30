@@ -9,11 +9,24 @@
     ]
   },
   {
-    "id": "Butler",
-    "hatred": [
+    "id": "Cannibal",
+    "jinx": [
       {
-        "id": "Cannibal",
-        "reason": "If the Cannibal gains the Butler ability, the Cannibal learns this."
+          "id": "Butler",
+          "reason": "If the Cannibal gains the Butler ability, the Cannibal learns this."
+      },
+      {
+          "id": "Juggler",
+          "reason": "If the Juggler guesses on their first day and dies by execution, tonight the living Cannibal learns how many guesses the Juggler got correct."
+      }
+    ]
+  },
+  {
+    "id": "Ogre",
+    "jinx": [
+      {
+          "id": "Recluse",
+          "reason": "If the Recluse registers as evil to the Ogre, the Ogre learns that they are evil."
       }
     ]
   },
@@ -39,11 +52,23 @@
       },
       {
         "id": "Politician",
-        "reason": "A Pit-Hag can not create an evil Politician."
+        "reason": "If the Pit-Hag turns an evil player into the Politician, they can't turn good due to their own ability."
+      },
+      {
+        "id": "Cult Leader",
+        "reason": "If the Pit-Hag turns an evil player into the Cult Leader, they can't turn good due to their own ability."
+      },
+      {
+        "id": "Goon",
+        "reason": "If the Pit-Hag turns an evil player into the Goon, they can't turn good due to their own ability."
       },
       {
         "id": "Village Idiot",
         "reason": "If there is a spare token, the Pit-Hag can create an extra Village Idiot. If so, the drunk Village Idiot might change."
+      },
+      {
+        "id": "Ogre",
+        "reason": "If the Pit-Hag turns an evil player into the Ogre, they can't turn good due to their own ability."
       }
     ]
   },
@@ -188,7 +213,15 @@
       {
         "id": "Plague Doctor",
         "reason": "If the Plague Doctor dies, a living Minion gains the Spy ability in addition to their own ability, and learns this."
-      }
+      },
+      {
+        "id": "Damsel",
+        "reason": "If the Spy is (or has been) in play, the Damsel is poisoned."
+      },
+      {
+        "id": "Ogre",
+        "reason": "The Spy registers as evil to the Ogre."
+    }
     ]
   },
   {
@@ -213,6 +246,10 @@
       {
         "id": "Heretic",
         "reason": "Only 1 jinxed character can be in play."
+      },
+      {
+        "id": "Damsel",
+        "reason": "If the Widow is (or has been) in play, the Damsel is poisoned."
       }
     ]
   },
@@ -460,6 +497,10 @@
       {
         "id": "Fearmonger",
         "reason": "The Vizier wakes with the Fearmonger, learns who they choose and cannot choose to execute that player."
+      },
+      {
+        "id": "Politician",
+        "reason": "The Politician might register as evil to the Vizier."
       }
     ]
   },
@@ -547,6 +588,38 @@
       {
         "id": "Poppy Grower",
         "reason": "If the Poppy Grower is alive when the Summoner acts, the Summoner chooses which Demon, but the Storyteller chooses which player."
+      },
+      {
+        "id": "Pit-Hag",
+        "reason": "The Summoner cannot create an in-play Demon. If the Summoner creates a not-in-play Demon, deaths tonight are arbitrary."
+      },
+      {
+        "id": "Kazali",
+        "reason": "The Summoner cannot create an in-play Demon. If the Summoner creates a not-in-play Demon, deaths tonight are arbitrary."
+      },
+      {
+        "id": "Hatter",
+        "reason": "The Summoner cannot create an in-play Demon. If the Summoner creates a not-in-play Demon, deaths tonight are arbitrary."
+      },
+      {
+        "id": "Riot",
+        "reason": "If the Summoner creates Riot, all Minions also become Riot."
+      },
+      {
+        "id": "Courtier",
+        "reason": "If the Summoner is drunk on the 3rd night, the Summoner chooses which Demon, but the Storyteller chooses which player."
+      },
+      {
+        "id": "Zombuul",
+        "reason": "If the Summoner turns a dead player into the Zombuul, the Storyteller treats that player as a Zombuul that has died once."
+      },
+      {
+        "id": "Puuka",
+        "reason": "The Summoner may choose a player to become the Pukka on the 2nd night."
+      },
+      {
+        "id": "Engineer",
+        "reason": "If the Engineer removes a Summoner from play before that Summoner uses their ability, the Summoner uses their ability immediately."
       }
     ]
   },
