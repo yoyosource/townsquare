@@ -501,6 +501,10 @@
       {
         "id": "Politician",
         "reason": "The Politician might register as evil to the Vizier."
+      },
+      {
+        "id": "Magician",
+        "reason": "If the Vizier and Magician are both in play, the Demon does not learn the Minions."
       }
     ]
   },
