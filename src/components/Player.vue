@@ -372,12 +372,11 @@ export default {
       if (!this.voteLocked) return;
 
       var count = this.session.votes[this.index];
-      console.log("vote", count, player, this.session.votes)
       if (player.hasTwoVotes && count === 1) {
         count = 2
       } else if (count === 1) {
         count = 0;
-      } else if (count === 0) {
+      } else {
         count = 1;
       }
 
