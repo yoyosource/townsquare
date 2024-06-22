@@ -63,9 +63,9 @@ try {
   //   .then(res => res.json())
   //   .then(jinxesJSON => {
   jinxes = new Map(
-    jinxesJSON.map(({ id, hatred }) => [
+    jinxesJSON.map(({ id, jinx }) => [
       clean(id),
-      new Map(hatred.map(({ id, reason }) => [clean(id), reason]))
+      new Map(jinx.map(({ id, reason }) => [clean(id), reason]))
     ])
   );
   // });
