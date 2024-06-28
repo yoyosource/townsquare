@@ -144,7 +144,7 @@
       },
       {
         "id": "Magician",
-        "reason": "Only 1 jinxed character can be in play."
+        "reason": "Each night, the Magician chooses a Minion: if that Minion & Lil' Monsta are alive, that Minion babysits Lil' Monsta."
       },
       {
         "id": "Scarlet Woman",
@@ -182,7 +182,11 @@
       },
       {
         "id": "Preacher",
-        "reason": "Only 1 jinxed character can be in play."
+        "reason": "If the Preacher chooses Legion, Legion keeps their ability, but the Preacher might learn they are Legion."
+      },
+      {
+        "id": "Minstrel",
+        "reason": "If Legion died by execution today, Legion keeps their ability, but the Minstrel might learn they are Legion."
       },
       {
         "id": "Hatter",
@@ -338,6 +342,10 @@
         "reason": "If the Engineer removes a Summoner from play before that Summoner uses their ability, the Summoner uses their ability immediately."
       },
       {
+        "id": "Preacher",
+        "reason": "If the Preacher chose the Summoner on or before the 3rd night, the Summoner chooses which Demon, but the Storyteller chooses which player."
+      },
+      {
         "id": "Zombuul",
         "reason": "If the Summoner turns a dead player into the Zombuul, the Storyteller treats that player as a Zombuul that has died once."
       },
@@ -440,6 +448,10 @@
       {
         "id": "Huntsman",
         "reason": "If the Kazali chooses the Damsel to become a Minion, and a Huntsman is in play, a good player becomes the Damsel."
+      },
+      {
+        "id": "Soldier",
+        "reason": "If the Kazali turns the Soldier into a Minion, the Soldier chooses which not-in-play Minion to become."
       },
       {
         "id": "Choirboy",
@@ -577,7 +589,7 @@
       },
       {
         "id": "Mastermind",
-        "reason": "Only 1 jinxed character can be in play. Evil players start knowing which player and character it is."
+        "reason": "If the Al-Hadikhia dies by execution, and the Mastermind is alive, the Al-Hadikhia chooses 3 good players tonight: if all 3 choose to live, evil wins. Otherwise, good wins."
       }
     ]
   },
@@ -589,16 +601,12 @@
         "reason": "If the Organ Grinder is causing eyes closed voting, the Butler may raise their hand to vote but their vote is only counted if their master voted too."
       },
       {
-        "id": "Flowergirl",
-        "reason": "If the Organ Grinder is causing eyes-closed voting, the Flowergirl wakes tonight to choose a player: they learn if that player voted today. (instead of their normal ability)"
-      },
-      {
         "id": "Minstrel",
-        "reason": "Only 1 jinxed character can be in play. Evil players start knowing which player and character it is."
+        "reason": "If the Minstrel makes everyone drunk, the Organ Grinder keeps their ability but the Minstrel keeps their eyes open when voting."
       },
       {
         "id": "Preacher",
-        "reason": "Only 1 jinxed character can be in play. Evil players start knowing which player and character it is."
+        "reason": "If the Preacher removes the Organ Grinder ability, the Organ Grinder keeps their ability but the Preacher keeps their eyes open when voting."
       }
     ]
   },
