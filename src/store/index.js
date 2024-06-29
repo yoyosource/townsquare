@@ -30,7 +30,7 @@ const getFirstNightOrder = (name) => {
   return firstNightOrder.indexOf(clean(name)) + 1;
 };
 
-const otherNightOrder = nightJSON.firstNight.map(clean);
+const otherNightOrder = nightJSON.otherNight.map(clean);
 const getOtherNightOrder = (name) => {
   // -1 will be raised to 0, others will be 1 or greater.
   return otherNightOrder.indexOf(clean(name)) + 1;

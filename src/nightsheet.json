@@ -1,7 +1,6 @@
 {
     "firstNight": [
       "DUSK",
-      "Cannibal",
       "Philosopher",
       "Kazali",
       "Alchemist",
@@ -69,6 +68,7 @@
     ],
     "otherNight": [
       "DUSK",
+      "Cannibal",
       "Philosopher",
       "Poppy Grower",
       "Sailor",
