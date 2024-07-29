@@ -41,6 +41,11 @@
             v-if="!session.isSpectator"
             @click="tab = 'players'"
           />
+          <font-awesome-icon 
+            icon="tools" 
+            v-if="!session.isSpectator"
+            @click="tab = 'settings'" 
+          />
           <font-awesome-icon icon="theater-masks" @click="tab = 'characters'" />
           <font-awesome-icon icon="question" @click="tab = 'help'" />
         </li>
@@ -225,6 +230,18 @@
             </em>
           </li>
         </template>
+
+        <template v-if="tab === 'settings'">
+          <!-- Game Settings -->
+          <li class="headline">Settings</li>
+          <li @click="toggleSelfNaming">
+            Allow Self Naming
+            <em
+              ><font-awesome-icon
+                :icon="['fas', session.allowSelfNaming ? 'check-square' : 'square']"
+            /></em>
+          </li>
+        </template>
       </ul>
     </div>
   </div>
@@ -344,6 +361,9 @@ export default {
       if (this.grimoire.isNight) {
         this.$store.commit("session/setMarkedPlayer", -1);
       }
+    },
+    toggleSelfNaming() {
+      this.$store.commit("session/setAllowSelfNaming", !this.session.allowSelfNaming);
     },
     ...mapMutations([
       "toggleGrimoire",

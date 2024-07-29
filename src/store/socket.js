@@ -176,6 +176,10 @@ class LiveSession {
         if (!this._isSpectator) return;
         this._store.commit("toggleNight", params);
         break;
+      case "allowSelfNaming":
+        if (!this._isSpectator) return;
+        this._store.commit("session/setAllowSelfNaming", params);
+        break;
       case "isVoteHistoryAllowed":
         if (!this._isSpectator) return;
         this._store.commit("session/setVoteHistoryAllowed", params);
@@ -208,6 +212,9 @@ class LiveSession {
         break;
       case "pronouns":
         this._updatePlayerPronouns(params);
+        break;
+      case "name":
+        this._updatePlayerName(params);
         break;
     }
   }
@@ -282,6 +289,7 @@ class LiveSession {
       this._sendDirect(playerId, "gs", {
         gamestate: this._gamestate,
         isNight: grimoire.isNight,
+        allowSelfNaming: session.allowSelfNaming,
         isVoteHistoryAllowed: session.isVoteHistoryAllowed,
         isVoteWatchingAllowed: session.isVoteWatchingAllowed,
         nomination: session.nomination,
@@ -306,6 +314,7 @@ class LiveSession {
       gamestate,
       isLightweight,
       isNight,
+      allowSelfNaming,
       isVoteHistoryAllowed,
       isVoteWatchingAllowed,
       nomination,
@@ -360,6 +369,7 @@ class LiveSession {
     });
     if (!isLightweight) {
       this._store.commit("toggleNight", !!isNight);
+      this._store.commit("session/setAllowSelfNaming", allowSelfNaming);
       this._store.commit("session/setVoteHistoryAllowed", isVoteHistoryAllowed);
       this._store.commit("session/setVoteWatchingAllowed", isVoteWatchingAllowed);
       this._store.commit("session/nomination", {
@@ -530,6 +540,24 @@ class LiveSession {
     this._send("pronouns", [index, value]);
   }
 
+   /**
+   * Publish a player name update
+   * @param player
+   * @param value
+   * @param isFromSockets
+   */
+   sendPlayerName({ player, value, isFromSockets }) {
+    //send name only for the seated player or storyteller
+    //Do not re-send name data for an update that was recieved from the sockets layer
+    if (
+      isFromSockets ||
+      (this._isSpectator && this._store.state.session.playerId !== player.id)
+    )
+      return;
+    const index = this._store.state.players.players.indexOf(player);
+    this._send("name", [index, value]);
+  }
+
   /**
    * Update a pronouns based on incoming data.
    * @param index
@@ -542,6 +570,23 @@ class LiveSession {
     this._store.commit("players/update", {
       player,
       property: "pronouns",
+      value,
+      isFromSockets: true
+    });
+  }
+
+  /**
+   * Update a name based on incoming data.
+   * @param index
+   * @param value
+   * @private
+   */
+  _updatePlayerName([index, value]) {
+    const player = this._store.state.players.players[index];
+
+    this._store.commit("players/update", {
+      player,
+      property: "name",
       value,
       isFromSockets: true
     });
@@ -932,6 +977,8 @@ export default store => {
       case "players/update":
         if (payload.property === "pronouns") {
           session.sendPlayerPronouns(payload);
+        } else if (payload.property === "name") {
+          session.sendPlayerName(payload);
         } else {
           session.sendPlayer(payload);
         }

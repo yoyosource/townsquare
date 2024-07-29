@@ -42,6 +42,7 @@ const faIcons = [
   "TheaterMasks",
   "Times",
   "TimesCircle",
+  "Tools",
   "TrashAlt",
   "Undo",
   "User",
