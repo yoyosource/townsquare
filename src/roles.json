@@ -1574,6 +1574,17 @@
     "ability": "If you were the player most responsible for your team losing, you change alignment & win, even if dead."
   },
   {
+    "id": "zealot",
+    "name": "Zealot",
+    "edition": "",
+    "team": "outsider",
+    "firstNightReminder": "",
+    "otherNightReminder": "",
+    "reminders": [],
+    "setup": false,
+    "ability": "If there are 5 or more players alive, you must vote for every nomination."
+  },
+  {
     "id": "hatter",
     "name": "Hatter",
     "edition": "",
