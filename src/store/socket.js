@@ -768,6 +768,17 @@ class LiveSession {
   }
 
   /**
+   * Sends the allowSelfNaming state. ST only
+   */
+  setAllowSelfNaming() {
+    if (this._isSpectator) return;
+    this._send(
+        "allowSelfNaming",
+        this._store.state.session.allowSelfNaming
+    );
+  }
+
+  /**
    * Send the isVoteWatchingAllowed state. ST only
    */
   setVoteWatchingAllowed() {
@@ -941,6 +952,9 @@ export default store => {
         break;
       case "session/clearVoteHistory":
         session.clearVoteHistory();
+        break;
+      case "session/setAllowSelfNaming":
+        session.setAllowSelfNaming();
         break;
       case "session/setVoteHistoryAllowed":
         session.setVoteHistoryAllowed();

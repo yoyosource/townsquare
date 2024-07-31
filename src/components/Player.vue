@@ -322,9 +322,10 @@ export default {
       }
     },
     changeName() {
-      if (this.session.isSpectator) return;
       const name = prompt("Player name", this.player.name) || this.player.name;
-      this.updatePlayer("name", name, true);
+      if (name !== null && name !== "") {
+        this.updatePlayer("name", name, true);
+      }
     },
     removeReminder(reminder) {
       const reminders = [...this.player.reminders];
@@ -335,7 +336,8 @@ export default {
       if (
         this.session.isSpectator &&
         property !== "reminders" &&
-        property !== "pronouns"
+        property !== "pronouns" &&
+        property !== "name"
       )
         return;
       this.$store.commit("players/update", {

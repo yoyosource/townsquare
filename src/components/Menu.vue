@@ -235,10 +235,21 @@
           <!-- Game Settings -->
           <li class="headline">Settings</li>
           <li @click="toggleSelfNaming">
-            Allow Self Naming
-            <em
-              ><font-awesome-icon
+            Self Naming
+            <em><font-awesome-icon
                 :icon="['fas', session.allowSelfNaming ? 'check-square' : 'square']"
+            /></em>
+          </li>
+          <li class="option" @click="setTwoVotes">
+            Voting Twice
+            <em><font-awesome-icon
+                :icon="[ 'fas', session.isTwoVotesEnabled ? 'check-square' : 'square' ]"
+            /></em>
+          </li>
+          <li class="option" @click="setVoteWatching">
+            Vote Watching
+            <em><font-awesome-icon
+                :icon="[ 'fas', session.isVoteWatchingAllowed ? 'check-square' : 'square' ]"
             /></em>
           </li>
         </template>
@@ -364,6 +375,23 @@ export default {
     },
     toggleSelfNaming() {
       this.$store.commit("session/setAllowSelfNaming", !this.session.allowSelfNaming);
+    },
+    setTwoVotes() {
+      this.$store.commit("session/setTwoVotesEnabled", !this.session.isTwoVotesEnabled);
+    },
+    setVoteWatching() {
+      this.$store.commit(
+          "session/setVoteWatchingAllowed",
+          !this.session.isVoteWatchingAllowed
+      );
+
+      if (!this.session.isVoteWatchingAllowed) {
+        // Disable vote history if votes are hidden.
+        this.$store.commit(
+            "session/setVoteHistoryAllowed",
+            false
+        );
+      }
     },
     ...mapMutations([
       "toggleGrimoire",
