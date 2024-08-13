@@ -718,7 +718,7 @@ class LiveSession {
     const message = {};
 
     gtag("event", "send_roles", {
-      edition: this._store.state.edition.id,
+      edition: this._store.state.edition.name,
       player_count: this._store.state.players.players.length,
     });
 
@@ -730,7 +730,7 @@ class LiveSession {
         ];
 
         gtag("event", "send_role", {
-          edition: this._store.state.edition.id,
+          edition: this._store.state.edition.name,
           player_count: this._store.state.players.players.length,
           role: player.role,
         });
@@ -759,7 +759,7 @@ class LiveSession {
       this._send("nomination", nomination);
 
       gtag("event", "nomination", {
-        edition: this._store.state.edition.id,
+        edition: this._store.state.edition.name,
       });
     }
   }
@@ -794,7 +794,7 @@ class LiveSession {
       ? "enabled"
       : "disabled";
     gtag("event", "vote_history_" + enabled, {
-      edition: this._store.state.edition.id,
+      edition: this._store.state.edition.name,
     });
   }
 
@@ -809,7 +809,7 @@ class LiveSession {
       ? "enabled"
       : "disabled";
     gtag("event", "self_naming_" + enabled, {
-      edition: this._store.state.edition.id,
+      edition: this._store.state.edition.name,
     });
   }
 
@@ -827,7 +827,7 @@ class LiveSession {
       ? "enabled"
       : "disabled";
     gtag("event", "vote_watching_" + enabled, {
-      edition: this._store.state.edition.id,
+      edition: this._store.state.edition.name,
     });
   }
 
