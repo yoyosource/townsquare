@@ -63,6 +63,9 @@ module.exports = (store) => {
   if (localStorage.getItem("playerId")) {
     store.commit("session/setPlayerId", localStorage.getItem("playerId"));
   }
+  if (localStorage.getItem("playerSecret")) {
+    store.commit("session/setPlayerSecret", localStorage.getItem("playerSecret"));
+  }
   if (localStorage.getItem("session") && !window.location.hash.substr(1)) {
     const [spectator, sessionId] = JSON.parse(localStorage.getItem("session"));
     store.commit("session/setSpectator", spectator);
@@ -181,6 +184,13 @@ module.exports = (store) => {
           localStorage.setItem("playerId", payload);
         } else {
           localStorage.removeItem("playerId");
+        }
+        break;
+      case "session/setPlayerSecret":
+        if (payload) {
+          localStorage.setItem("playerSecret", payload);
+        } else {
+          localStorage.removeItem("playerSecret");
         }
         break;
     }

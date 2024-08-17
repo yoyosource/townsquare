@@ -1,5 +1,7 @@
+const crypto = require("crypto");
 const fs = require("fs");
 const https = require("https");
+const { URL } = require("url");
 const WebSocket = require("ws");
 const client = require("prom-client");
 
@@ -94,6 +96,10 @@ const metrics = {
   connection_terminated_timeout: new client.Counter({
     name: "connection_terminated_timeout",
     help: "Terminated connection due to timeout"
+  }),
+  connection_terminated_player_validate: new client.Counter({
+    name: "connection_terminated_player_validate",
+    help: "Terminated connection due to player validation failure"
   })
 };
 
@@ -105,9 +111,9 @@ for (let metric in metrics) {
 // a new client connects
 wss.on("connection", function connection(ws, req) {
   // url pattern: clocktower.live/<channel>/<playerId|host>
-  const url = req.url.toLocaleLowerCase().split("/");
-  ws.playerId = url.pop();
-  ws.channel = url.pop();
+  const url = new URL(req.url, "wss://clocktower.live/");
+  [ws.channel, ws.playerId] = url.pathname.replace(/^\//, "").split("/").map(c => decodeURIComponent(c));
+  ws.channel = ws.channel?.toLowerCase();
   // check for another host on this channel
   if (
     ws.playerId === "host" &&
@@ -123,6 +129,22 @@ wss.on("connection", function connection(ws, req) {
     ws.close(1000, `The channel "${ws.channel}" already has a host`);
     metrics.connection_terminated_host.inc();
     return;
+  }
+  // Validate the player ID to confirm it's not an impersonation.
+  if (ws.playerId?.indexOf("__s_") === 0) {
+    let correctPlayerId;
+    let rawSecret = url.searchParams.get("secret");
+    if (rawSecret) {
+      let playerSecret = new Uint8Array(Buffer.from(rawSecret, "base64url"));
+      const digestInput = new Uint8Array([155, 113, 7, 193, 229, 225, 124, 147, 153, 27, 254, 60, 164, 234, 108, 10, ...playerSecret]);
+      correctPlayerId = "__s_" + crypto.createHash("sha256").update(digestInput).digest("base64url");
+    }
+    if (ws.playerId !== correctPlayerId) {
+      console.log(ws.channel, "possible player impersonation rejected");
+      ws.close(1000, "Player secret failed to validate.")
+      metrics.connection_terminated_player_validate.inc();
+      return;
+    }
   }
   ws.isAlive = true;
   ws.pingStart = new Date().getTime();
