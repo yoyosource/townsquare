@@ -707,10 +707,10 @@ class LiveSession {
         value: "",
       });
     }
-    // add playerId to new seat
+    // add playerId to new seat unless it is already occupied
     if (index >= 0) {
       const player = players[index];
-      if (!player) return;
+      if (!player || player.id) return;
       this._store.commit("players/update", { player, property, value });
     }
     // update player session list as if this was a ping
