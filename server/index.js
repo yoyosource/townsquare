@@ -142,7 +142,7 @@ wss.on("connection", function connection(ws, req) {
     let correctPlayerId;
     let rawSecret = url.searchParams.get("secret");
     if (rawSecret) {
-      let playerSecret = new Uint8Array(Buffer.from(rawSecret, "base64url"));
+      let playerSecret = new Uint8Array(Buffer.from(rawSecret, "base64"));
       const digestInput = new Uint8Array([
         155,
         113,
@@ -164,7 +164,7 @@ wss.on("connection", function connection(ws, req) {
       ]);
       correctPlayerId =
         "__s_" +
-        crypto.createHash("sha256").update(digestInput).digest("base64url");
+        crypto.createHash("sha256").update(digestInput).digest("base64");
     }
     if (ws.playerId !== correctPlayerId) {
       console.log(ws.channel, "possible player impersonation rejected");
