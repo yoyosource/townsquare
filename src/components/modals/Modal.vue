@@ -104,11 +104,27 @@ export default {
         color: red;
       }
     }
+
+    @media (orientation: portrait) {
+      top: 15px;
+      right: 5px;
+      > .top-right-button {
+        width: 20px;
+      }
+    }
   }
 
   > .slot {
     max-height: 100%;
     position: initial;
+
+    @media (orientation: portrait) {
+      h3 {
+        text-align: left;
+        text-wrap: wrap;
+        padding-right: 25px;
+      }
+    }
   }
 }
 
