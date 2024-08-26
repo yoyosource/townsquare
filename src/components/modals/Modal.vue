@@ -122,7 +122,10 @@ export default {
       h3 {
         text-align: left;
         text-wrap: wrap;
+        padding-bottom: 5px;
         padding-right: 25px;
+        font-size: 16px;
+        line-height: 15px;
       }
     }
   }
