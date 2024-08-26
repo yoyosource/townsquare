@@ -114,6 +114,11 @@ export default {
   background: url("../assets/demon-head.png") center center no-repeat;
   background-size: auto 100%;
 
+  @media (orientation: portrait) {
+    width: 30%;
+    background-size: 100% auto;
+  }
+
   li {
     font-weight: bold;
     width: 100%;
