@@ -12,6 +12,7 @@
     />
     <h3>
       Character Reference
+      <br />
       <font-awesome-icon icon="address-card" />
       {{ edition.name || "Custom Script" }}
     </h3>
@@ -167,6 +168,7 @@ h3 {
   svg {
     vertical-align: middle;
   }
+  line-height: 90%;
 }
 
 .townsfolk {
