@@ -118,7 +118,8 @@ export default {
       top: 15px;
       right: 5px;
       > .top-right-button {
-        width: 20px;
+        width: 25px;
+        height: 15px;
       }
     }
   }
