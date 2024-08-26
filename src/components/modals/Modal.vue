@@ -68,6 +68,11 @@ export default {
   max-height: 80%;
   max-width: 80%;
 
+  @media (orientation: portrait) {
+    max-width: 90%;
+    max-height: 100%;
+  }
+
   .vote-history &,
   .night-reference &,
   .characters & {
