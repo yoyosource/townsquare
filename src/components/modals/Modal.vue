@@ -83,6 +83,10 @@ export default {
   .characters & {
     max-height: 100%;
     max-width: 60%;
+
+    @media (orientation: portrait) {
+      max-width: 90%;
+    }
   }
 
   ul {
