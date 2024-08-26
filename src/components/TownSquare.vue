@@ -271,14 +271,6 @@ export default {
   justify-content: center;
 }
 
-// media check if the screen is taller than wide
-@media (orientation: portrait) {
-  #townsquare {
-    width: 100%;
-    height: 100vw;
-  }
-}
-
 .circle {
   padding: 0;
   width: 100%;
@@ -287,8 +279,7 @@ export default {
   margin: 0;
 
   @media (orientation: portrait) {
-    width: 100vw;
-    height: 100%;
+    height: 100vw;
   }
 
   > li {
@@ -478,6 +469,13 @@ export default {
       margin: 0 0.5%;
       display: inline-block;
       transition: all 250ms;
+    }
+
+    @media (orientation: portrait) {
+      li {
+        width: 16vw;
+        height: 16vw;
+      }
     }
   }
   &.closed {
