@@ -271,12 +271,25 @@ export default {
   justify-content: center;
 }
 
+// media check if the screen is taller than wide
+@media (orientation: portrait) {
+  #townsquare {
+    width: 100%;
+    height: 100vw;
+  }
+}
+
 .circle {
   padding: 0;
   width: 100%;
   height: 100%;
   list-style: none;
   margin: 0;
+
+  @media (orientation: portrait) {
+    width: 100vw;
+    height: 100%;
+  }
 
   > li {
     position: absolute;
