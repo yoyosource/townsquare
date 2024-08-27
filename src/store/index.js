@@ -24,21 +24,21 @@ const getRolesByEdition = (edition = editionJSON[0]) => {
   );
 };
 
-const firstNightOrder = nightJSON.firstNight.map(clean);
-const getFirstNightOrder = (name) => {
+const firstNightOrder = nightJSON.firstNight;
+const getFirstNightOrder = (id) => {
   // -1 will be raised to 0, others will be 1 or greater.
-  return firstNightOrder.indexOf(clean(name)) + 1;
+  return firstNightOrder.indexOf(clean(id)) + 1;
 };
 
-const otherNightOrder = nightJSON.otherNight.map(clean);
-const getOtherNightOrder = (name) => {
+const otherNightOrder = nightJSON.otherNight;
+const getOtherNightOrder = (id) => {
   // -1 will be raised to 0, others will be 1 or greater.
-  return otherNightOrder.indexOf(clean(name)) + 1;
+  return otherNightOrder.indexOf(clean(id)) + 1;
 };
 
 const rolesFormatted = rolesJSON.map((role) => {
-  role.firstNight = getFirstNightOrder(role.name);
-  role.otherNight = getOtherNightOrder(role.name);
+  role.firstNight = getFirstNightOrder(role.id);
+  role.otherNight = getOtherNightOrder(role.id);
   return role;
 });
 
