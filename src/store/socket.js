@@ -766,7 +766,7 @@ class LiveSession {
         gtag("event", "send_role", {
           edition: this._store.state.edition.name,
           player_count: this._store.state.players.players.length,
-          role: player.role,
+          role: player.role.id,
         });
       }
     });
