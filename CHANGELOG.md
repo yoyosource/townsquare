@@ -1,5 +1,13 @@
 # Release Notes
 
+### Version 2.16.2
+- fixed issue regarding the grimoire being clipped on mobile devices ([#11](https://github.com/nicholas-eden/townsquare/issues/11))
+- fixed issue with demon head image in center being clipped on mobile devices
+- increased text sizes on mobile devices
+- adjusted windows on mobile to be more mobile friendly
+
+---
+
 ### Version 2.16.1
 Updated character night order to be consistent with script tool
 
