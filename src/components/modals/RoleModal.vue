@@ -157,6 +157,10 @@ ul.tokens li {
   margin: 1%;
   transition: transform 500ms ease;
 
+  @media (orientation: portrait) {
+    width: 8vh;
+  }
+
   &.townsfolk {
     box-shadow: 0 0 10px $townsfolk, 0 0 10px #004cff;
   }

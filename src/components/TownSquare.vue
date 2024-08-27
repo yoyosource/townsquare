@@ -278,6 +278,10 @@ export default {
   list-style: none;
   margin: 0;
 
+  @media (orientation: portrait) {
+    height: 100vw;
+  }
+
   > li {
     position: absolute;
     left: 50%;
@@ -465,6 +469,13 @@ export default {
       margin: 0 0.5%;
       display: inline-block;
       transition: all 250ms;
+    }
+
+    @media (orientation: portrait) {
+      li {
+        width: 16vw;
+        height: 16vw;
+      }
     }
   }
   &.closed {

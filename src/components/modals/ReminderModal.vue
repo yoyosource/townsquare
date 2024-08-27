@@ -151,6 +151,9 @@ ul.reminders .reminder {
     top: 28%;
     width: 80%;
     line-height: 1;
+    @media (orientation: portrait) {
+      font-size: 100%;
+    }
   }
 
   &:hover {

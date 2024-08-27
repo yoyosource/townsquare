@@ -68,6 +68,11 @@ export default {
   max-height: 80%;
   max-width: 80%;
 
+  @media (orientation: portrait) {
+    max-width: 90%;
+    max-height: 100%;
+  }
+
   .vote-history &,
   .night-reference &,
   .characters & {
@@ -78,6 +83,10 @@ export default {
   .characters & {
     max-height: 100%;
     max-width: 60%;
+
+    @media (orientation: portrait) {
+      max-width: 90%;
+    }
   }
 
   ul {
@@ -104,11 +113,31 @@ export default {
         color: red;
       }
     }
+
+    @media (orientation: portrait) {
+      top: 15px;
+      right: 5px;
+      > .top-right-button {
+        width: 25px;
+        height: 15px;
+      }
+    }
   }
 
   > .slot {
     max-height: 100%;
     position: initial;
+
+    @media (orientation: portrait) {
+      h3 {
+        text-align: left;
+        text-wrap: wrap;
+        padding-bottom: 5px;
+        padding-right: 25px;
+        font-size: 16px;
+        line-height: 15px;
+      }
+    }
   }
 }
 

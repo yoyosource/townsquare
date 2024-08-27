@@ -521,6 +521,10 @@ export default {
       justify-content: space-between;
       min-height: 30px;
 
+      @media (orientation: portrait) {
+        font-size: 16px;
+      }
+
       &.tabs {
         display: flex;
         padding: 0;
@@ -579,6 +583,10 @@ export default {
         rgba(0, 0, 0, 0.5) 80%,
         $demon 100%
       );
+
+      @media (orientation: portrait) {
+        font-size: 16px;
+      }
     }
   }
 }

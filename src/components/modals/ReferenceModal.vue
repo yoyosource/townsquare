@@ -12,6 +12,7 @@
     />
     <h3>
       Character Reference
+      <br />
       <font-awesome-icon icon="address-card" />
       {{ edition.name || "Custom Script" }}
     </h3>
@@ -167,6 +168,7 @@ h3 {
   svg {
     vertical-align: middle;
   }
+  line-height: 90%;
 }
 
 .townsfolk {
@@ -296,11 +298,17 @@ ul {
 
 /** break into 1 column below 1200px **/
 @media screen and (max-width: 1199.98px) {
+  .toggle {
+    width: 20px;
+    height: 15px;
+  }
   .modal {
     max-width: 60%;
   }
   ul {
     li {
+      width: 100%;
+      padding: 0px 5px 5px 0px;
       .icon {
         width: 6vh;
       }
@@ -315,6 +323,29 @@ ul {
       }
       .ability {
         font-size: 90%;
+        text-wrap: wrap;
+        line-height: 80%;
+      }
+    }
+  }
+}
+
+// if screen is less than 800px, make it 90%
+@media screen and (max-width: 800px) {
+  .modal {
+    max-width: 90%;
+  }
+  ul {
+    li {
+      aside h4 {
+        font-size: 16px;
+      }
+      .icon {
+        width: 9vh;
+      }
+      .role {
+        line-height: 125%;
+        font-size: 150%;
       }
     }
   }
