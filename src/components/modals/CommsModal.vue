@@ -1,8 +1,6 @@
 <template>
   <Modal v-if="modals.comms" @close="toggleModal('comms')">
-    <h3>
-      Messages
-    </h3>
+    <h3>Messages</h3>
     <ul class="messages">
       <li v-for="message in messages" :key="message.id">
         <span class="sender">{{ message.sender }}</span>
@@ -26,12 +24,12 @@ export default {
   methods: {
     sendMessage(role) {
       this.$store.commit("players/setFabled", {
-        fabled: role
+        fabled: role,
       });
       this.$store.commit("toggleModal", "fabled");
     },
-    ...mapMutations(["toggleModal"])
-  }
+    ...mapMutations(["toggleModal"]),
+  },
 };
 </script>
 

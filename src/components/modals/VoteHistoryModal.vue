@@ -20,25 +20,25 @@
           <font-awesome-icon
             :icon="[
               'fas',
-              session.isVoteHistoryAllowed ? 'check-square' : 'square'
+              session.isVoteHistoryAllowed ? 'check-square' : 'square',
             ]"
           />
           Accessible to players
         </div>
         <div class="option" @click="setVoteWatching">
           <font-awesome-icon
-              :icon="[
+            :icon="[
               'fas',
-              session.isVoteWatchingAllowed ? 'check-square' : 'square'
+              session.isVoteWatchingAllowed ? 'check-square' : 'square',
             ]"
           />
           Vote Watching
         </div>
         <div class="option" @click="setTwoVotes">
           <font-awesome-icon
-              :icon="[
+            :icon="[
               'fas',
-              session.isTwoVotesEnabled ? 'check-square' : 'square'
+              session.isTwoVotesEnabled ? 'check-square' : 'square',
             ]"
           />
           Voting Twice
@@ -67,16 +67,8 @@
       <tbody>
         <tr v-for="(vote, index) in session.voteHistory" :key="index">
           <td>
-            {{
-              vote.timestamp
-                .getHours()
-                .toString()
-                .padStart(2, "0")
-            }}:{{
-              vote.timestamp
-                .getMinutes()
-                .toString()
-                .padStart(2, "0")
+            {{ vote.timestamp.getHours().toString().padStart(2, "0") }}:{{
+              vote.timestamp.getMinutes().toString().padStart(2, "0")
             }}
           </td>
           <td>{{ vote.nominator }}</td>
@@ -91,7 +83,7 @@
             <font-awesome-icon
               :icon="[
                 'fas',
-                vote.votes.length >= vote.majority ? 'check-square' : 'square'
+                vote.votes.length >= vote.majority ? 'check-square' : 'square',
               ]"
             />
           </td>
@@ -110,10 +102,10 @@ import { mapMutations, mapState } from "vuex";
 
 export default {
   components: {
-    Modal
+    Modal,
   },
   computed: {
-    ...mapState(["session", "modals"])
+    ...mapState(["session", "modals"]),
   },
   methods: {
     clearVoteHistory() {
@@ -122,40 +114,33 @@ export default {
     setRecordVoteHistory() {
       this.$store.commit(
         "session/setVoteHistoryAllowed",
-        !this.session.isVoteHistoryAllowed
+        !this.session.isVoteHistoryAllowed,
       );
 
       if (this.session.isVoteHistoryAllowed) {
         // Enable vote watching if vote history is re-enabled.
-        this.$store.commit(
-            "session/setVoteWatchingAllowed",
-            true
-        );
+        this.$store.commit("session/setVoteWatchingAllowed", true);
       }
     },
     setVoteWatching() {
       this.$store.commit(
-          "session/setVoteWatchingAllowed",
-          !this.session.isVoteWatchingAllowed
+        "session/setVoteWatchingAllowed",
+        !this.session.isVoteWatchingAllowed,
       );
 
       if (!this.session.isVoteWatchingAllowed) {
         // Disable vote history if votes are hidden.
-        this.$store.commit(
-            "session/setVoteHistoryAllowed",
-            false
-        );
+        this.$store.commit("session/setVoteHistoryAllowed", false);
       }
-
     },
     setTwoVotes() {
       this.$store.commit(
-          "session/setTwoVotesEnabled",
-          !this.session.isTwoVotesEnabled
+        "session/setTwoVotesEnabled",
+        !this.session.isTwoVotesEnabled,
       );
     },
-    ...mapMutations(["toggleModal"])
-  }
+    ...mapMutations(["toggleModal"]),
+  },
 };
 </script>
 

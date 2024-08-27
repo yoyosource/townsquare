@@ -57,12 +57,12 @@ export default {
     availableRoles() {
       const availableRoles = [];
       const players = this.$store.state.players.players;
-      this.$store.state.roles.forEach(role => {
+      this.$store.state.roles.forEach((role) => {
         // don't show bluff roles that are already assigned to players
         if (
           this.playerIndex >= 0 ||
           (this.playerIndex < 0 &&
-            !players.some(player => player.role.id === role.id))
+            !players.some((player) => player.role.id === role.id))
         ) {
           availableRoles.push(role);
         }
@@ -80,12 +80,12 @@ export default {
     },
     ...mapState(["modals", "roles", "session"]),
     ...mapState("players", ["players"]),
-    ...mapState(["otherTravelers"])
+    ...mapState(["otherTravelers"]),
   },
   data() {
     return {
       tab: "editionRoles",
-      query: ""
+      query: "",
     };
   },
   methods: {
@@ -94,7 +94,7 @@ export default {
         // assign to bluff slot (index < 0)
         this.$store.commit("players/setBluff", {
           index: this.playerIndex * -1 - 1,
-          role
+          role,
         });
       } else {
         if (this.session.isSpectator && role.team === "traveler") return;
@@ -103,7 +103,7 @@ export default {
         this.$store.commit("players/update", {
           player,
           property: "role",
-          value: role
+          value: role,
         });
       }
       this.reset();
@@ -120,7 +120,7 @@ export default {
     queryMatches(name) {
       // A search query matches if, after removing all non-word characters,
       // it is a case-insensitive prefix of the character name.
-      const simplify = str => str.replaceAll(/\W+/g, "").toLowerCase();
+      const simplify = (str) => str.replaceAll(/\W+/g, "").toLowerCase();
       return simplify(name || "").startsWith(simplify(this.query));
     },
     keyup(event) {
@@ -131,20 +131,21 @@ export default {
 
       // If there's a unique match and the user presses Enter, select that role.
       if (event.key === "Enter") {
-        const matchingRoles = this.displayedRoles.filter(
-            r => this.queryMatches(r.name));
+        const matchingRoles = this.displayedRoles.filter((r) =>
+          this.queryMatches(r.name),
+        );
         if (matchingRoles.length === 1) {
           this.setRole(matchingRoles[0]);
         }
       }
     },
-    ...mapMutations(["toggleModal"])
+    ...mapMutations(["toggleModal"]),
   },
   watch: {
     isDisplayed(shown) {
       if (shown) this.$nextTick(() => this.$refs.searchInput.focus());
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -162,19 +163,29 @@ ul.tokens li {
   }
 
   &.townsfolk {
-    box-shadow: 0 0 10px $townsfolk, 0 0 10px #004cff;
+    box-shadow:
+      0 0 10px $townsfolk,
+      0 0 10px #004cff;
   }
   &.outsider {
-    box-shadow: 0 0 10px $outsider, 0 0 10px $outsider;
+    box-shadow:
+      0 0 10px $outsider,
+      0 0 10px $outsider;
   }
   &.minion {
-    box-shadow: 0 0 10px $minion, 0 0 10px $minion;
+    box-shadow:
+      0 0 10px $minion,
+      0 0 10px $minion;
   }
   &.demon {
-    box-shadow: 0 0 10px $demon, 0 0 10px $demon;
+    box-shadow:
+      0 0 10px $demon,
+      0 0 10px $demon;
   }
   &.traveler {
-    box-shadow: 0 0 10px $traveler, 0 0 10px $traveler;
+    box-shadow:
+      0 0 10px $traveler,
+      0 0 10px $traveler;
   }
   &:hover {
     transform: scale(1.2);

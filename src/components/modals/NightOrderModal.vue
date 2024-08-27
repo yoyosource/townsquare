@@ -35,14 +35,16 @@
                 v-for="(player, index) in role.players"
                 :class="{ dead: player.isDead }"
                 :key="index"
-                >
+              >
                 <template v-if="!session.isSpectator">
                   <div class="option" @click="setResponded(player, role.id)">
                     {{ player.name }}
                     <font-awesome-icon
-                        :icon="[
+                      :icon="[
                         'fas',
-                        !!player.hasResponded[role.id] ? 'check-square' : 'square'
+                        !!player.hasResponded[role.id]
+                          ? 'check-square'
+                          : 'square',
                       ]"
                     />
                   </div>
@@ -50,7 +52,7 @@
                 <template v-if="session.isSpectator">{{
                   player.name + (role.players.length > index + 1 ? "," : "")
                 }}</template>
-                </small>
+              </small>
             </span>
           </span>
           <span
@@ -60,10 +62,12 @@
               backgroundImage: `url(${
                 role.image && grimoire.isImageOptIn
                   ? role.image
-                  : require('../../assets/icons/' +
-                      (role.imageAlt || role.id) +
-                      '.png')
-              })`
+                  : require(
+                      '../../assets/icons/' +
+                        (role.imageAlt || role.id) +
+                        '.png',
+                    )
+              })`,
             }"
           ></span>
           <span class="reminder" v-if="role.firstNightReminder">
@@ -85,10 +89,12 @@
               backgroundImage: `url(${
                 role.image && grimoire.isImageOptIn
                   ? role.image
-                  : require('../../assets/icons/' +
-                      (role.imageAlt || role.id) +
-                      '.png')
-              })`
+                  : require(
+                      '../../assets/icons/' +
+                        (role.imageAlt || role.id) +
+                        '.png',
+                    )
+              })`,
             }"
           ></span>
           <span class="name">
@@ -99,13 +105,15 @@
                 v-for="(player, index) in role.players"
                 :class="{ dead: player.isDead }"
                 :key="index"
-                >
+              >
                 <template v-if="!session.isSpectator">
                   <div class="option" @click="setResponded(player, role.id)">
                     <font-awesome-icon
-                        :icon="[
+                      :icon="[
                         'fas',
-                        !!player.hasResponded[role.id] ? 'check-square' : 'square'
+                        !!player.hasResponded[role.id]
+                          ? 'check-square'
+                          : 'square',
                       ]"
                     />
                     {{ player.name }}
@@ -114,7 +122,7 @@
                 <template v-if="session.isSpectator">{{
                   player.name + (role.players.length > index + 1 ? "," : "")
                 }}</template>
-                </small>
+              </small>
             </span>
           </span>
           <span class="reminder" v-if="role.otherNightReminder">
@@ -132,10 +140,10 @@ import { mapMutations, mapState } from "vuex";
 
 export default {
   components: {
-    Modal
+    Modal,
   },
   computed: {
-    rolesFirstNight: function() {
+    rolesFirstNight: function () {
       const rolesFirstNight = [];
       // add minion / demon infos to night order sheet
       if (this.players.length > 6) {
@@ -145,69 +153,69 @@ export default {
             name: "Minion info",
             firstNight: 5,
             team: "minion",
-            players: this.players.filter(p => p.role.team === "minion"),
+            players: this.players.filter((p) => p.role.team === "minion"),
             firstNightReminder:
               "• If more than one Minion, they all make eye contact with each other. " +
-              "• Show the “This is the Demon” card. Point to the Demon."
+              "• Show the “This is the Demon” card. Point to the Demon.",
           },
           {
             id: "evil",
             name: "Demon info & bluffs",
             firstNight: 8,
             team: "demon",
-            players: this.players.filter(p => p.role.team === "demon"),
+            players: this.players.filter((p) => p.role.team === "demon"),
             firstNightReminder:
               "• Show the “These are your minions” card. Point to each Minion. " +
               "• Show the “These characters are not in play” card. Show 3 character tokens of good " +
-              "characters not in play."
-          }
+              "characters not in play.",
+          },
         );
       }
-      this.roles.forEach(role => {
-        const players = this.players.filter(p => p.role.id === role.id);
+      this.roles.forEach((role) => {
+        const players = this.players.filter((p) => p.role.id === role.id);
         if (role.firstNight && (role.team !== "traveler" || players.length)) {
           rolesFirstNight.push(Object.assign({ players }, role));
         }
       });
       this.fabled
         .filter(({ firstNight }) => firstNight)
-        .forEach(fabled => {
+        .forEach((fabled) => {
           rolesFirstNight.push(Object.assign({ players: [] }, fabled));
         });
       rolesFirstNight.sort((a, b) => a.firstNight - b.firstNight);
       return rolesFirstNight;
     },
-    rolesOtherNight: function() {
+    rolesOtherNight: function () {
       const rolesOtherNight = [];
-      this.roles.forEach(role => {
-        const players = this.players.filter(p => p.role.id === role.id);
+      this.roles.forEach((role) => {
+        const players = this.players.filter((p) => p.role.id === role.id);
         if (role.otherNight && (role.team !== "traveler" || players.length)) {
           rolesOtherNight.push(Object.assign({ players }, role));
         }
       });
       this.fabled
         .filter(({ otherNight }) => otherNight)
-        .forEach(fabled => {
+        .forEach((fabled) => {
           rolesOtherNight.push(Object.assign({ players: [] }, fabled));
         });
       rolesOtherNight.sort((a, b) => a.otherNight - b.otherNight);
       return rolesOtherNight;
     },
     ...mapState(["roles", "modals", "edition", "grimoire", "session"]),
-    ...mapState("players", ["players", "fabled"])
+    ...mapState("players", ["players", "fabled"]),
   },
   methods: {
     setResponded(player, roleId) {
-      var hasResponded = {...player.hasResponded}
-      hasResponded[roleId] = !hasResponded[roleId]
+      var hasResponded = { ...player.hasResponded };
+      hasResponded[roleId] = !hasResponded[roleId];
       this.$store.commit("players/update", {
         player: player,
         property: "hasResponded",
         value: hasResponded,
       });
     },
-    ...mapMutations(["toggleModal"])
-  }
+    ...mapMutations(["toggleModal"]),
+  },
 };
 </script>
 

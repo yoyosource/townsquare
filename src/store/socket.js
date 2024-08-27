@@ -29,9 +29,10 @@ class LiveSession {
         channel +
         "/" +
         (this._isSpectator
-          ? (encodeURIComponent(this._store.state.session.playerId) + "?secret=" +
-            encodeURIComponent(this._store.state.session.playerSecret))
-          : "host")
+          ? encodeURIComponent(this._store.state.session.playerId) +
+            "?secret=" +
+            encodeURIComponent(this._store.state.session.playerSecret)
+          : "host"),
     );
     this._socket.addEventListener("message", this._handleMessage.bind(this));
     this._socket.onopen = this._onOpen.bind(this);
@@ -229,13 +230,38 @@ class LiveSession {
    */
   async connect(channel) {
     function toBase64URL(u8Array) {
-      return btoa(String.fromCharCode(...u8Array)).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/, "");
+      return btoa(String.fromCharCode(...u8Array))
+        .replaceAll("+", "-")
+        .replaceAll("/", "_")
+        .replace(/=+$/, "");
     }
     let playerId = this._store.state.session.playerId;
     if (!playerId || playerId.indexOf("__s_") !== 0) {
       const playerSecret = crypto.getRandomValues(new Uint8Array(32));
-      const digestInput = new Uint8Array([155, 113, 7, 193, 229, 225, 124, 147, 153, 27, 254, 60, 164, 234, 108, 10, ...playerSecret]);
-      playerId = "__s_" + toBase64URL(new Uint8Array(await crypto.subtle.digest("SHA-256", digestInput)));
+      const digestInput = new Uint8Array([
+        155,
+        113,
+        7,
+        193,
+        229,
+        225,
+        124,
+        147,
+        153,
+        27,
+        254,
+        60,
+        164,
+        234,
+        108,
+        10,
+        ...playerSecret,
+      ]);
+      playerId =
+        "__s_" +
+        toBase64URL(
+          new Uint8Array(await crypto.subtle.digest("SHA-256", digestInput)),
+        );
       this._store.commit("session/setPlayerId", playerId);
       this._store.commit("session/setPlayerSecret", toBase64URL(playerSecret));
     }
