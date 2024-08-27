@@ -116,9 +116,8 @@ export default {
 
   @media (orientation: portrait) {
     width: 30%;
-    background-size: 100% auto;
+    background-size: contain;
   }
-
   li {
     font-weight: bold;
     width: 100%;
