@@ -768,6 +768,11 @@ class LiveSession {
           player_count: this._store.state.players.players.length,
           role: player.role.id,
         });
+
+        gtag("event", "send_role_" + player.role.id, {
+          edition: this._store.state.edition.name,
+          player_count: this._store.state.players.players.length,
+        });
       }
     });
     if (Object.keys(message).length) {
