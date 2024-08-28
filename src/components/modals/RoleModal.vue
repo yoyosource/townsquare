@@ -209,6 +209,7 @@ input.role-search {
   outline: none;
   color: white;
   font-size: 1em;
+  touch-action: none;
 
   &:not(:focus) {
     border-bottom-color: #777;
