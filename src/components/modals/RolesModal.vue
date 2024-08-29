@@ -173,6 +173,11 @@ ul.tokens {
     margin: 5px;
     opacity: 0.5;
     transition: all 250ms;
+
+    @media (orientation: portrait) {
+      width: 7vh;
+    }
+
     &.selected {
       opacity: 1;
       .buttons {
@@ -252,6 +257,11 @@ ul.tokens {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    @media (orientation: portrait) {
+      width: 8%;
+    }
+
     &:after {
       content: " ";
       display: block;

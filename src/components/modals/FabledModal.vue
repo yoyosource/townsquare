@@ -54,6 +54,10 @@ ul.tokens li {
   margin: 0.5%;
   transition: transform 500ms ease;
 
+  @media (orientation: portrait) {
+    width: 8vh;
+  }
+
   &:hover {
     transform: scale(1.2);
     z-index: 10;
