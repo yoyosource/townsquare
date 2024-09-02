@@ -60,13 +60,7 @@
             v-if="role.id"
             :style="{
               backgroundImage: `url(${
-                role.image && grimoire.isImageOptIn
-                  ? role.image
-                  : require(
-                      '../../assets/icons/' +
-                        (role.imageAlt || role.id) +
-                        '.png',
-                    )
+                getImage(role)
               })`,
             }"
           ></span>
@@ -87,13 +81,7 @@
             v-if="role.id"
             :style="{
               backgroundImage: `url(${
-                role.image && grimoire.isImageOptIn
-                  ? role.image
-                  : require(
-                      '../../assets/icons/' +
-                        (role.imageAlt || role.id) +
-                        '.png',
-                    )
+                getImage(role)
               })`,
             }"
           ></span>
@@ -205,6 +193,19 @@ export default {
     ...mapState("players", ["players", "fabled"]),
   },
   methods: {
+    getImage(role) {
+      if (role.image && this.grimoire.isImageOptIn) {
+        if (role.image?.length) {
+          return role.image[0];
+        }
+
+        return role.image;
+      }
+
+      return require('../../assets/icons/' +
+        (role.imageAlt || role.id) +
+        '.png');
+    },
     setResponded(player, roleId) {
       var hasResponded = { ...player.hasResponded };
       hasResponded[roleId] = !hasResponded[roleId];
