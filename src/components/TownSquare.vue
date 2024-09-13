@@ -134,7 +134,8 @@ export default {
     },
     claimSeat(playerIndex) {
       if (!this.session.isSpectator) return;
-      if (this.session.playerId === this.players[playerIndex].id) {
+      const player = this.players[playerIndex];
+      if (this.session.playerId === player.id && player.connected) {
         this.$store.commit("session/claimSeat", -1);
       } else {
         this.$store.commit("session/claimSeat", playerIndex);
