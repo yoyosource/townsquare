@@ -1,6 +1,7 @@
 const NEWPLAYER = {
   name: "",
   id: "",
+  connected: false,
   role: {},
   reminders: [],
   isVoteless: false,
