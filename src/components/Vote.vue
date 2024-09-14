@@ -12,7 +12,7 @@
       <br />
       <template v-if="!session.isSpectator || session.isVoteWatchingAllowed">
         <em class="blue">
-          {{ voteCount }} vote{{ voters.length !== 1 ? "s" : "" }}
+          {{ voteCount }} vote{{ voteCount !== 1 ? "s" : "" }}
         </em>
         in favor
       </template>
