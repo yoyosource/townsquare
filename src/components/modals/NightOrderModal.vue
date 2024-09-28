@@ -204,7 +204,7 @@ export default {
 
       return require('../../assets/icons/' +
         (role.imageAlt || role.id) +
-        '.png');
+        '.webp');
     },
     setResponded(player, roleId) {
       var hasResponded = { ...player.hasResponded };

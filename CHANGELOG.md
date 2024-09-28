@@ -1,5 +1,10 @@
 # Release Notes
 
+### Version 2.17.0
+- Update the build to pull images from https://github.com/tomozbot/botc-icons
+- Add Boffin role
+- Removed full stop after night order reminders
+
 ### Version 2.16.4
 - fixed minor spelling mistakes in code documentation
 - fixed Banshee votes being shown as the singular form "2 vote" during a nomination if no other players voted

@@ -5,7 +5,9 @@
   "author": "Steffen Baumgart",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build ./src/main.js",
+    "clone-images": "rm -rf /tmp/botc-icons/ && git clone https://github.com/tomozbot/botc-icons.git --depth 1 /tmp/botc-icons",
+    "copy-images": "cp -rf /tmp/botc-icons/WEBP/ ./src/assets/icons/",
+    "build": "npm run clone-images && npm run copy-images && vue-cli-service build ./src/main.js",
     "lint": "vue-cli-service lint",
     "lint-ci": "vue-cli-service lint --no-fix --max-warnings=0"
   },

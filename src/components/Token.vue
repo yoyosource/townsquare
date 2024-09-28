@@ -82,7 +82,7 @@ export default {
 
       return require('../assets/icons/' +
         (role.imageAlt || role.id) +
-        '.png');
+        '.webp');
     },
     setRole() {
       this.$emit("set-role");

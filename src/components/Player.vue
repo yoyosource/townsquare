@@ -34,7 +34,7 @@
         class="night-order first"
         v-if="nightOrder.get(player).first && grimoire.isNightOrder"
       >
-        <em>{{ nightOrder.get(player).first }}.</em>
+        <em>{{ nightOrder.get(player).first }}</em>
         <span v-if="player.role.firstNightReminder">{{
           player.role.firstNightReminder
         }}</span>
@@ -43,7 +43,7 @@
         class="night-order other"
         v-if="nightOrder.get(player).other && grimoire.isNightOrder"
       >
-        <em>{{ nightOrder.get(player).other }}.</em>
+        <em>{{ nightOrder.get(player).other }}</em>
         <span v-if="player.role.otherNightReminder">{{
           player.role.otherNightReminder
         }}</span>
@@ -230,7 +230,7 @@
                 : require(
                     '../assets/icons/' +
                       (reminder.imageAlt || reminder.role) +
-                      '.png',
+                      '.webp',
                   )
             })`,
           }"
@@ -975,12 +975,12 @@ li.move:not(.from) .player .overlay svg.move {
     background-size: 100%;
     background-position: center 0;
     background-repeat: no-repeat;
-    background-image: url("../assets/icons/plus.png");
+    background-image: url("../assets/plus.png");
     transition: opacity 200ms;
   }
 
   &:after {
-    background-image: url("../assets/icons/x.png");
+    background-image: url("../assets/x.png");
     opacity: 0;
     top: 5%;
   }
