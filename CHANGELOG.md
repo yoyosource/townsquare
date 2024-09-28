@@ -1,13 +1,28 @@
 # Release Notes
+### Version 2.17.1
+- updated fabled json to include Bootlegger, Ferryman, and Gardener
+- fixed inconsistency with official app and physical game where characters with multiple of the same reminder would only show one leaf
+- fixed icon spacing in the night order modal
+- added dusk and dawn to night order sheet for Vizier and Leviathan night order positions to make sense
+- fixed minion & demon info positions in night order to reference the nightsheet.json
+- fixed scrolling in character menus for large scripts (this only works when the modals are maximised)
+
+---
 
 ### Version 2.17.0
-- Update the build to pull images from https://github.com/tomozbot/botc-icons
-- Add Boffin role
-- Removed full stop after night order reminders
+- cleaned up character JSON to create consistent reminder tokens and ability texts
+- updated nightsheet.json as per latest updates
+- update the build to pull images from https://github.com/tomozbot/botc-icons
+- added Boffin role
+- removed full stop after night order reminders
+
+---
 
 ### Version 2.16.4
 - fixed minor spelling mistakes in code documentation
 - fixed Banshee votes being shown as the singular form "2 vote" during a nomination if no other players voted
+
+---
 
 ### Version 2.16.3
 - adjusted the Add Fabled and Choose & Assign windows to be more mobile friendly

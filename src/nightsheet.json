@@ -1,6 +1,6 @@
 {
   "firstNight": [
-    "DUSK",
+    "dusk",
     "lordoftyphon",
     "kazali",
     "apprentice",
@@ -13,11 +13,11 @@
     "poppygrower",
     "yaggababble",
     "magician",
-    "MINION",
+    "minion",
     "snitch",
     "lunatic",
     "summoner",
-    "DEMON",
+    "demon",
     "king",
     "sailor",
     "marionette",
@@ -68,12 +68,12 @@
     "general",
     "chambermaid",
     "mathematician",
-    "DAWN",
+    "dawn",
     "leviathan",
     "vizier"
   ],
   "otherNight": [
-    "DUSK",
+    "dusk",
     "cannibal",
     "barista",
     "bureaucrat",
@@ -160,7 +160,7 @@
     "general",
     "chambermaid",
     "mathematician",
-    "DAWN",
+    "dawn",
     "leviathan"
   ]
 }
