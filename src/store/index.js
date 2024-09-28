@@ -179,6 +179,8 @@ export default new Vuex.Store({
       });
       return customRoles;
     },
+    getFirstNightOrder: () => (id) => getFirstNightOrder(id),
+    getOtherNightOrder: () => (id) => getOtherNightOrder(id),
     rolesJSONbyId: () => rolesJSONbyId,
   },
   mutations: {

@@ -1,12 +1,12 @@
 {
   "name": "townsquare",
-  "version": "2.16.0",
+  "version": "2.17.1",
   "description": "Blood on the Clocktower Town Square",
   "author": "Steffen Baumgart",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "clone-images": "rm -rf /tmp/botc-icons/ && git clone https://github.com/tomozbot/botc-icons.git --depth 1 /tmp/botc-icons",
-    "copy-images": "cp -rf /tmp/botc-icons/WEBP/ ./src/assets/icons/",
+    "clone-images": "rm -rf ./tmp/botc-icons/ && git clone https://github.com/tomozbot/botc-icons.git --depth 1 ./tmp/botc-icons",
+    "copy-images": "cp -rf ./tmp/botc-icons/WEBP/ ./src/assets/icons/",
+    "serve": "npm run clone-images && npm run copy-images && vue-cli-service serve",
     "build": "npm run clone-images && npm run copy-images && vue-cli-service build ./src/main.js",
     "lint": "vue-cli-service lint",
     "lint-ci": "vue-cli-service lint --no-fix --max-warnings=0"

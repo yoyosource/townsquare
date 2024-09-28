@@ -19,7 +19,7 @@
               reminder.image && grimoire.isImageOptIn
                 ? reminder.image
                 : require(
-                    '../../assets/' +
+                    '../../assets/icons/' +
                       (reminder.imageAlt || reminder.role) +
                       '.webp',
                   )
@@ -58,20 +58,33 @@ export default {
       let reminders = [];
       const { players, bluffs } = this.$store.state.players;
       this.$store.state.roles.forEach((role) => {
-        // add reminders from player roles
-        if (players.some((p) => p.role.id === role.id)) {
-          reminders = [...reminders, ...role.reminders.map(mapReminder(role))];
-        }
-        // add reminders from bluff/other roles
-        else if (bluffs.some((bluff) => bluff.id === role.id)) {
-          reminders = [...reminders, ...role.reminders.map(mapReminder(role))];
+        // add reminders from player roles and bluff/other roles
+        if (players.some((p) => p.role.id === role.id) || bluffs.some((bluff) => bluff.id === role.id)) {
+          role.reminders.map(mapReminder(role)).forEach((reminder1) => {
+            if (
+              !reminders.some(
+                (reminder2) =>
+                  reminder2.name === reminder1.name &&
+                  reminder2.role === reminder1.role,
+              )
+            ) {
+              reminders.push(reminder1);
+            }
+          });
         }
         // add global reminders
         if (role.remindersGlobal && role.remindersGlobal.length) {
-          reminders = [
-            ...reminders,
-            ...role.remindersGlobal.map(mapReminder(role)),
-          ];
+          role.remindersGlobal.map(mapReminder(role)).forEach((reminder1) => {
+            if (
+              !reminders.some(
+                (reminder2) =>
+                  reminder2.name === reminder1.name &&
+                  reminder2.role === reminder1.role,
+              )
+            ) {
+              reminders.push(reminder1);
+            }
+          });
         }
       });
       // add fabled reminders
@@ -82,7 +95,17 @@ export default {
       // add out of script traveler reminders
       this.$store.state.otherTravelers.forEach((role) => {
         if (players.some((p) => p.role.id === role.id)) {
-          reminders = [...reminders, ...role.reminders.map(mapReminder(role))];
+          role.reminders.map(mapReminder(role)).forEach((reminder1) => {
+            if (
+              !reminders.some(
+                (reminder2) =>
+                  reminder2.name === reminder1.name &&
+                  reminder2.role === reminder1.role,
+              )
+            ) {
+              reminders.push(reminder1);
+            }
+          });
         }
       });
 

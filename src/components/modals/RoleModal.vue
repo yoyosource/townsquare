@@ -1,5 +1,5 @@
 <template>
-  <Modal v-if="isDisplayed" @close="close">
+  <Modal class="role" v-if="isDisplayed" @close="close">
     <h3>
       Choose a new character for
       {{
