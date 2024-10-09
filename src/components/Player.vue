@@ -11,7 +11,7 @@
             session.markedPlayer === index,
           'no-vote': player.isVoteless,
           'two-votes': player.hasTwoVotes,
-          you: session.sessionId && player.id && player.id === session.playerId,
+          you: player.connected && session.sessionId && player.id && player.id === session.playerId,
           'vote-yes':
             (!session.isSpectator ||
               session.isVoteWatchingAllowed ||
@@ -104,7 +104,10 @@
         icon="chair"
         v-if="player.id && session.sessionId"
         class="seat"
-        :class="{ highlight: session.isRolesDistributed }"
+        :class="{
+          highlight: session.isRolesDistributed,
+          disconnected: !player.connected
+        }"
       />
 
       <!-- Ghost vote icon -->
@@ -147,7 +150,7 @@
             @click="changePronouns"
             v-if="
               !session.isSpectator ||
-              (session.isSpectator && player.id === session.playerId)
+              (session.isSpectator && player.connected && player.id === session.playerId)
             "
           >
             <font-awesome-icon icon="venus-mars" />Change Pronouns
@@ -156,9 +159,7 @@
             @click="changeName"
             v-if="
               !session.isSpectator ||
-              (session.allowSelfNaming &&
-                session.isSpectator &&
-                player.id === session.playerId)
+              (session.allowSelfNaming && session.isSpectator && player.connected && player.id === session.playerId)
             "
           >
             <font-awesome-icon icon="user-edit" />Rename
@@ -203,7 +204,7 @@
             :class="{ disabled: player.id && player.id !== session.playerId }"
           >
             <font-awesome-icon icon="chair" />
-            <template v-if="!player.id"> Claim seat </template>
+            <template v-if="!player.id || (player.id === session.playerId && !player.connected)"> Claim seat </template>
             <template v-else-if="player.id === session.playerId">
               Vacate seat
             </template>
@@ -771,6 +772,10 @@ li.move:not(.from) .player .overlay svg.move {
   &.highlight {
     animation-iteration-count: 1;
     animation: redToWhite 1s normal forwards;
+  }
+
+  &.disconnected {
+    color: red;
   }
 }
 

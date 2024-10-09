@@ -1,4 +1,14 @@
 # Release Notes
+
+### Version 2.18.0
+- Players that lose connection to their active session have their seats reserved in case they reconnect
+- Reserved seats cannot be claimed by another player and have their chair icon display as red
+- If a player reconnects they can claim their reserved seat using the "Claim seat" button as if it were an unclaimed seat
+- The Storyteller can manually empty a reserved seat with the "Empty seat" button as if it were a claimed seat
+- Players manually vacating a seat using the "Vacate seat" or "Leave Session" buttons do not reserve the seat they vacated
+
+---
+
 ### Version 2.17.1
 - updated fabled json to include Bootlegger, Ferryman, and Gardener
 - fixed inconsistency with official app and physical game where characters with multiple of the same reminder would only show one leaf

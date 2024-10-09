@@ -301,6 +301,7 @@ class LiveSession {
     this._gamestate = this._store.state.players.players.map((player) => ({
       name: player.name,
       id: player.id,
+      connected: player.connected,
       isDead: player.isDead,
       isVoteless: player.isVoteless,
       hasTwoVotes: player.hasTwoVotes,
@@ -373,14 +374,20 @@ class LiveSession {
       const player = players[x];
       const { roleId } = state;
       // update relevant properties
-      ["name", "id", "isDead", "isVoteless", "hasTwoVotes", "pronouns"].forEach(
-        (property) => {
-          const value = state[property];
-          if (player[property] !== value) {
-            this._store.commit("players/update", { player, property, value });
-          }
-        },
-      );
+      [
+        "name",
+        "id",
+        "connected",
+        "isDead",
+        "isVoteless",
+        "hasTwoVotes",
+        "pronouns",
+      ].forEach((property) => {
+        const value = state[property];
+        if (player[property] !== value) {
+          this._store.commit("players/update", { player, property, value });
+        }
+      });
       // roles are special, because of travelers
       if (roleId && player.role.id !== roleId) {
         const role =
@@ -652,11 +659,11 @@ class LiveSession {
       }
       // remove claimed seats from players that are no longer connected
       this._store.state.players.players.forEach((player) => {
-        if (player.id && !this._players[player.id]) {
+        if (player.connected && !this._players[player.id]) {
           this._store.commit("players/update", {
-            player,
-            property: "id",
-            value: "",
+            player: player,
+            property: "connected",
+            value: false,
           });
         }
       });
@@ -695,6 +702,20 @@ class LiveSession {
   _handleBye(playerId) {
     if (this._isSpectator) return;
     delete this._players[playerId];
+    this._store.state.players.players.forEach((player) => {
+      if (player.id === playerId) {
+        this._store.commit("players/update", {
+          player: player,
+          property: "id",
+          value: "",
+        });
+        this._store.commit("players/update", {
+          player: player,
+          property: "connected",
+          value: "false",
+        });
+      }
+    });
     this._store.commit(
       "session/setPlayerCount",
       Object.keys(this._players).length,
@@ -703,13 +724,18 @@ class LiveSession {
 
   /**
    * Claim a seat, needs to be confirmed by the Storyteller.
-   * Seats already occupied can't be claimed.
+   * Seats already occupied or reserved can't be claimed.
    * @param seat either -1 to vacate or the index of the seat claimed
    */
   claimSeat(seat) {
     if (!this._isSpectator) return;
     const players = this._store.state.players.players;
-    if (players.length > seat && (seat < 0 || !players[seat].id)) {
+    const playerId = this._store.state.session.playerId;
+    const player = players[seat];
+    if (
+      players.length > seat &&
+      (seat < 0 || !player.id || (player.id === playerId && !player.connected))
+    ) {
       this._send("claim", [seat, this._store.state.session.playerId]);
     }
   }
@@ -722,22 +748,37 @@ class LiveSession {
    */
   _updateSeat([index, value]) {
     if (this._isSpectator) return;
-    const property = "id";
+    const idProperty = "id";
+    const connectedProperty = "connected";
     const players = this._store.state.players.players;
     // remove previous seat
     const oldIndex = players.findIndex(({ id }) => id === value);
     if (oldIndex >= 0 && oldIndex !== index) {
       this._store.commit("players/update", {
         player: players[oldIndex],
-        property,
+        property: idProperty,
         value: "",
       });
+      this._store.commit("players/update", {
+        player: players[oldIndex],
+        property: connectedProperty,
+        value: false,
+      });
     }
-    // add playerId to new seat unless it is already occupied
+    // add playerId to new seat unless it is already occupied by or reserved for another player
     if (index >= 0) {
       const player = players[index];
-      if (!player || player.id) return;
-      this._store.commit("players/update", { player, property, value });
+      if (!player || (player.id && player.id !== value)) return;
+      this._store.commit("players/update", {
+        player: player,
+        property: idProperty,
+        value: value,
+      });
+      this._store.commit("players/update", {
+        player: player,
+        property: connectedProperty,
+        value: true,
+      });
     }
     // update player session list as if this was a ping
     this._handlePing([true, value, 0]);
@@ -757,7 +798,7 @@ class LiveSession {
     });
 
     this._store.state.players.players.forEach((player, index) => {
-      if (player.id && player.role) {
+      if (player.connected && player.role) {
         message[player.id] = [
           "player",
           { index, property: "role", value: player.role.id },
