@@ -269,6 +269,21 @@ class LiveSession {
     this._store.commit("session/setPlayerCount", 0);
     this._store.commit("session/setPing", 0);
     this._isSpectator = this._store.state.session.isSpectator;
+    if (!this._isSpectator) {
+      // clear all claimed and reserved seats when hosting a new session
+      this._store.state.players.players.forEach((player) => {
+        this._store.commit("players/update", {
+          player: player,
+          property: "id",
+          value: "",
+        });
+        this._store.commit("players/update", {
+          player: player,
+          property: "connected",
+          value: false,
+        });
+      });
+    }
     this._open(channel);
   }
 
@@ -657,7 +672,7 @@ class LiveSession {
           delete this._pings[player];
         }
       }
-      // remove claimed seats from players that are no longer connected
+      // reserve previously claimed seats for players that are no longer connected
       this._store.state.players.players.forEach((player) => {
         if (player.connected && !this._players[player.id]) {
           this._store.commit("players/update", {
