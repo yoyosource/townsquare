@@ -108,6 +108,7 @@
           highlight: session.isRolesDistributed,
           disconnected: !player.connected
         }"
+        :title="setSeatTitle()"
       />
 
       <!-- Ghost vote icon -->
@@ -377,6 +378,20 @@ export default {
     claimSeat() {
       this.isMenuOpen = false;
       this.$emit("trigger", ["claimSeat"]);
+    },
+    setSeatTitle() {
+      if (this.player.connected) {
+        if (this.player.id === this.session.playerId) {
+          return "Your claimed seat";
+        }
+        return "Seat claimed by " + this.player.name;
+      }
+      else {
+        if (this.player.id === this.session.playerId) {
+          return "Your reserved seat. Click 'Claim seat' to reconnect";
+        }
+        return "Seat reserved for " + this.player.name;
+      }
     },
     /**
      * Allow the ST to override a locked vote.
