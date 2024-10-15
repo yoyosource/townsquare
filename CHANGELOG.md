@@ -1,5 +1,12 @@
 # Release Notes
 
+### Version 2.18.1
+- Fix players being able to vote while not connected to their seat
+- Hosting a new Session now clears all reserved seats
+- Added a ToolTip to the seat icon to clarify the reserved/connected state
+
+---
+
 ### Version 2.18.0
 - Players that lose connection to their active session have their seats reserved in case they reconnect
 - Reserved seats cannot be claimed by another player and have their chair icon display as red
