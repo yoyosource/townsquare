@@ -1,5 +1,10 @@
 # Release Notes
 
+### Version 2.18.2
+- Update Acrobat and Organ Grinder
+
+---
+
 ### Version 2.18.1
 - Fix players being able to vote while not connected to their seat
 - Hosting a new Session now clears all reserved seats
