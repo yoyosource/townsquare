@@ -1484,14 +1484,15 @@
     "id": "acrobat",
     "name": "Acrobat",
     "edition": "",
-    "team": "outsider",
+    "team": "townsfolk",
     "firstNightReminder": "",
-    "otherNightReminder": "If a good living neighbor is drunk or poisoned, the Acrobat player dies.",
+    "otherNightReminder": "The Acrobat points to a player. If that player is or becomes drunk or poisoned tonight, the Acrobat dies.",
     "reminders": [
+      "Chosen",
       "Dead"
     ],
     "setup": false,
-    "ability": "Each night*, if either good living neighbor is drunk or poisoned, you die."
+    "ability": "Each night*, choose a player: if they are or become drunk or poisoned tonight, you die."
   },
   {
     "id": "ogre",
@@ -1751,13 +1752,13 @@
     "name": "Organ Grinder",
     "edition": "",
     "team": "minion",
-    "firstNightReminder": "",
-    "otherNightReminder": "",
+    "firstNightReminder": "Wake the Organ Grinder. If they give the 'yes' head signal, mark them Drunk. If they give the 'no' head signal, remove the Drunk reminder.",
+    "otherNightReminder": "Wake the Organ Grinder. If they give the 'yes' head signal, mark them Drunk. If they give the 'no' head signal, remove the Drunk reminder.",
     "reminders": [
-      "About To Die"
+      "Drunk"
     ],
     "setup": false,
-    "ability": "All players keep their eyes closed when voting & the vote tally is secret. Votes for you only count if you vote."
+    "ability": "All players keep their eyes closed when voting and the vote tally is secret. Each night, choose if you are drunk or not."
   },
   {
     "id": "boffin",
