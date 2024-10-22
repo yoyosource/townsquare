@@ -611,14 +611,6 @@
       {
         "id": "butler",
         "reason": "If the Organ Grinder is causing eyes closed voting, the Butler may raise their hand to vote but their vote is only counted if their master voted too."
-      },
-      {
-        "id": "minstrel",
-        "reason": "If the Minstrel makes everyone drunk, the Organ Grinder keeps their ability but the Minstrel keeps their eyes open when voting."
-      },
-      {
-        "id": "preacher",
-        "reason": "If the Preacher removes the Organ Grinder ability, the Organ Grinder keeps their ability but the Preacher keeps their eyes open when voting."
       }
     ]
   },
