@@ -228,7 +228,7 @@
           :style="{
             backgroundImage: `url(${
               reminder.image && grimoire.isImageOptIn
-                ? (reminder.image?.length ? reminder.image[0] : reminder.image)
+                ? (Array.isArray(reminder.image) ? reminder.image[0] : reminder.image)
                 : require(
                     '../assets/icons/' +
                       (reminder.imageAlt || reminder.role) +

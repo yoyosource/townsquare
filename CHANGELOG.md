@@ -1,5 +1,11 @@
 # Release Notes
 
+### Version 2.18.3
+- Fix homebrew character reminders (again)
+- Update the image clone scripts to use rimraf and copyfiles
+
+---
+
 ### Version 2.18.2
 - Fix homebrew characters with multiple alignment-shifted images failing to display character icons on reminders
 - Update Acrobat and Organ Grinder
