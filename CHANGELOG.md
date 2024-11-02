@@ -2,6 +2,7 @@
 
 ### Version 2.18.3
 - Fix homebrew character reminders (again)
+- Fix homebrew character icons in night order and character sheet
 - Update the image clone scripts to use rimraf and copyfiles
 
 ---

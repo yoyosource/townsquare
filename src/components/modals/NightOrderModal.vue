@@ -235,7 +235,7 @@ export default {
       }
 
       if (role.image && this.grimoire.isImageOptIn) {
-        if (role.image?.length) {
+        if (Array.isArray(role.image)) {
           return role.image[0];
         }
 
