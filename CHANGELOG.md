@@ -1,7 +1,7 @@
 # Release Notes
 
 ### Version 2.18.2
-- Fix homebrew characters with multiple alignment-shifted images failing to display character icons on reminders
+- Fix homebrew characters with multiple alignment-shifted images failing to display character icons on reminders correctly
 - Update Acrobat and Organ Grinder
 
 ---
