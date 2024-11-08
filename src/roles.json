@@ -1292,6 +1292,20 @@
     "ability": "Each night, you become the alignment of an alive neighbor. If all good players choose to join your cult, your team wins."
   },
   {
+    "id": "acrobat",
+    "name": "Acrobat",
+    "edition": "",
+    "team": "townsfolk",
+    "firstNightReminder": "",
+    "otherNightReminder": "The Acrobat points to a player. If that player is or becomes drunk or poisoned tonight, the Acrobat dies.",
+    "reminders": [
+      "Chosen",
+      "Dead"
+    ],
+    "setup": false,
+    "ability": "Each night*, choose a player: if they are or become drunk or poisoned tonight, you die."
+  },
+  {
     "id": "lycanthrope",
     "name": "Lycanthrope",
     "edition": "",
@@ -1479,20 +1493,6 @@
     ],
     "setup": false,
     "ability": "Minions & Demons do not know each other. If you die, they learn who each other are that night."
-  },
-  {
-    "id": "acrobat",
-    "name": "Acrobat",
-    "edition": "",
-    "team": "townsfolk",
-    "firstNightReminder": "",
-    "otherNightReminder": "The Acrobat points to a player. If that player is or becomes drunk or poisoned tonight, the Acrobat dies.",
-    "reminders": [
-      "Chosen",
-      "Dead"
-    ],
-    "setup": false,
-    "ability": "Each night*, choose a player: if they are or become drunk or poisoned tonight, you die."
   },
   {
     "id": "ogre",
