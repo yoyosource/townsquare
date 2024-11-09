@@ -2,7 +2,7 @@
 
 ### Version 2.18.4
 - Add Gnome
-- Update Boomdandy, Lycanthrope, Snitch, Nightwatchman, Damsel, King, Vizier, Plague Doctor, Farmer, and Ahsaahir abilities
+- Update Boomdandy, Lycanthrope, Snitch, Nightwatchman, Damsel, King, Vizier, Plague Doctor, Farmer, and Ahsaahir abilities, as well as Kazali/Soldier and Kazali/Goon jinxes
 - Add new Cannibal/Poppy Grower jinx
 - Remove Organ Grinder/Lil' Monsta and Lycanthrope/Gambler jinxes
 - Fix blue tab gradient for Settings menu tab
@@ -17,7 +17,7 @@
 ---
 
 ### Version 2.18.2
-- Fix homebrew characters with multiple alignment-shifted images failing to display character icons on reminders correctly
+- Fix homebrew characters with multiple alignment-shifted images failing to display character icons on reminders
 - Update Acrobat and Organ Grinder
 
 ---
