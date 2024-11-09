@@ -715,7 +715,7 @@
     "otherNightReminder": "",
     "reminders": [],
     "setup": false,
-    "ability": "Only you and the dead can vote. They don't need a vote token to do so. A 50% majority is not required."
+    "ability": "Only you & the dead can vote. They don't need a vote token to do so. A 50% majority is not required."
   },
   {
     "id": "bishop",
@@ -751,7 +751,7 @@
     "otherNightReminder": "The Dreamer points to a player. Show 1 good and 1 evil character token; one of these is correct.",
     "reminders": [],
     "setup": false,
-    "ability": "Each night, choose a player (not yourself or Travellers): you learn 1 good and 1 evil character, 1 of which is correct."
+    "ability": "Each night, choose a player (not yourself or Travellers): you learn 1 good & 1 evil character, 1 of which is correct."
   },
   {
     "id": "snakecharmer",
@@ -1074,7 +1074,7 @@
       "?"
     ],
     "setup": false,
-    "ability": "Each night, until dusk, 1) a player becomes sober, healthy and gets true info, or 2) their ability works twice. They learn which."
+    "ability": "Each night, until dusk, 1) a player becomes sober, healthy & gets true info, or 2) their ability works twice. They learn which."
   },
   {
     "id": "harlot",
@@ -1278,7 +1278,7 @@
     "otherNightReminder": "If the dead equal or outnumber the living, show the King a character token of a living player.",
     "reminders": [],
     "setup": false,
-    "ability": "Each night, if the dead equal or outnumber the living, you learn 1 alive character. The Demon knows who you are."
+    "ability": "Each night, if the dead equal or outnumber the living, you learn 1 alive character. The Demon knows you are the King."
   },
   {
     "id": "cultleader",
@@ -1311,12 +1311,13 @@
     "edition": "",
     "team": "townsfolk",
     "firstNightReminder": "",
-    "otherNightReminder": "The Lycanthrope points to a living player: if good, they die and no one else can die tonight.",
+    "otherNightReminder": "The Lycanthrope points to a living player: if good, they die and the Demon does not kill.",
     "reminders": [
+      "Registers As Evil",
       "Dead"
     ],
     "setup": false,
-    "ability": "Each night*, choose a living player: if good, they die, but they are the only player that can die tonight."
+    "ability": "Each night*, choose an alive player: if good, they die & the Demon doesn't kill tonight. One good player registers as evil."
   },
   {
     "id": "alsaahir",
@@ -1327,7 +1328,7 @@
     "otherNightReminder": "",
     "reminders": [],
     "setup": false,
-    "ability": "Once per day, if you publicly guess which players are Minion(s) and which are Demon(s), good wins."
+    "ability": "Each day, if you publicly guess which players are Minion(s) and which are Demon(s), good wins."
   },
   {
     "id": "engineer",
@@ -1353,7 +1354,7 @@
       "No Ability"
     ],
     "setup": false,
-    "ability": "Once per game, at night, choose a player: they learn who you are."
+    "ability": "Once per game, at night, choose a player: they learn you are the Nightwatchman."
   },
   {
     "id": "huntsman",
@@ -1433,7 +1434,7 @@
     "otherNightReminder": "If a Farmer died tonight, choose another good player and make them the Farmer. Wake this player, show them the 'You are' card and the Farmer character token.",
     "reminders": [],
     "setup": false,
-    "ability": "If you die at night, an alive good player becomes a Farmer."
+    "ability": "When you die at night, an alive good player becomes a Farmer."
   },
   {
     "id": "choirboy",
@@ -1531,7 +1532,7 @@
       "Storyteller Ability"
     ],
     "setup": false,
-    "ability": "If you die, the Storyteller gains a Minion ability."
+    "ability": "When you die, the Storyteller gains a Minion ability."
   },
   {
     "id": "hatter",
@@ -1579,7 +1580,7 @@
       "Guess Used"
     ],
     "setup": false,
-    "ability": "All Minions know you are in play. If a Minion publicly guesses you (once), your team loses."
+    "ability": "All Minions know a Damsel is in play. If a Minion publicly guesses you (once), your team loses."
   },
   {
     "id": "snitch",
@@ -1590,7 +1591,7 @@
     "otherNightReminder": "",
     "reminders": [],
     "setup": false,
-    "ability": "Minions start knowing 3 not-in-play characters."
+    "ability": "Each Minion gets 3 bluffs."
   },
   {
     "id": "heretic",
@@ -1681,7 +1682,7 @@
       "Knows"
     ],
     "setup": false,
-    "ability": "On your 1st night, look at the Grimoire and choose a player: they are poisoned. 1 good player knows a Widow is in play."
+    "ability": "On your first night, look at the Grimoire & choose a player: they are poisoned. 1 good player knows a Widow is in play."
   },
   {
     "id": "marionette",
@@ -1734,7 +1735,7 @@
     "otherNightReminder": "",
     "reminders": [],
     "setup": false,
-    "ability": "If you are executed, all but 3 players die. 1 minute later, the player with the most players pointing at them dies."
+    "ability": "If you are executed, all but 3 players die. After a 10 to 1 countdown, the player with the most players pointing at them, dies."
   },
   {
     "id": "vizier",
@@ -1745,7 +1746,7 @@
     "otherNightReminder": "",
     "reminders": [],
     "setup": false,
-    "ability": "All players know who you are. You can not die during the day. If good voted, you may choose to execute immediately."
+    "ability": "All players know you are the Vizier. You can not die during the day. If good voted, you may choose to execute immediately."
   },
   {
     "id": "organgrinder",
@@ -1922,5 +1923,18 @@
     "reminders": [],
     "setup": false,
     "ability": "Once per day, you may choose to kill an alive neighbor, if your other alive neighbor agrees."
+  },
+  {
+    "id": "gnome",
+    "name": "Gnome",
+    "edition": "",
+    "team": "traveler",
+    "firstNightReminder": "",
+    "otherNightReminder": "",
+    "reminders": [
+      "Amigo"
+    ],
+    "setup": false,
+    "ability": "All players start knowing a player of your alignment. You may choose to kill anyone who nominates them."
   }
 ]

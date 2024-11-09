@@ -31,6 +31,10 @@
       {
         "id": "zealot",
         "reason": "If the Cannibal gains the Zealot ability, the Cannibal learns this."
+      },
+      {
+        "id": "poppygrower",
+        "reason": "If the Cannibal eats the Poppy Grower, then dies or loses the Poppy Grower ability, the Demon and Minions learn each other that night."
       }
     ]
   },
@@ -155,25 +159,12 @@
         "reason": "If there are 5 or more players alive and the player holding the Lil' Monsta token dies, the Scarlet Woman is given the Lil' Monsta token tonight."
       },
       {
-        "id": "organgrinder",
-        "reason": "Votes for the Organ Grinder count if the Organ Grinder is babysitting Lil' Monsta."
-      },
-      {
         "id": "vizier",
         "reason": "The Vizier can die by execution if they are babysitting Lil' Monsta."
       },
       {
         "id": "hatter",
         "reason": "If a Demon chooses Lil' Monsta, they also choose a Minion to become and babysit Lil' Monsta tonight."
-      }
-    ]
-  },
-  {
-    "id": "lycanthrope",
-    "jinx": [
-      {
-        "id": "gambler",
-        "reason": "If the Lycanthrope is alive and the Gambler kills themself at night, no other players can die tonight."
       }
     ]
   },
@@ -451,7 +442,7 @@
       },
       {
         "id": "goon",
-        "reason": "If the Kazali chooses the Goon to become a Minion, remaining Minion choices are decided by the Storyteller."
+        "reason": "The Kazali can choose that the Goon player is one of their evil Minions."
       },
       {
         "id": "marionette",
@@ -467,7 +458,7 @@
       },
       {
         "id": "soldier",
-        "reason": "If the Kazali turns the Soldier into a Minion, the Soldier chooses which not-in-play Minion to become."
+        "reason": "The Kazali can choose that the Soldier player is one of their evil Minions."
       }
     ]
   },

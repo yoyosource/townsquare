@@ -1,5 +1,14 @@
 # Release Notes
 
+### Version 2.18.4
+- Add Gnome
+- Update Boomdandy, Lycanthrope, Snitch, Nightwatchman, Damsel, King, Vizier, Plague Doctor, Farmer, and Ahsaahir abilities
+- Add new Cannibal/Poppy Grower jinx
+- Remove Organ Grinder/Lil' Monsta and Lycanthrope/Gambler jinxes
+- Fix blue tab gradient for Settings menu tab
+
+---
+
 ### Version 2.18.3
 - Fix homebrew character reminders (again)
 - Fix homebrew character icons in night order and character sheet
