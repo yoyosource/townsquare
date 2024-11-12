@@ -55,7 +55,7 @@
     "setup": false,
     "name": "Revolutionary",
     "team": "fabled",
-    "ability": "2 neighboring players are known to be the same alignment. Once per game, one of them registers falsely."
+    "ability": "2 neighboring players are known to be the same alignment. Once per game, 1 of them registers falsely."
   },
   {
     "id": "fiddler",

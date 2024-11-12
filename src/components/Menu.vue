@@ -561,6 +561,7 @@ export default {
         }
         &.grimoire .fa-book-open,
         &.players .fa-users,
+        &.settings .fa-tools,
         &.characters .fa-theater-masks,
         &.session .fa-broadcast-tower,
         &.help .fa-question {
