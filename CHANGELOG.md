@@ -1,5 +1,8 @@
 # Release Notes
 
+### Version 2.18.5
+- Always display pronouns when set
+
 ### Version 2.18.4
 - Add Gnome
 - Update Boomdandy, Lycanthrope, Snitch, Nightwatchman, Damsel, King, Vizier, Plague Doctor, Farmer, and Ahsaahir abilities, as well as Kazali/Soldier and Kazali/Goon jinxes

@@ -36,8 +36,8 @@
       >
         <em>{{ nightOrder.get(player).first }}</em>
         <span v-if="player.role.firstNightReminder">{{
-          player.role.firstNightReminder
-        }}</span>
+            player.role.firstNightReminder
+          }}</span>
       </div>
       <div
         class="night-order other"
@@ -45,8 +45,8 @@
       >
         <em>{{ nightOrder.get(player).other }}</em>
         <span v-if="player.role.otherNightReminder">{{
-          player.role.otherNightReminder
-        }}</span>
+            player.role.otherNightReminder
+          }}</span>
       </div>
 
       <Token
@@ -139,10 +139,7 @@
         :class="{ active: isMenuOpen }"
       >
         <span>{{ player.name }}</span>
-        <font-awesome-icon icon="venus-mars" v-if="player.pronouns" />
-        <div class="pronouns" v-if="player.pronouns">
-          <span>{{ player.pronouns }}</span>
-        </div>
+        <span class="pronouns" v-if="player.pronouns">{{ player.pronouns }}</span>
       </div>
 
       <transition name="fold">
@@ -154,7 +151,8 @@
               (session.isSpectator && player.connected && player.id === session.playerId)
             "
           >
-            <font-awesome-icon icon="venus-mars" />Change Pronouns
+            <font-awesome-icon icon="venus-mars" />
+            Change Pronouns
           </li>
           <li
             @click="changeName"
@@ -163,7 +161,8 @@
               (session.allowSelfNaming && session.isSpectator && player.connected && player.id === session.playerId)
             "
           >
-            <font-awesome-icon icon="user-edit" />Rename
+            <font-awesome-icon icon="user-edit" />
+            Rename
           </li>
           <template v-if="!session.isSpectator">
             <li @click="movePlayer()" :class="{ disabled: session.lockedVote }">
@@ -205,7 +204,7 @@
             :class="{ disabled: player.id && player.id !== session.playerId }"
           >
             <font-awesome-icon icon="chair" />
-            <template v-if="!player.id || (player.id === session.playerId && !player.connected)"> Claim seat </template>
+            <template v-if="!player.id || (player.id === session.playerId && !player.connected)"> Claim seat</template>
             <template v-else-if="player.id === session.playerId">
               Vacate seat
             </template>
@@ -253,22 +252,22 @@ import { mapGetters, mapState } from "vuex";
 
 export default {
   components: {
-    Token,
+    Token
   },
   props: {
     player: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   computed: {
     ...mapState("players", ["players"]),
     ...mapState(["grimoire", "session"]),
     ...mapGetters({ nightOrder: "players/nightOrder" }),
-    index: function () {
+    index: function() {
       return this.players.indexOf(this.player);
     },
-    voteLocked: function () {
+    voteLocked: function() {
       const session = this.session;
       const players = this.players.length;
       if (!session.nomination) return false;
@@ -276,7 +275,7 @@ export default {
         (this.index - 1 + players - session.nomination[1]) % players;
       return indexAdjusted < session.lockedVote - 1;
     },
-    zoom: function () {
+    zoom: function() {
       const unit = window.innerWidth > window.innerHeight ? "vh" : "vw";
       if (this.players.length < 7) {
         return { width: 18 + this.grimoire.zoom + unit };
@@ -287,12 +286,12 @@ export default {
       } else {
         return { width: 12 + this.grimoire.zoom + unit };
       }
-    },
+    }
   },
   data() {
     return {
       isMenuOpen: false,
-      isSwap: false,
+      isSwap: false
     };
   },
   methods: {
@@ -350,7 +349,7 @@ export default {
       this.$store.commit("players/update", {
         player: this.player,
         property,
-        value,
+        value
       });
       if (closeMenu) {
         this.isMenuOpen = false;
@@ -385,8 +384,7 @@ export default {
           return "Your claimed seat";
         }
         return "Seat claimed by " + this.player.name;
-      }
-      else {
+      } else {
         if (this.player.id === this.session.playerId) {
           return "Your reserved seat. Click 'Claim seat' to reconnect";
         }
@@ -411,10 +409,10 @@ export default {
 
       this.$store.commit("session/voteSync", [
         this.index,
-        (this.session.votes[this.index] = count),
+        (this.session.votes[this.index] = count)
       ]);
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -427,6 +425,7 @@ export default {
   transform-origin: left center;
   transform: perspective(200px);
 }
+
 .fold-enter,
 .fold-leave-to {
   transform: perspective(200px) rotateY(90deg);
@@ -497,6 +496,7 @@ export default {
 /****** Life token *******/
 .player {
   z-index: 2;
+
   .life {
     border-radius: 50%;
     width: 100%;
@@ -591,17 +591,20 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+
   &:after {
     content: " ";
     display: block;
     padding-top: 100%;
   }
 }
+
 .player .overlay svg {
   position: absolute;
   filter: drop-shadow(0 0 3px black);
   z-index: 2;
   cursor: pointer;
+
   &.swap,
   &.move,
   &.nominate,
@@ -613,15 +616,18 @@ export default {
     pointer-events: none;
     transition: all 250ms;
     transform: scale(0.2);
+
     * {
       stroke-width: 10px;
       stroke: white;
       fill: url(#default);
     }
+
     &:hover *,
     &.fa-hand-paper * {
       fill: url(#demon);
     }
+
     &.fa-times * {
       fill: url(#townsfolk);
     }
@@ -635,9 +641,9 @@ export default {
 }
 
 #townsquare.vote
-  .player:not(.vote-twice)
-  .overlay
-  svg.second-vote.fa-hand-paper {
+.player:not(.vote-twice)
+.overlay
+svg.second-vote.fa-hand-paper {
   opacity: 0 !important;
 }
 
@@ -715,21 +721,23 @@ li.move:not(.from) .player .overlay svg.move {
 /****** Session seat glow *****/
 @mixin glow($name, $color) {
   @keyframes #{$name}-glow {
-    0% {
-      box-shadow: 0 0 rgba($color, 1);
-      border-color: $color;
-    }
-    50% {
-      border-color: black;
-    }
-    100% {
-      box-shadow: 0 0 20px 16px transparent;
-      border-color: $color;
-    }
-  }
+                       0% {
+                         box-shadow: 0 0 rgba($color, 1);
+                         border-color: $color;
+                       }
+
+                       50% {
+                         border-color: black;
+                       }
+
+                       100% {
+                         box-shadow: 0 0 20px 16px transparent;
+                         border-color: $color;
+                       }
+                     }
 
   .player.you.#{$name} .token {
-    animation: #{$name}-glow 5s ease-in-out infinite;
+    animation: #{$name} -glow 5s ease-in-out infinite;
   }
 }
 
@@ -755,22 +763,26 @@ li.move:not(.from) .player .overlay svg.move {
   justify-content: center;
   transition: opacity 250ms;
   opacity: 0;
+
   &:before {
     content: " ";
     padding-top: 100%;
     display: block;
   }
+
   svg {
     height: 60%;
     width: 60%;
     position: absolute;
     stroke: white;
     stroke-width: 15px;
+
     path {
       fill: white;
     }
   }
 }
+
 .player.marked .marked {
   opacity: 0.5;
 }
@@ -784,6 +796,7 @@ li.move:not(.from) .player .overlay svg.move {
   filter: drop-shadow(0 0 3px black);
   cursor: default;
   z-index: 2;
+
   &.highlight {
     animation-iteration-count: 1;
     animation: redToWhite 1s normal forwards;
@@ -812,6 +825,7 @@ li.move:not(.from) .player .overlay svg.move {
 .player > .name {
   right: 10%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   font-size: 120%;
   line-height: 120%;
@@ -843,38 +857,10 @@ li.move:not(.from) .player .overlay svg.move {
     color: red;
   }
 
-  &:hover .pronouns {
-    opacity: 1;
-    color: white;
-  }
-
   .pronouns {
-    display: flex;
-    position: absolute;
-    right: 110%;
-    max-width: 250px;
-    z-index: 25;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    border: 3px solid black;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
-    align-items: center;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 200ms ease-in-out;
-    padding: 0 4px;
-    bottom: -3px;
-
-    &:before {
-      content: " ";
-      border: 10px solid transparent;
-      width: 0;
-      height: 0;
-      border-left-color: black;
-      position: absolute;
-      margin-left: 2px;
-      left: 100%;
-    }
+    font-size: 60%;
+    line-height: 1;
+    padding-bottom: 5px;
   }
 }
 
@@ -916,6 +902,7 @@ li.move:not(.from) .player .overlay svg.move {
   li.disabled {
     cursor: not-allowed;
     opacity: 0.5;
+
     &:hover {
       color: white;
     }
@@ -934,6 +921,7 @@ li.move:not(.from) .player .overlay svg.move {
 #townsquare.public .circle .ability {
   display: none;
 }
+
 .circle .player .shroud:hover ~ .token .ability,
 .circle .player .token:hover .ability {
   opacity: 1;
@@ -978,11 +966,10 @@ li.move:not(.from) .player .overlay svg.move {
     width: 100%;
     position: absolute;
     top: 15%;
-    text-shadow:
-      0 1px 1px #f6dfbd,
-      0 -1px 1px #f6dfbd,
-      1px 0 1px #f6dfbd,
-      -1px 0 1px #f6dfbd;
+    text-shadow: 0 1px 1px #f6dfbd,
+    0 -1px 1px #f6dfbd,
+    1px 0 1px #f6dfbd,
+    -1px 0 1px #f6dfbd;
   }
 
   .icon,
@@ -1008,9 +995,11 @@ li.move:not(.from) .player .overlay svg.move {
   &.add {
     opacity: 0;
     top: 30px;
+
     &:after {
       display: none;
     }
+
     .icon {
       top: 5%;
     }
@@ -1020,6 +1009,7 @@ li.move:not(.from) .player .overlay svg.move {
     .icon {
       display: none;
     }
+
     .text {
       font-size: 70%;
       word-break: break-word;
@@ -1036,6 +1026,7 @@ li.move:not(.from) .player .overlay svg.move {
   &:hover:before {
     opacity: 0;
   }
+
   &:hover:after {
     opacity: 1;
   }
@@ -1057,6 +1048,7 @@ li.move:not(.from) .player .overlay svg.move {
   opacity: 1;
   top: 0;
 }
+
 .circle li:hover .reminder.add:before {
   opacity: 1;
 }
