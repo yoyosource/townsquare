@@ -321,7 +321,7 @@ class LiveSession {
       isVoteless: player.isVoteless,
       hasTwoVotes: player.hasTwoVotes,
       pronouns: player.pronouns,
-      ...(player.role && player.role.team === "traveler"
+      ...(player.role && player.role.team === "traveller"
         ? { roleId: player.role.id }
         : {}),
     }));
@@ -403,7 +403,7 @@ class LiveSession {
           this._store.commit("players/update", { player, property, value });
         }
       });
-      // roles are special, because of travelers
+      // roles are special, because of travellers
       if (roleId && player.role.id !== roleId) {
         const role =
           this._store.state.roles.get(roleId) ||
@@ -415,7 +415,7 @@ class LiveSession {
             value: role,
           });
         }
-      } else if (!roleId && player.role.team === "traveler") {
+      } else if (!roleId && player.role.team === "traveller") {
         this._store.commit("players/update", {
           player,
           property: "role",
@@ -530,8 +530,8 @@ class LiveSession {
       return;
     const index = this._store.state.players.players.indexOf(player);
     if (property === "role") {
-      if (value.team && value.team === "traveler") {
-        // update local gamestate to remember this player as a traveler
+      if (value.team && value.team === "traveller") {
+        // update local gamestate to remember this player as a traveller
         this._gamestate[index].roleId = value.id;
         this._send("player", {
           index,
@@ -539,7 +539,7 @@ class LiveSession {
           value: value.id,
         });
       } else if (this._gamestate[index].roleId) {
-        // player was previously a traveler
+        // player was previously a traveller
         delete this._gamestate[index].roleId;
         this._send("player", { index, property, value: "" });
       }
@@ -559,9 +559,9 @@ class LiveSession {
     if (!this._isSpectator) return;
     const player = this._store.state.players.players[index];
     if (!player) return;
-    // special case where a player stops being a traveler
+    // special case where a player stops being a traveller
     if (property === "role") {
-      if (!value && player.role.team === "traveler") {
+      if (!value && player.role.team === "traveller") {
         // reset to an unknown role
         this._store.commit("players/update", {
           player,
