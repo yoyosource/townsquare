@@ -49,8 +49,12 @@
 - Change "traveler" to "traveller" internally, and added continuing support for old scripts that use "traveler"
 - Hide Name and Author of script if logo is present and imageOptIn is active
 
+---
+
 ### Version 2.18.5
 - Always display pronouns when set
+
+---
 
 ### Version 2.18.4
 - Add Gnome
