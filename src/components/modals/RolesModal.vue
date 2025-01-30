@@ -8,7 +8,7 @@
     <ul class="tokens" v-for="(teamRoles, team) in roleSelection" :key="team">
       <li class="count" :class="[team]">
         {{ teamRoles.reduce((a, { selected }) => a + selected, 0) }} /
-        {{ game[nonTravellers - 5][team] }}
+        {{ bagSetup[team] || 0 }}
       </li>
       <li
         v-for="role in teamRoles"
@@ -92,7 +92,27 @@ export default {
         roles.some((role) => role.selected && role.setup),
       );
     },
-    ...mapState(["roles", "modals"]),
+    bagSetup: function() {
+      let index = Math.max(5, this.nonTravellers) - 5;
+      if (this.edition.bagSetup) {
+        return this.edition.bagSetup[index]
+      } else {
+        return this.game[index]
+      }
+    },
+    bagSetupCharacterTypes: function() {
+      let types = {};
+      let bagSetups = this.edition.bagSetup ? this.edition.bagSetup : this.game;
+      for (const bagSetup of bagSetups) {
+        for (const team in bagSetup) {
+          if (bagSetup[team] > 0) {
+            types[team] = true;
+          }
+        }
+      }
+      return types;
+    },
+    ...mapState(["roles", "modals", "edition"]),
     ...mapState("players", ["players"]),
     ...mapGetters({ nonTravellers: "players/nonTravellers" }),
   },
@@ -100,15 +120,15 @@ export default {
     selectRandomRoles() {
       this.roleSelection = {};
       this.roles.forEach((role) => {
+        if (!this.bagSetupCharacterTypes[role.team]) return;
         if (!this.roleSelection[role.team]) {
           this.$set(this.roleSelection, role.team, []);
         }
         this.roleSelection[role.team].push(role);
         this.$set(role, "selected", 0);
       });
-      delete this.roleSelection["traveller"];
-      const playerCount = Math.max(5, this.nonTravellers);
-      const composition = this.game[playerCount - 5];
+
+      const composition = this.bagSetup;
       Object.keys(composition).forEach((team) => {
         for (let x = 0; x < composition[team]; x++) {
           if (this.roleSelection[team]) {
@@ -192,7 +212,7 @@ ul.tokens {
     &.townsfolk {
       box-shadow:
         0 0 10px $townsfolk,
-        0 0 10px #004cff;
+        0 0 10px $townsfolk;
     }
     &.outsider {
       box-shadow:
