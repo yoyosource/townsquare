@@ -6,12 +6,13 @@
   >
     <h3>Select the characters for {{ nonTravellers }} players:</h3>
     <ul class="tokens" v-for="(teamRoles, team) in roleSelection" :key="team">
-      <li class="count" :class="[team]">
+      <li class="count colored" :style="teamColor(team)" :class="[team]">
         {{ teamRoles.reduce((a, { selected }) => a + selected, 0) }} /
         {{ bagSetup[team] || 0 }}
       </li>
       <li
         v-for="role in teamRoles"
+        class="colored" :style="teamColor(team)"
         :class="[role.team, role.selected ? 'selected' : '']"
         :key="role.id"
         @click="role.selected = role.selected ? 0 : 1"
@@ -64,6 +65,7 @@
 <script>
 import Modal from "./Modal";
 import gameJSON from "./../../game";
+import characterTypesJSON from "@/characterTypes";
 import Token from "./../Token";
 import { mapGetters, mapMutations, mapState } from "vuex";
 
@@ -78,6 +80,7 @@ export default {
     return {
       roleSelection: {},
       game: gameJSON,
+      characterTypes: characterTypesJSON,
       allowMultiple: false,
     };
   },
@@ -117,6 +120,15 @@ export default {
     ...mapGetters({ nonTravellers: "players/nonTravellers" }),
   },
   methods: {
+    teamColor(team) {
+      if (this.edition.characterTypes && this.edition.characterTypes[team]) {
+        return { "--color": this.edition.characterTypes[team].color };
+      }
+      if (this.characterTypes[team]) {
+        return { "--color": this.characterTypes[team].color };
+      }
+      return { "--color": "#ffffff" };
+    },
     selectRandomRoles() {
       this.roleSelection = {};
       this.roles.forEach((role) => {
@@ -185,8 +197,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../vars.scss";
-
 ul.tokens {
   padding-left: 5%;
   li {
@@ -209,31 +219,13 @@ ul.tokens {
         display: block;
       }
     }
-    &.townsfolk {
+
+    &.colored {
       box-shadow:
-        0 0 10px $townsfolk,
-        0 0 10px $townsfolk;
+        0 0 10px var(--color),
+        0 0 10px var(--color);
     }
-    &.outsider {
-      box-shadow:
-        0 0 10px $outsider,
-        0 0 10px $outsider;
-    }
-    &.minion {
-      box-shadow:
-        0 0 10px $minion,
-        0 0 10px $minion;
-    }
-    &.demon {
-      box-shadow:
-        0 0 10px $demon,
-        0 0 10px $demon;
-    }
-    &.traveller {
-      box-shadow:
-        0 0 10px $traveller,
-        0 0 10px $traveller;
-    }
+
     &:hover {
       transform: scale(1.2);
       z-index: 10;
@@ -289,18 +281,8 @@ ul.tokens {
       display: block;
       padding-top: 100%;
     }
-    &.townsfolk {
-      color: $townsfolk;
-    }
-    &.outsider {
-      color: $outsider;
-    }
-    &.minion {
-      color: $minion;
-    }
-    &.demon {
-      color: $demon;
-    }
+
+    color: var(--color)
   }
 }
 

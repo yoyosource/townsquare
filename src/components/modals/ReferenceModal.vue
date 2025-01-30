@@ -19,7 +19,9 @@
     <div
       v-for="(teamRoles, team) in rolesGrouped"
       :key="team"
+      class="colored"
       :class="['team', team]"
+      :style="teamColor(team)"
     >
       <aside>
         <h4>{{ team }}</h4>
@@ -48,7 +50,7 @@
       </ul>
     </div>
 
-    <div class="team jinxed" v-if="jinxed.length">
+    <div class="team jinxed colored" v-if="jinxed.length" :style="teamColor('fabled')">
       <aside>
         <h4>Jinxed</h4>
       </aside>
@@ -87,10 +89,16 @@
 <script>
 import Modal from "./Modal";
 import { mapMutations, mapState } from "vuex";
+import characterTypesJSON from "@/characterTypes.json";
 
 export default {
   components: {
     Modal,
+  },
+  data: function() {
+    return {
+      characterTypes: characterTypesJSON,
+    };
   },
   computed: {
     /**
@@ -143,6 +151,15 @@ export default {
     ...mapState("players", ["players"]),
   },
   methods: {
+    teamColor(team) {
+      if (this.edition.characterTypes && this.edition.characterTypes[team]) {
+        return { "--color": this.edition.characterTypes[team].color };
+      }
+      if (this.characterTypes[team]) {
+        return { "--color": this.characterTypes[team].color };
+      }
+      return { "--color": "#ffffff" };
+    },
     getImage(role) {
       if (role.image && this.grimoire.isImageOptIn) {
         if (Array.isArray(role.image)) {
@@ -182,45 +199,12 @@ h3 {
   line-height: 90%;
 }
 
-.townsfolk {
+.colored {
   .name {
-    color: $townsfolk;
+    color: var(--color);
   }
   aside {
-    background: linear-gradient(-90deg, $townsfolk, transparent);
-  }
-}
-.outsider {
-  .name {
-    color: $outsider;
-  }
-  aside {
-    background: linear-gradient(-90deg, $outsider, transparent);
-  }
-}
-.minion {
-  .name {
-    color: $minion;
-  }
-  aside {
-    background: linear-gradient(-90deg, $minion, transparent);
-  }
-}
-.demon {
-  .name {
-    color: $demon;
-  }
-  aside {
-    background: linear-gradient(-90deg, $demon, transparent);
-  }
-}
-
-.jinxed {
-  .name {
-    color: $fabled;
-  }
-  aside {
-    background: linear-gradient(-90deg, $fabled, transparent);
+    background: linear-gradient(-90deg, var(--color), transparent);
   }
 }
 

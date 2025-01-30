@@ -11,7 +11,7 @@
         })`,
       }"
     ></li>
-    <li v-if="players.length - teams.traveller < 5">Please add more players!</li>
+    <li v-if="players.length - townData.traveller < 5">Please add more players!</li>
     <li>
       <span class="meta" v-if="!edition.isOfficial">
         {{ edition.name }}
@@ -21,45 +21,24 @@
         {{ players.length }} <font-awesome-icon class="players" icon="users" />
       </span>
       <span>
-        {{ teams.alive }}
+        {{ townData.alive }}
         <font-awesome-icon class="alive" icon="heartbeat" />
       </span>
       <span>
-        {{ teams.votes }} <font-awesome-icon class="votes" icon="vote-yea" />
+        {{ townData.votes }} <font-awesome-icon class="votes" icon="vote-yea" />
       </span>
     </li>
-    <li v-if="players.length - teams.traveller >= 5">
-      <span>
-        {{ teams.townsfolk }}
-        <font-awesome-icon class="townsfolk" icon="user-friends" />
-      </span>
-      <span>
-        {{ teams.outsider }}
-        <font-awesome-icon
-          class="outsider"
-          :icon="teams.outsider > 1 ? 'user-friends' : 'user'"
-        />
-      </span>
-      <span>
-        {{ teams.minion }}
-        <font-awesome-icon
-          class="minion"
-          :icon="teams.minion > 1 ? 'user-friends' : 'user'"
-        />
-      </span>
-      <span>
-        {{ teams.demon }}
-        <font-awesome-icon
-          class="demon"
-          :icon="teams.demon > 1 ? 'user-friends' : 'user'"
-        />
-      </span>
-      <span v-if="teams.traveller">
-        {{ teams.traveller }}
-        <font-awesome-icon
-          class="traveller"
-          :icon="teams.traveller > 1 ? 'user-friends' : 'user'"
-        />
+    <li v-if="players.length - townData.teams.traveller >= 5">
+      <span
+        v-for="(teamRoles, team) in townData.teams"
+        :key="team"
+        :class="[team]"
+        :style="teamColor(team)"
+      >
+        <div v-if="team !== 'traveller' || townData.teams[team] > 0">
+          {{ townData.teams[team] }}
+        <font-awesome-icon :class="team" class="colored" :icon="townData.teams[team] > 1 ? 'user-friends' : 'user'" />
+        </div>
       </span>
       <span v-if="grimoire.isNight">
         Night phase
@@ -72,16 +51,24 @@
 <script>
 import gameJSON from "./../game";
 import { mapState } from "vuex";
+import characterTypesJSON from "@/characterTypes.json";
 
 export default {
+  data: function() {
+    return {
+      characterTypes: characterTypesJSON,
+    };
+  },
   computed: {
-    teams: function () {
+    townData: function () {
       const { players } = this.$store.state.players;
       const nonTravellers = this.$store.getters["players/nonTravellers"];
       const alive = players.filter((player) => player.isDead !== true).length;
       return {
-        ...gameJSON[nonTravellers - 5],
-        traveller: players.length - nonTravellers,
+        teams: {
+          ...(this.edition.bagSetup ? this.edition.bagSetup : gameJSON)[nonTravellers - 5],
+          "traveller": players.length - nonTravellers,
+        },
         alive,
         votes:
           alive +
@@ -93,6 +80,17 @@ export default {
     ...mapState(["edition", "grimoire"]),
     ...mapState("players", ["players"]),
   },
+  methods: {
+    teamColor(team) {
+      if (this.edition.characterTypes && this.edition.characterTypes[team]) {
+        return { "--color": this.edition.characterTypes[team].color };
+      }
+      if (this.characterTypes[team]) {
+        return { "--color": this.characterTypes[team].color };
+      }
+      return { "--color": "#ffffff" };
+    },
+  }
 };
 </script>
 
@@ -153,20 +151,8 @@ export default {
     .votes {
       color: #fff;
     }
-    .townsfolk {
-      color: $townsfolk;
-    }
-    .outsider {
-      color: $outsider;
-    }
-    .minion {
-      color: $minion;
-    }
-    .demon {
-      color: $demon;
-    }
-    .traveller {
-      color: $traveller;
+    .colored {
+      color: var(--color);
     }
   }
 

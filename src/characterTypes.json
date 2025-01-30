@@ -1,0 +1,26 @@
+{
+  "townsfolk": {
+    "color": "#1f65ff",
+    "assignable": true
+  },
+  "outsider": {
+    "color": "#46d5ff",
+    "assignable": true
+  },
+  "minion": {
+    "color": "#ff6900",
+    "assignable": true
+  },
+  "demon": {
+    "color": "#ce0100",
+    "assignable": true
+  },
+  "fabled": {
+    "color": "#ffe91f",
+    "assignable": false
+  },
+  "traveller": {
+    "color": "#cc04ff",
+    "assignable": true
+  }
+}

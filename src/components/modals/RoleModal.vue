@@ -29,6 +29,7 @@
     <ul class="tokens">
       <li
         v-for="role in displayedRoles"
+        class="colored" :style="teamColor(role.team)"
         :class="[role.team, { match: queryMatches(role.name) }]"
         :key="role.id"
         @click="setRole(role, getAlignmentIndex(role))"
@@ -67,6 +68,7 @@
 import { mapMutations, mapState } from "vuex";
 import Modal from "./Modal";
 import Token from "../Token";
+import characterTypesJSON from "@/characterTypes.json";
 
 export default {
   components: { Token, Modal },
@@ -76,12 +78,11 @@ export default {
       const availableRoles = [];
       const players = this.$store.state.players.players;
       this.$store.state.roles.forEach((role) => {
+        if (this.characterTypes[role.team] && !this.characterTypes[role.team].assignable) return
+        if (this.edition.characterTypes[role.team] && !this.edition.characterTypes[role.team].assignable) return
+
         // don't show bluff roles that are already assigned to players
-        if (
-          this.playerIndex >= 0 ||
-          (this.playerIndex < 0 &&
-            !players.some((player) => player.role.id === role.id))
-        ) {
+        if (this.playerIndex >= 0 || (this.playerIndex < 0 && !players.some((player) => player.role.id === role.id))) {
           availableRoles.push(role);
         }
       });
@@ -96,7 +97,7 @@ export default {
         return this.availableRoles;
       else return [...this.otherTravellers.values()];
     },
-    ...mapState(["modals", "roles", "session"]),
+    ...mapState(["modals", "roles", "session", "edition"]),
     ...mapState("players", ["players"]),
     ...mapState(["otherTravellers"]),
   },
@@ -105,9 +106,22 @@ export default {
       tab: "editionRoles",
       alignment: "Regular",
       query: "",
+      characterTypes: characterTypesJSON,
     };
   },
   methods: {
+    teamColor(team) {
+      if (!team) {
+        return {}
+      }
+      if (this.edition.characterTypes && this.edition.characterTypes[team]) {
+        return { "--color": this.edition.characterTypes[team].color };
+      }
+      if (this.characterTypes[team]) {
+        return { "--color": this.characterTypes[team].color };
+      }
+      return { "--color": "#ffffff" };
+    },
     setRole(role, alignmentIndex) {
       if (this.playerIndex < 0) {
         // assign to bluff slot (index < 0)
@@ -212,31 +226,12 @@ ul.tokens li {
     width: 8vh;
   }
 
-  &.townsfolk {
+  &.colored {
     box-shadow:
-      0 0 10px $townsfolk,
-      0 0 10px #004cff;
+      0 0 10px var(--color),
+      0 0 10px var(--color);
   }
-  &.outsider {
-    box-shadow:
-      0 0 10px $outsider,
-      0 0 10px $outsider;
-  }
-  &.minion {
-    box-shadow:
-      0 0 10px $minion,
-      0 0 10px $minion;
-  }
-  &.demon {
-    box-shadow:
-      0 0 10px $demon,
-      0 0 10px $demon;
-  }
-  &.traveller {
-    box-shadow:
-      0 0 10px $traveller,
-      0 0 10px $traveller;
-  }
+
   &:hover {
     transform: scale(1.2);
     z-index: 10;

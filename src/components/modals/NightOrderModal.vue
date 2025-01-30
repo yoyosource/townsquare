@@ -26,6 +26,8 @@
           v-for="role in rolesFirstNight"
           :key="role.name"
           :class="[role.team]"
+          class="colored"
+          :style="teamColor(role.team)"
         >
           <span class="name">
             {{ role.name }}
@@ -75,6 +77,8 @@
           v-for="role in rolesOtherNight"
           :key="role.name"
           :class="[role.team]"
+          class="colored"
+          :style="teamColor(role.team)"
         >
           <span
             class="icon"
@@ -125,10 +129,16 @@
 <script>
 import Modal from "./Modal";
 import { mapMutations, mapState } from "vuex";
+import characterTypesJSON from "@/characterTypes.json";
 
 export default {
   components: {
     Modal,
+  },
+  data: function() {
+    return {
+      characterTypes: characterTypesJSON,
+    }
   },
   computed: {
     rolesFirstNight: function () {
@@ -274,6 +284,18 @@ export default {
     ...mapState("players", ["players", "fabled"]),
   },
   methods: {
+    teamColor(team) {
+      if (!team) {
+        return {};
+      }
+      if (this.edition.characterTypes && this.edition.characterTypes[team]) {
+        return { "--color": this.edition.characterTypes[team].color };
+      }
+      if (this.characterTypes[team]) {
+        return { "--color": this.characterTypes[team].color };
+      }
+      return { "--color": "#ffffff" };
+    },
     getImage(role) {
       if (role.id === "dusk" || role.id === "dawn") {
         return require(`../../assets/${role.id}.webp`);
@@ -357,46 +379,15 @@ h4 {
   display: block;
 }
 
-.fabled {
+.colored {
   .name {
-    background: linear-gradient(90deg, $fabled, transparent 35%);
+    background: linear-gradient(90deg, var(--color), transparent 35%);
     .night .other & {
-      background: linear-gradient(-90deg, $fabled, transparent 35%);
+      background: linear-gradient(-90deg, var(--color), transparent 35%);
     }
   }
 }
-.townsfolk {
-  .name {
-    background: linear-gradient(90deg, $townsfolk, transparent 35%);
-    .night .other & {
-      background: linear-gradient(-90deg, $townsfolk, transparent 35%);
-    }
-  }
-}
-.outsider {
-  .name {
-    background: linear-gradient(90deg, $outsider, transparent 35%);
-    .night .other & {
-      background: linear-gradient(-90deg, $outsider, transparent 35%);
-    }
-  }
-}
-.minion {
-  .name {
-    background: linear-gradient(90deg, $minion, transparent 35%);
-    .night .other & {
-      background: linear-gradient(-90deg, $minion, transparent 35%);
-    }
-  }
-}
-.demon {
-  .name {
-    background: linear-gradient(90deg, $demon, transparent 35%);
-    .night .other & {
-      background: linear-gradient(-90deg, $demon, transparent 35%);
-    }
-  }
-}
+
 ul {
   li {
     display: flex;
