@@ -182,6 +182,9 @@ export default {
       // check for fabled and set those too, if present
       if (roles.some((role) => this.$store.state.fabled.has(role.id || role))) {
         const fabled = [];
+        if (meta.djinn) {
+          fabled.push({ id: "djinn", name: "Djinn" });
+        }
         roles.forEach((role) => {
           if (this.$store.state.fabled.has(role.id || role)) {
             fabled.push(this.$store.state.fabled.get(role.id || role));
