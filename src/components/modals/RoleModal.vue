@@ -68,7 +68,7 @@
 import { mapMutations, mapState } from "vuex";
 import Modal from "./Modal";
 import Token from "../Token";
-import characterTypesJSON from "@/characterTypes.json";
+import characterTypesJSON from "../../characterTypes.json";
 
 export default {
   components: { Token, Modal },
@@ -79,7 +79,7 @@ export default {
       const players = this.$store.state.players.players;
       this.$store.state.roles.forEach((role) => {
         if (this.characterTypes[role.team] && !this.characterTypes[role.team].assignable) return
-        if (this.edition.characterTypes[role.team] && !this.edition.characterTypes[role.team].assignable) return
+        if (this.edition.characterTypes && this.edition.characterTypes[role.team] && !this.edition.characterTypes[role.team].assignable) return
 
         // don't show bluff roles that are already assigned to players
         if (this.playerIndex >= 0 || (this.playerIndex < 0 && !players.some((player) => player.role.id === role.id))) {
