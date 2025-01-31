@@ -38,7 +38,10 @@
       </text>
     </svg>
     <div class="edition" :class="[`edition-${role.edition}`, role.team]"></div>
-    <div class="ability" v-if="role.ability">
+    <div class="ability" v-if="role.id === 'djinn'">
+      {{ edition.djinn ? edition.djinn : role.ability }}
+    </div>
+    <div class="ability" v-if="role.id !== 'djinn' && role.ability">
       {{ role.ability }}
     </div>
   </div>
@@ -66,7 +69,7 @@ export default {
         (this.role.remindersGlobal || []).length
       );
     },
-    ...mapState(["grimoire"]),
+    ...mapState(["grimoire", "edition"]),
   },
   data() {
     return {};
