@@ -42,6 +42,7 @@
 <script>
 import Modal from "./Modal";
 import { mapMutations, mapState } from "vuex";
+import characterTypesJSON from "../../characterTypes.json";
 
 /**
  * Helper function that maps a reminder name with a role-based object that provides necessary visual data.
@@ -65,8 +66,22 @@ export default {
       let reminders = [];
       const { players, bluffs } = this.$store.state.players;
       this.$store.state.roles.forEach((role) => {
+        let showRemindersOnGlobal = false;
+          if (role.remindersGlobal && role.remindersGlobal.length) {
+            if (this.edition.characterTypes && this.edition.characterTypes[role.team] && this.edition.characterTypes[role.team].showRemindersOnGlobal) {
+              showRemindersOnGlobal = true;
+            } else if (this.characterTypes[role.team] && this.characterTypes[role.team].showRemindersOnGlobal) {
+              showRemindersOnGlobal = true;
+            }
+            if (showRemindersOnGlobal && !(role.remindersGlobal.map(mapReminder(role)).some((reminder1) => players.some((p) => p.reminders.some((reminder) => {
+              return reminder.role === reminder1.role && reminder.name === reminder1.name;
+            }))))) {
+              showRemindersOnGlobal = false;
+            }
+          }
+
         // add reminders from player roles and bluff/other roles
-        if (players.some((p) => p.role.id === role.id) || bluffs.some((bluff) => bluff.id === role.id)) {
+        if (players.some((p) => p.role.id === role.id) || bluffs.some((bluff) => bluff.id === role.id) || showRemindersOnGlobal) {
           role.reminders.map(mapReminder(role)).forEach((reminder1) => {
             if (
               !reminders.some(
@@ -134,12 +149,13 @@ export default {
     isDisplayed() {
       return this.modals.reminder && this.availableReminders.length && this.players[this.playerIndex]
     },
-    ...mapState(["modals", "grimoire"]),
+    ...mapState(["modals", "grimoire", "edition"]),
     ...mapState("players", ["players"]),
   },
   data() {
     return {
       query: "",
+      characterTypes: characterTypesJSON,
     };
   },
   methods: {
