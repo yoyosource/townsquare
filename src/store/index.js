@@ -284,12 +284,12 @@ export default new Vuex.Store({
           return role;
         })
         // map existing roles to base definition or pre-populate custom roles to ensure all properties
-        .map(
-          (role) =>
-            rolesJSONbyId.get(role.id) ||
-            state.roles.get(role.id) ||
-            Object.assign({}, customRole, role),
-        )
+        .map((role) => {
+          if (Object.keys(role).length === 1 && role.id && rolesJSONbyId.get(role.id)) {
+            return rolesJSONbyId.get(role.id);
+          }
+          return state.roles.get(role.id) || Object.assign({}, customRole, role);
+        })
         // default empty icons and placeholders, clean up firstNight / otherNight
         .map((role) => {
           if (rolesJSONbyId.get(role.id)) return role;
