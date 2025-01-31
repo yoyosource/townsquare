@@ -129,7 +129,7 @@
 <script>
 import Modal from "./Modal";
 import { mapMutations, mapState } from "vuex";
-import characterTypesJSON from "@/characterTypes.json";
+import characterTypesJSON from "../../characterTypes.json";
 
 export default {
   components: {

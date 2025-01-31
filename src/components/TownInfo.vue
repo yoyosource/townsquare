@@ -51,7 +51,7 @@
 <script>
 import gameJSON from "./../game";
 import { mapState } from "vuex";
-import characterTypesJSON from "@/characterTypes.json";
+import characterTypesJSON from "../characterTypes.json";
 
 export default {
   data: function() {
