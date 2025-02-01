@@ -175,6 +175,7 @@ export default {
         value,
       });
       this.$store.commit("toggleModal", "reminder");
+      this.reset();
     },
     keyup(event) {
       // Allow Escape for modal dialog dismissal.
@@ -189,6 +190,9 @@ export default {
           this.addReminder(matchingReminders[0]);
         }
       }
+    },
+    reset() {
+      this.query = "";
     },
     queryMatches(name) {
       // A search query matches if, after removing all non-word characters,
