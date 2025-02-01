@@ -9,7 +9,7 @@
           :class="['edition-' + edition.id]"
           :style="{
             backgroundImage: `url(${require(
-              '../../assets/editions/' + edition.id + '.png',
+              '../../assets/editions/' + edition.id + '.webp',
             )})`,
           }"
           :key="edition.id"
@@ -21,7 +21,7 @@
           class="edition edition-custom"
           @click="isCustom = true"
           :style="{
-            backgroundImage: `url(${require('../../assets/editions/custom.png')})`,
+            backgroundImage: `url(${require('../../assets/editions/custom.webp')})`,
           }"
         >
           Custom Script / Characters
@@ -30,17 +30,21 @@
     </div>
     <div class="custom" v-else>
       <h3>Load custom script / characters</h3>
-      To play with a custom script, you need to select the characters you want
+      To write your own custom script, you need to select the characters you want
       to play with in the official
       <a href="https://script.bloodontheclocktower.com/" target="_blank"
         >Script Tool</a
       >
-      and then upload the generated "custom-list.json" either directly here or
-      provide a URL to such a hosted JSON file.<br />
+      and then upload the generated JSON either directly here or
+      provide a URL to such a hosted JSON file. There are also a multitude of
+      existing popular custom scripts, many of which can be found at
+      <a href="https://botcscripts.com/?sort=num_favs" target="_blank"
+      >botcscripts.com</a
+      >.<br />
       <br />
       To play with custom characters, please read
       <a
-        href="https://github.com/bra1n/townsquare#custom-characters"
+        href="https://github.com/nicholas-eden/townsquare#custom-character-support"
         target="_blank"
         >the documentation</a
       >
@@ -95,28 +99,28 @@ export default {
       isCustom: false,
       scripts: [
         [
-          "Deadly Penance Day",
-          "https://gist.githubusercontent.com/bra1n/0337cc44c6fd2c44f7589256ed5486d2/raw/16be38fa3c01aaf49827303ac80577bdb52c0b25/penanceday.json",
+          "No Greater Joy by Steven Medway (Teensyville)",
+          "https://gist.githubusercontent.com/tomozbot/fd7297327b907031a8b959e77c253ed2/raw/ee4269bae8ab710d96c36f86049abe033226a2a6/No%2520Greater%2520Joy.json",
         ],
         [
-          "Catfishing 11.1",
-          "https://gist.githubusercontent.com/bra1n/8a5ec41a7bbf945f6b7dfc1cef72b569/raw/a312ab93c2f302e0ef83c8b65a4e8e82760fda3a/catfishing.json",
+          "Laissez un Faire by Steven Medway (Teensyville)",
+          "https://gist.githubusercontent.com/tomozbot/d602aedacf4c60d61ea926f642d5a685/raw/23f8ddccb8599f156dda10f129f6e8bb98ff824f/Laissez%2520un%2520Faire.json",
         ],
         [
-          "On Thin Ice (Teensyville)",
-          "https://gist.githubusercontent.com/bra1n/8dacd9f2abc6f428331ea1213ab153f5/raw/0cacbcaf8ed9bddae0cca25a9ada97e9958d868b/on-thin-ice.json",
+          "Catfishing by Emily",
+          "https://gist.githubusercontent.com/tomozbot/9ec44c1bb04c3c6450301faf5838e85a/raw/2e19d1ace38d9b682f58bd6704b06826cb29478a/Catfishing.json",
         ],
         [
-          "Race To The Bottom (Teensyville)",
-          "https://gist.githubusercontent.com/bra1n/63e1354cb3dc9d4032bcd0623dc48888/raw/5acb0eedcc0a67a64a99c7e0e6271de0b7b2e1b2/race-to-the-bottom.json",
+          "Boozling by Lau",
+          "https://gist.githubusercontent.com/tomozbot/5e91a5a9753e149144804f56d1719fc2/raw/90772eaee733308c4eaa0cc0876964531e9f425d/Boozling.json",
         ],
         [
-          "Frankenstein's Mayor by Ted (Teensyville)",
-          "https://gist.githubusercontent.com/bra1n/32c52b422cc01b934a4291eeb81dbcee/raw/5bf770693bbf7aff5e86601c82ca4af3222f4ba6/Frankensteins_Mayor_by_Ted.json",
+          "Extension Cord by Viva La Sam",
+          "https://gist.githubusercontent.com/tomozbot/d2062e520b610552fe7a7c69e3bb972a/raw/d53ea3a7ae10fc4f96f3a4062ea9963e4dc38c30/Extension%2520Cord.json",
         ],
         [
-          "Vigormortis High School (Teensyville)",
-          "https://gist.githubusercontent.com/bra1n/1f65bd4a999524719d5dabe98c3c2d27/raw/22bbec6bf56a51a7459e5ae41ed47e41971c5445/VigormortisHighSchool.json",
+          "Harold Holt's Revenge by Theo",
+          "https://gist.githubusercontent.com/tomozbot/8e18fb42ff5ac592b8f1ffc254292440/raw/361f637550429bdeca9c0ad28794789285817336/Harold%2520Holt's%2520Revenge.json",
         ],
       ],
     };
@@ -181,6 +185,12 @@ export default {
       if (metaIndex > -1) {
         meta = roles.splice(metaIndex, 1).pop();
       }
+      if (meta.firstNight) {
+        meta.firstNight = meta.firstNight.map((id) => this.$store.getters.clean(id));
+      }
+      if (meta.otherNight) {
+        meta.otherNight = meta.otherNight.map((id) => this.$store.getters.clean(id));
+      }
       this.$store.commit("setCustomRoles", roles);
       this.$store.commit(
         "setEdition",
@@ -208,11 +218,11 @@ ul.editions .edition {
   font-family: PiratesBay, sans-serif;
   letter-spacing: 1px;
   text-align: center;
-  padding-top: 15%;
+  padding-top: 20%;
   background-position: center center;
-  background-size: 100% auto;
+  background-size: 80% auto;
   background-repeat: no-repeat;
-  width: 30%;
+  width: 45%;
   margin: 5px;
   font-size: 120%;
   text-shadow:

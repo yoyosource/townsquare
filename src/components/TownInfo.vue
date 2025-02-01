@@ -7,13 +7,13 @@
         backgroundImage: `url(${
           edition.logo && grimoire.isImageOptIn
             ? edition.logo
-            : require('../assets/editions/' + edition.id + '.png')
+            : require('../assets/editions/' + edition.id + '.webp')
         })`,
       }"
     ></li>
     <li v-if="players.length - teams.traveller < 5">Please add more players!</li>
     <li>
-      <span class="meta" v-if="!edition.isOfficial">
+      <span class="meta" v-if="!edition.isOfficial && !(edition.logo && grimoire.isImageOptIn)">
         {{ edition.name }}
         {{ edition.author ? "by " + edition.author : "" }}
       </span>
@@ -109,7 +109,7 @@ export default {
   align-content: center;
   justify-content: center;
   flex-wrap: wrap;
-  background: url("../assets/demon-head.png") center center no-repeat;
+  background: url("../assets/demon-head.webp") center center no-repeat;
   background-size: auto 100%;
 
   @media (orientation: portrait) {

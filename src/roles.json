@@ -1773,7 +1773,7 @@
     "otherNightReminder": "",
     "reminders": [],
     "setup": false,
-    "ability": "All players know you are the Vizier. You can not die during the day. If good voted, you may choose to execute immediately."
+    "ability": "All players know you are the Vizier. You cannot die during the day. If good voted, you may choose to execute immediately."
   },
   {
     "id": "organgrinder",
@@ -1786,7 +1786,7 @@
       "Drunk"
     ],
     "setup": false,
-    "ability": "All players keep their eyes closed when voting and the vote tally is secret. Each night, choose if you are drunk or not."
+    "ability": "All players keep their eyes closed when voting and the vote tally is secret. Each night, choose if you are drunk until dusk."
   },
   {
     "id": "boffin",
