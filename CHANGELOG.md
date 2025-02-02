@@ -26,6 +26,7 @@
 - Fixed off-script travellers not appearing in night order modal
 - Added custom jinx support for homebrew characters, once again following the official [JSON Schema](https://github.com/ThePandemoniumInstitute/botc-release/blob/main/script-schema.json)
 - Updated Organ Grinder and Vizier ability texts
+- Remove Riot from night order, as it was not added to any official tools
 
 ### Version 2.19.1
 - Added Wizard
