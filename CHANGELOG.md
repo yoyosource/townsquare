@@ -25,7 +25,8 @@
 - Added JSON-driven night order support following the official [JSON Schema](https://github.com/ThePandemoniumInstitute/botc-release/blob/main/script-schema.json), including curated night order for base-3 scripts (if this is used, fabled and off-script travellers that act at night will always act after dusk)
 - Fixed off-script travellers not appearing in night order modal
 - Added custom jinx support for homebrew characters, once again following the official [JSON Schema](https://github.com/ThePandemoniumInstitute/botc-release/blob/main/script-schema.json)
-- Updated Organ Grinder, Vizier & Widow ability texts
+- Updated Organ Grinder, Vizier ability texts
+- Corrected Widow and Lil' Monsta ability texts to match the official app and upcoming physical tokens
 - Removed Riot from night order, as it was not added in any official tools
 
 ### Version 2.19.1
