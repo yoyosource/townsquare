@@ -53,11 +53,18 @@
       <h3>Some popular custom scripts:</h3>
       <ul class="scripts">
         <li
-          v-for="(script, index) in scripts"
+          v-for="(script, index) in customs.teensyville"
           :key="index"
-          @click="handleURL(script[1])"
+          @click="parseRoles(script)"
         >
-          {{ script[0] }}
+          {{ script[0].name + " by " + script[0].author + " (Teensyville)" }}
+        </li>
+        <li
+          v-for="(script, index) in customs.standard"
+          :key="index"
+          @click="parseRoles(script)"
+        >
+          {{ script[0].name + " by " + script[0].author }}
         </li>
       </ul>
       <input
@@ -85,6 +92,7 @@
 </template>
 
 <script>
+import customsJSON from "../../customs";
 import editionJSON from "../../editions";
 import { mapMutations, mapState } from "vuex";
 import Modal from "./Modal";
@@ -95,34 +103,9 @@ export default {
   },
   data: function () {
     return {
+      customs: customsJSON,
       editions: editionJSON,
       isCustom: false,
-      scripts: [
-        [
-          "No Greater Joy by Steven Medway (Teensyville)",
-          "https://gist.githubusercontent.com/tomozbot/fd7297327b907031a8b959e77c253ed2/raw/ee4269bae8ab710d96c36f86049abe033226a2a6/No%2520Greater%2520Joy.json",
-        ],
-        [
-          "Laissez un Faire by Steven Medway (Teensyville)",
-          "https://gist.githubusercontent.com/tomozbot/d602aedacf4c60d61ea926f642d5a685/raw/23f8ddccb8599f156dda10f129f6e8bb98ff824f/Laissez%2520un%2520Faire.json",
-        ],
-        [
-          "Catfishing by Emily",
-          "https://gist.githubusercontent.com/tomozbot/9ec44c1bb04c3c6450301faf5838e85a/raw/2e19d1ace38d9b682f58bd6704b06826cb29478a/Catfishing.json",
-        ],
-        [
-          "Boozling by Lau",
-          "https://gist.githubusercontent.com/tomozbot/5e91a5a9753e149144804f56d1719fc2/raw/90772eaee733308c4eaa0cc0876964531e9f425d/Boozling.json",
-        ],
-        [
-          "Extension Cord by Viva La Sam",
-          "https://gist.githubusercontent.com/tomozbot/d2062e520b610552fe7a7c69e3bb972a/raw/d53ea3a7ae10fc4f96f3a4062ea9963e4dc38c30/Extension%2520Cord.json",
-        ],
-        [
-          "Harold Holt's Revenge by Theo",
-          "https://gist.githubusercontent.com/tomozbot/8e18fb42ff5ac592b8f1ffc254292440/raw/361f637550429bdeca9c0ad28794789285817336/Harold%2520Holt's%2520Revenge.json",
-        ],
-      ],
     };
   },
   computed: mapState(["modals"]),

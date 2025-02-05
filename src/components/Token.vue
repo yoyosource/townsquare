@@ -78,7 +78,7 @@ export default {
     getImage(role) {
       if (role.image && this.grimoire.isImageOptIn) {
         if (Array.isArray(role.image)) {
-          return role.image[this.alignmentIndex];
+          return role.image[this.alignmentIndex] || role.image[0];
         }
         return role.image;
       }
