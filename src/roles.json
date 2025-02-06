@@ -1693,7 +1693,7 @@
       "Knows"
     ],
     "setup": false,
-    "ability": "On your first night, look at the Grimoire & choose a player: they are poisoned. 1 good player knows a Widow is in play."
+    "ability": "On your 1st night, look at the Grimoire & choose a player: they are poisoned. 1 good player knows a Widow is in play."
   },
   {
     "id": "xaan",
@@ -1773,7 +1773,7 @@
     "otherNightReminder": "",
     "reminders": [],
     "setup": false,
-    "ability": "All players know you are the Vizier. You can not die during the day. If good voted, you may choose to execute immediately."
+    "ability": "All players know you are the Vizier. You cannot die during the day. If good voted, you may choose to execute immediately."
   },
   {
     "id": "organgrinder",
@@ -1786,7 +1786,7 @@
       "Drunk"
     ],
     "setup": false,
-    "ability": "All players keep their eyes closed when voting and the vote tally is secret. Each night, choose if you are drunk or not."
+    "ability": "All players keep their eyes closed when voting and the vote tally is secret. Each night, choose if you are drunk until dusk."
   },
   {
     "id": "boffin",
@@ -1827,7 +1827,7 @@
       "Dead"
     ],
     "setup": true,
-    "ability": "Each night, Minions choose who babysits Lil' Monsta & 'is the Demon'. Each night*, a player might die. [+1 Minion]"
+    "ability": "Each night, Minions choose who babysits Lil' Monsta & \"is the Demon\". Each night*, a player might die. [+1 Minion]"
   },
   {
     "id": "kazali",
@@ -1935,7 +1935,7 @@
     "edition": "",
     "team": "demon",
     "firstNightReminder": "",
-    "otherNightReminder": "If it is the third night, wake each Minion. Show them the 'You are' card and the Riot character token.",
+    "otherNightReminder": "",
     "reminders": [
       "Night 1",
       "Night 2",
