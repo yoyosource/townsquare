@@ -153,19 +153,6 @@
             </li>
             <li
               v-if="!session.isSpectator"
-              @click="setTwoVotes"
-            >
-              Voting Twice
-              <em
-              ><font-awesome-icon
-                :icon="[
-                  'fas',
-                  session.isTwoVotesEnabled ? 'check-square' : 'square',
-                ]"
-              /></em>
-            </li>
-            <li
-              v-if="!session.isSpectator"
               @click="setVoteWatching"
             >
               Secret Vote
@@ -174,6 +161,19 @@
                 :icon="[
                   'fas',
                   !session.isVoteWatchingAllowed ? 'check-square' : 'square',
+                ]"
+              /></em>
+            </li>
+            <li
+              v-if="!session.isSpectator"
+              @click="setTwoVotes"
+            >
+              Voting Twice
+              <em
+              ><font-awesome-icon
+                :icon="[
+                  'fas',
+                  session.isTwoVotesEnabled ? 'check-square' : 'square',
                 ]"
               /></em>
             </li>

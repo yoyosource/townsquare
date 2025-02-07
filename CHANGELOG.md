@@ -1,5 +1,9 @@
 # Release Notes
 
+### Version 2.20.1
+- Reverted change to hide name and author of script if a custom logo is being used
+- Renamed remaining options that were still labelled "vote watching"
+
 ### Version 2.20.0
 - Added opposing alignment functionality for both official and homebrew characters (with explicit permission from TPI)
 - Added menu option for changing a players' alignment - this functionality is only client side and will never be shown to players, even for travellers
