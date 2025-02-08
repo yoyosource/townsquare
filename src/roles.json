@@ -729,7 +729,7 @@
       "Nominate Evil"
     ],
     "setup": false,
-    "ability": "Only the Storyteller can nominate. At least 1 opposite player must be nominated each day."
+    "ability": "Only the Storyteller can nominate. At least 1 opposing player must be nominated each day."
   },
   {
     "id": "clockmaker",

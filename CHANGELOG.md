@@ -1,7 +1,7 @@
 # Release Notes
 
 ### Version 2.20.2
-- Corrected Fool ability and reminder token texts to match the official app and physical game
+- Corrected Fool & Bishop ability texts to match the official app and physical game
 
 ### Version 2.20.1
 - Reverted change to hide name and author of script if a custom logo is being used
