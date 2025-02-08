@@ -1783,6 +1783,7 @@
     "firstNightReminder": "Wake the Organ Grinder. If they give the 'yes' head signal, mark them Drunk. If they give the 'no' head signal, remove the Drunk reminder.",
     "otherNightReminder": "Wake the Organ Grinder. If they give the 'yes' head signal, mark them Drunk. If they give the 'no' head signal, remove the Drunk reminder.",
     "reminders": [
+      "About To Die",
       "Drunk"
     ],
     "setup": false,
