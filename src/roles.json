@@ -498,10 +498,10 @@
     "firstNightReminder": "",
     "otherNightReminder": "",
     "reminders": [
-      "No ability"
+      "No Ability"
     ],
     "setup": false,
-    "ability": "The first time you die, you don't."
+    "ability": "The 1st time you die, you don't."
   },
   {
     "id": "goon",
