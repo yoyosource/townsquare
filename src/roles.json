@@ -498,10 +498,10 @@
     "firstNightReminder": "",
     "otherNightReminder": "",
     "reminders": [
-      "No ability"
+      "No Ability"
     ],
     "setup": false,
-    "ability": "The first time you die, you don't."
+    "ability": "The 1st time you die, you don't."
   },
   {
     "id": "goon",
@@ -729,7 +729,7 @@
       "Nominate Evil"
     ],
     "setup": false,
-    "ability": "Only the Storyteller can nominate. At least 1 opposite player must be nominated each day."
+    "ability": "Only the Storyteller can nominate. At least 1 opposing player must be nominated each day."
   },
   {
     "id": "clockmaker",
@@ -1783,6 +1783,7 @@
     "firstNightReminder": "Wake the Organ Grinder. If they give the 'yes' head signal, mark them Drunk. If they give the 'no' head signal, remove the Drunk reminder.",
     "otherNightReminder": "Wake the Organ Grinder. If they give the 'yes' head signal, mark them Drunk. If they give the 'no' head signal, remove the Drunk reminder.",
     "reminders": [
+      "About To Die",
       "Drunk"
     ],
     "setup": false,

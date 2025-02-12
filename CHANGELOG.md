@@ -1,5 +1,9 @@
 # Release Notes
 
+### Version 2.20.2
+- Corrected Fool & Bishop ability texts to match the official app and physical game
+- Added missing "About To Die" reminder for the Organ Grinder
+
 ### Version 2.20.1
 - Reverted change to hide name and author of script if a custom logo is being used
 - Renamed remaining options that were still labelled "vote watching"
