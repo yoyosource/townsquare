@@ -1,26 +1,38 @@
 {
   "townsfolk": {
     "color": "#1f65ff",
-    "assignable": true
+    "assignable": true,
+    "showRemindersOnGlobal": false,
+    "showRemindersInNightOrder": false
   },
   "outsider": {
     "color": "#46d5ff",
-    "assignable": true
+    "assignable": true,
+    "showRemindersOnGlobal": false,
+    "showRemindersInNightOrder": false
   },
   "minion": {
     "color": "#ff6900",
-    "assignable": true
+    "assignable": true,
+    "showRemindersOnGlobal": false,
+    "showRemindersInNightOrder": false
   },
   "demon": {
     "color": "#ce0100",
-    "assignable": true
+    "assignable": true,
+    "showRemindersOnGlobal": false,
+    "showRemindersInNightOrder": false
   },
   "fabled": {
     "color": "#ffe91f",
-    "assignable": false
+    "assignable": false,
+    "showRemindersOnGlobal": false,
+    "showRemindersInNightOrder": false
   },
   "traveller": {
     "color": "#cc04ff",
-    "assignable": true
+    "assignable": true,
+    "showRemindersOnGlobal": false,
+    "showRemindersInNightOrder": false
   }
 }

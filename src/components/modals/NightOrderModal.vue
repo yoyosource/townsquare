@@ -205,7 +205,16 @@ export default {
           const newFirstNight = this.edition.firstNight.indexOf(role.id) + 1;
           role = Object.assign({}, role, {firstNight: newFirstNight});
         }
-        const players = this.players.filter((p) => p.role.id === role.id);
+        const players = this.players.filter((p) => {
+          if (p.role.id === role.id) return true;
+          if (this.edition.characterTypes && this.edition.characterTypes[role.team] && this.edition.characterTypes[role.team].showRemindersInNightOrder) {
+            if (p.reminders.some(r => role.id === r.role && role.remindersGlobal.includes(r.name))) return true;
+          }
+          if (this.characterTypes[role.team] && this.characterTypes[role.team].showRemindersInNightOrder) {
+            if (p.reminders.some(r => role.id === r.role && role.remindersGlobal.includes(r.name))) return true;
+          }
+          return false;
+        });
         if (role.firstNight && (role.team !== "traveller" || players.length)) {
           rolesFirstNight.push(Object.assign({ players }, role));
         }
@@ -259,13 +268,23 @@ export default {
           const newOtherNight = this.edition.otherNight.indexOf(role.id) + 1;
           role = Object.assign({}, role, {otherNight: newOtherNight});
         }
-        const players = this.players.filter((p) => p.role.id === role.id);
+        const players = this.players.filter((p) => {
+          if (p.role.id === role.id) return true;
+          if (this.edition.characterTypes && this.edition.characterTypes[role.team] && this.edition.characterTypes[role.team].showRemindersInNightOrder) {
+            if (p.reminders.some(r => role.id === r.role && role.remindersGlobal.includes(r.name))) return true;
+          }
+          if (this.characterTypes[role.team] && this.characterTypes[role.team].showRemindersInNightOrder) {
+            if (p.reminders.some(r => role.id === r.role && role.remindersGlobal.includes(r.name))) return true;
+
+          }
+          return false;
+        });
         if (role.otherNight && (role.team !== "traveller" || players.length)) {
           rolesOtherNight.push(Object.assign({ players }, role));
         }
       });
       this.otherTravellers.forEach((role) => {
-        const players = this.players.filter((p) => p.role.id === role.id);
+        const players = this.players.filter((p) => p.role.id === role.id); // TODO: Implement reminder tokens as well
         if (role.otherNight && players.length) {
           const newOtherNight = this.edition.otherNight ? this.edition.otherNight.indexOf("dusk") + 1.2 : role.otherNight;
           rolesOtherNight.push(Object.assign({ players }, role, {otherNight: newOtherNight}));
