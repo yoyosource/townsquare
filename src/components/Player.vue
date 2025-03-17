@@ -313,10 +313,10 @@ export default {
       let newAlignment = this.player.alignmentIndex + 1;
       let team = this.player.role.team;
       let images = 2;
-      if (this.edition.characterTypes && this.edition.characterTypes[team]) {
-        images = this.edition.characterTypes[team].image_count || 2;
-      } else {
-        images = this.characterTypes[team].image_count || 2;
+      if (this.edition.characterTypes && this.edition.characterTypes[team] && this.edition.characterTypes[team].goodAndEvilImages) {
+        images = 3;
+      } else if (this.characterTypes[team].goodAndEvilImages) {
+        images = 3;
       }
       if (newAlignment > images - 1) newAlignment = 0;
       this.updatePlayer("alignmentIndex", newAlignment);

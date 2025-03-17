@@ -4,41 +4,41 @@
     "assignable": true,
     "showRemindersOnGlobal": false,
     "showRemindersInNightOrder": false,
-    "image_count": 2
+    "goodAndEvilImages": false
   },
   "outsider": {
     "color": "#46d5ff",
     "assignable": true,
     "showRemindersOnGlobal": false,
     "showRemindersInNightOrder": false,
-    "image_count": 2
+    "goodAndEvilImages": false
   },
   "minion": {
     "color": "#ff6900",
     "assignable": true,
     "showRemindersOnGlobal": false,
     "showRemindersInNightOrder": false,
-    "image_count": 2
+    "goodAndEvilImages": false
   },
   "demon": {
     "color": "#ce0100",
     "assignable": true,
     "showRemindersOnGlobal": false,
     "showRemindersInNightOrder": false,
-    "image_count": 2
+    "goodAndEvilImages": false
   },
   "fabled": {
     "color": "#ffe91f",
     "assignable": false,
     "showRemindersOnGlobal": false,
     "showRemindersInNightOrder": false,
-    "image_count": 1
+    "goodAndEvilImages": false
   },
   "traveller": {
     "color": "#cc04ff",
     "assignable": true,
     "showRemindersOnGlobal": false,
     "showRemindersInNightOrder": false,
-    "image_count": 3
+    "goodAndEvilImages": true
   }
 }
