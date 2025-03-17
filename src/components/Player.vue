@@ -258,6 +258,7 @@
 <script>
 import Token from "./Token";
 import { mapGetters, mapState } from "vuex";
+import characterTypesJSON from "@/characterTypes.json";
 
 export default {
   components: {
@@ -303,13 +304,21 @@ export default {
   data() {
     return {
       isMenuOpen: false,
-      isSwap: false
+      isSwap: false,
+      characterTypes: characterTypesJSON,
     };
   },
   methods: {
     changeAlignment() {
       let newAlignment = this.player.alignmentIndex + 1;
-      if ((this.player.role.team !== "traveller" && newAlignment > 1) || newAlignment > 2) newAlignment = 0;
+      let team = this.player.role.team;
+      let images = 2;
+      if (this.edition.characterTypes && this.edition.characterTypes[team]) {
+        images = this.edition.characterTypes[team].image_count || 2;
+      } else {
+        images = this.characterTypes[team].image_count || 2;
+      }
+      if (newAlignment > images - 1) newAlignment = 0;
       this.updatePlayer("alignmentIndex", newAlignment);
     },
     changePronouns() {
