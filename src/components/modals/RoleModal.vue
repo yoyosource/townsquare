@@ -156,14 +156,14 @@ export default {
       if (this.alignment === "Evil") {
         if (this.edition.characterTypes && this.edition.characterTypes[team] && this.edition.characterTypes[team].goodAndEvilImages) {
           return 2;
-        } else if (this.characterTypes[team].goodAndEvilImages) {
+        } else if (this.characterTypes[team] && this.characterTypes[team].goodAndEvilImages) {
           return 2;
         } else if (role.team !== "minion" && role.team !== "demon") return 1;
       }
       if (this.alignment === "Good") {
         if (this.edition.characterTypes && this.edition.characterTypes[team] && this.edition.characterTypes[team].goodAndEvilImages) {
           return 1;
-        } else if (this.characterTypes[team].goodAndEvilImages) {
+        } else if (this.characterTypes[team] && this.characterTypes[team].goodAndEvilImages) {
           return 1;
         }
         if (role.team === "minion" || role.team === "demon") return 1;
