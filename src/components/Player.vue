@@ -275,7 +275,7 @@ export default {
   },
   computed: {
     ...mapState("players", ["players"]),
-    ...mapState(["grimoire", "session"]),
+    ...mapState(["grimoire", "session", "edition"]),
     ...mapGetters({ nightOrder: "players/nightOrder" }),
     index: function() {
       return this.players.indexOf(this.player);
