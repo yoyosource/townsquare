@@ -152,6 +152,7 @@ export default {
       else this.alignment = "Regular";
     },
     getAlignmentIndex(role) {
+      let team = role.team;
       if (this.alignment === "Evil") {
         if (this.edition.characterTypes && this.edition.characterTypes[team] && this.edition.characterTypes[team].goodAndEvilImages) {
           return 2;
