@@ -130,6 +130,7 @@
 import Modal from "./Modal";
 import { mapMutations, mapState } from "vuex";
 import characterTypesJSON from "../../characterTypes.json";
+import nightJSON from "../../nightsheet.json";
 
 export default {
   components: {
@@ -138,166 +139,25 @@ export default {
   data: function() {
     return {
       characterTypes: characterTypesJSON,
+      nightOrder: nightJSON
     }
   },
   computed: {
     rolesFirstNight: function () {
-      const rolesFirstNight = [];
-      // add dusk and dawn to first night order sheet
-      const duskIndex = this.edition.firstNight ? this.edition.firstNight.indexOf("dusk") + 1 : this.$store.getters.getFirstNightOrder("dusk");
-      const dawnIndex = this.edition.firstNight ? this.edition.firstNight.indexOf("dawn") + 1 : this.$store.getters.getFirstNightOrder("dawn");
-      if (duskIndex > 0) {
-        rolesFirstNight.push(
-          {
-            id: "dusk",
-            name: "Dusk",
-            firstNight: duskIndex,
-            firstNightReminder: "Some Travellers & Fabled act.",
-            players: [],
-          }
-        );
+      if (!this.edition.firstNight) {
+        // TODO: Insert HomeBrew characters into the result
+        return getNightOrderByArray(this.nightOrder.firstNight)
+      } else {
+        return this.getNightOrderByArray(this.edition.firstNight);
       }
-      if (dawnIndex > 0) {
-        rolesFirstNight.push(
-          {
-            id: "dawn",
-            name: "Dawn",
-            firstNight: dawnIndex,
-            firstNightReminder: "Wait a few seconds, then start the day.",
-            players: [],
-          },
-        );
-      }
-      // add minion / demon infos to night order sheet
-      if (this.players.length > 6) {
-        const minionIndex = this.edition.firstNight ? this.edition.firstNight.indexOf("minioninfo") + 1 : this.$store.getters.getFirstNightOrder("minioninfo");
-        const demonIndex = this.edition.firstNight ? this.edition.firstNight.indexOf("demoninfo") + 1 : this.$store.getters.getFirstNightOrder("demoninfo");
-        if (minionIndex > 0) {
-          rolesFirstNight.push(
-            {
-              id: "minion",
-              name: "Minion info",
-              firstNight: minionIndex,
-              team: "minion",
-              players: this.players.filter((p) => p.role.team === "minion"),
-              firstNightReminder:
-                "If there is more than one Minion, they all make eye contact with each other. Show the “This is the Demon” card. Point to the Demon.",
-            }
-          );
-        }
-        if (demonIndex > 0) {
-          rolesFirstNight.push(
-            {
-              id: "demon",
-              name: "Demon info & bluffs",
-              firstNight: demonIndex,
-              team: "demon",
-              players: this.players.filter((p) => p.role.team === "demon"),
-              firstNightReminder:
-                "Show the “These are your minions” card. Point to each Minion. Show the “These characters are not in play” card. Show 3 character tokens of good characters that are not in play.",
-            },
-          );
-        }
-      }
-      const adjustedRoles = new Map(this.roles);
-      adjustedRoles.forEach((role) => {
-        if (this.edition.firstNight) {
-          const newFirstNight = this.edition.firstNight.indexOf(role.id) + 1;
-          role = Object.assign({}, role, {firstNight: newFirstNight});
-        }
-        const players = this.players.filter((p) => {
-          if (p.role.id === role.id) return true;
-          if (this.edition.characterTypes && this.edition.characterTypes[role.team] && this.edition.characterTypes[role.team].showRemindersInNightOrder) {
-            if (p.reminders.some(r => role.id === r.role && role.remindersGlobal.includes(r.name))) return true;
-          }
-          if (this.characterTypes[role.team] && this.characterTypes[role.team].showRemindersInNightOrder) {
-            if (p.reminders.some(r => role.id === r.role && role.remindersGlobal.includes(r.name))) return true;
-          }
-          return false;
-        });
-        if (role.firstNight && (role.team !== "traveller" || players.length)) {
-          rolesFirstNight.push(Object.assign({ players }, role));
-        }
-      });
-      this.otherTravellers.forEach((role) => {
-        const players = this.players.filter((p) => p.role.id === role.id);
-        if (role.firstNight && players.length) {
-          const newFirstNight = this.edition.firstNight ? this.edition.firstNight.indexOf("dusk") + 1.2 : role.firstNight;
-          rolesFirstNight.push(Object.assign({ players }, role, {firstNight: newFirstNight}));
-        }
-      });
-      this.fabled
-        .filter(({ firstNight }) => firstNight)
-        .forEach((fabled) => {
-          const newFirstNight = this.edition.firstNight ? this.edition.firstNight.indexOf("dusk") + 1.1 : fabled.firstNight;
-          rolesFirstNight.push(Object.assign({ players: [] }, fabled, {firstNight: newFirstNight}));
-        });
-      rolesFirstNight.sort((a, b) => a.firstNight - b.firstNight);
-      return rolesFirstNight;
     },
     rolesOtherNight: function () {
-      const rolesOtherNight = [];
-      // add dusk and dawn to other night order sheet
-      const duskIndex = this.edition.otherNight ? this.edition.otherNight.indexOf("dusk") + 1 : this.$store.getters.getOtherNightOrder("dusk");
-      const dawnIndex = this.edition.otherNight ? this.edition.otherNight.indexOf("dawn") + 1 : this.$store.getters.getOtherNightOrder("dawn");
-      if (duskIndex > 0) {
-        rolesOtherNight.push(
-          {
-            id: "dusk",
-            name: "Dusk",
-            otherNight: duskIndex,
-            otherNightReminder: "Some Travellers & Fabled act.",
-            players: [],
-          }
-        );
+      if (!this.edition.otherNight) {
+        // TODO: Insert HomeBrew characters into the result
+        return getNightOrderByArray(this.nightOrder.otherNight)
+      } else {
+        return this.getNightOrderByArray(this.edition.otherNight);
       }
-      if (dawnIndex > 0) {
-        rolesOtherNight.push(
-          {
-            id: "dawn",
-            name: "Dawn",
-            otherNight: dawnIndex,
-            otherNightReminder: "Wait a few seconds, then start the day.",
-            players: [],
-          },
-        );
-      }
-      const adjustedRoles = new Map(this.roles);
-      adjustedRoles.forEach((role) => {
-        if (this.edition.otherNight) {
-          const newOtherNight = this.edition.otherNight.indexOf(role.id) + 1;
-          role = Object.assign({}, role, {otherNight: newOtherNight});
-        }
-        const players = this.players.filter((p) => {
-          if (p.role.id === role.id) return true;
-          if (this.edition.characterTypes && this.edition.characterTypes[role.team] && this.edition.characterTypes[role.team].showRemindersInNightOrder) {
-            if (p.reminders.some(r => role.id === r.role && role.remindersGlobal.includes(r.name))) return true;
-          }
-          if (this.characterTypes[role.team] && this.characterTypes[role.team].showRemindersInNightOrder) {
-            if (p.reminders.some(r => role.id === r.role && role.remindersGlobal.includes(r.name))) return true;
-
-          }
-          return false;
-        });
-        if (role.otherNight && (role.team !== "traveller" || players.length)) {
-          rolesOtherNight.push(Object.assign({ players }, role));
-        }
-      });
-      this.otherTravellers.forEach((role) => {
-        const players = this.players.filter((p) => p.role.id === role.id); // TODO: Implement reminder tokens as well
-        if (role.otherNight && players.length) {
-          const newOtherNight = this.edition.otherNight ? this.edition.otherNight.indexOf("dusk") + 1.2 : role.otherNight;
-          rolesOtherNight.push(Object.assign({ players }, role, {otherNight: newOtherNight}));
-        }
-      });
-      this.fabled
-        .filter(({ otherNight }) => otherNight)
-        .forEach((fabled) => {
-          const newOtherNight = this.edition.otherNight ? this.edition.otherNight.indexOf("dusk") + 1.1 : fabled.otherNight;
-          rolesOtherNight.push(Object.assign({ players: [] }, fabled, {otherNight: newOtherNight}));
-        });
-      rolesOtherNight.sort((a, b) => a.otherNight - b.otherNight);
-      return rolesOtherNight;
     },
     ...mapState(["roles", "otherTravellers", "modals", "edition", "grimoire", "session"]),
     ...mapState("players", ["players", "fabled"]),
@@ -340,6 +200,78 @@ export default {
         property: "hasResponded",
         value: hasResponded,
       });
+    },
+    getNightOrderByArray(editionNightOrder) {
+      const nightOrder = [];
+      const adjustedRoles = new Map(this.roles);
+      for (let role of editionNightOrder) {
+        if (role === 'dusk') {
+          nightOrder.push(
+            {
+              id: "dusk",
+              name: "Dusk",
+              firstNightReminder: "Some Travellers & Fabled act.",
+              otherNightReminder: "Some Travellers & Fabled act.",
+              players: [],
+            }
+          );
+        } else if (role === 'dawn') {
+          nightOrder.push(
+            {
+              id: "dawn",
+              name: "Dawn",
+              firstNightReminder: "Wait a few seconds, then start the day.",
+              otherNightReminder: "Wait a few seconds, then start the day.",
+              players: [],
+            },
+          );
+        } else if (role === 'minioninfo') {
+          nightOrder.push(
+            {
+              id: "minion",
+              name: "Minion info",
+              team: "minion",
+              players: this.players.filter((p) => p.role.team === "minion"),
+              firstNightReminder:
+                "If there is more than one Minion, they all make eye contact with each other. Show the “This is the Demon” card. Point to the Demon.",
+            }
+          );
+        } else if (role === 'demoninfo') {
+          nightOrder.push(
+            {
+              id: "demon",
+              name: "Demon info & bluffs",
+              team: "demon",
+              players: this.players.filter((p) => p.role.team === "demon"),
+              firstNightReminder:
+                "Show the “These are your minions” card. Point to each Minion. Show the “These characters are not in play” card. Show 3 character tokens of good characters that are not in play.",
+            },
+          );
+        } else {
+          let adjustedRole = adjustedRoles.get(role);
+          if (adjustedRole === undefined) {
+            adjustedRole = this.fabled.find((r) => r.id === role);
+          }
+          if (adjustedRole === undefined) {
+            continue;
+          }
+
+          const players = this.players.filter((p) => {
+            if (p.role.id === adjustedRole.id) return true;
+            if (this.edition.characterTypes && this.edition.characterTypes[adjustedRole.team] && this.edition.characterTypes[adjustedRole.team].showRemindersInNightOrder) {
+              if (p.reminders.some(r => adjustedRole.id === r.role && adjustedRole.remindersGlobal.includes(r.name))) return true;
+            }
+            if (this.characterTypes[adjustedRole.team] && this.characterTypes[adjustedRole.team].showRemindersInNightOrder) {
+              if (p.reminders.some(r => adjustedRole.id === r.role && adjustedRole.remindersGlobal.includes(r.name))) return true;
+            }
+            return false;
+          });
+
+          nightOrder.push(Object.assign({}, adjustedRole, {players: players}));
+        }
+      }
+
+      return nightOrder;
     },
     ...mapMutations(["toggleModal"]),
   },

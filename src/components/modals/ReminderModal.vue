@@ -121,7 +121,7 @@ export default {
           ) {
             reminders.push(reminder1);
           }
-        });;
+        });
       });
 
       // add out of script traveller reminders
