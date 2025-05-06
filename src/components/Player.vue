@@ -52,7 +52,7 @@
 
       <Token
         :role="player.role"
-        :alignmentIndex="player.alignmentIndex"
+        :alignmentIndex="player.role.team === 'traveller' && grimoire.isPublic ? 0 : player.alignmentIndex"
         @set-role="$emit('trigger', ['openRoleModal'])"
       />
 
@@ -498,7 +498,8 @@ export default {
       pointer-events: none;
     }
 
-    #townsquare.spectator & {
+    #townsquare.spectator &,
+    #app.night & {
       pointer-events: none;
     }
 
